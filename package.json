@@ -13,7 +13,8 @@
   "scripts": {
     "precommit": "yarn lint",
     "prestart": "yarn docs",
-    "start": "cross-env NODE_ENV=production pm2 start ./src/index.js",
+    "start": "cross-env NODE_ENV=production pm2 start ./src/index.js --name node-rem",
+    "stop": "cross-env NODE_ENV=production pm2 stop node-rem",
     "dev": "nodemon ./src/index.js",
     "lint": "eslint ./src/ --ignore-path .gitignore --ignore-pattern internals/scripts",
     "lint:fix": "yarn lint --fix",
