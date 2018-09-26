@@ -9,6 +9,9 @@ branches:
     - master
     - /^greenkeeper/.*$/
 
+services:
+  - mongodb
+
 env:
   global:
     - NODE_ENV=test
