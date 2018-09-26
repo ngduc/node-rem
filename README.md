@@ -1,5 +1,7 @@
 # Node REM
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/ngduc/node-rem.svg)](https://greenkeeper.io/)
+
 NodeJS Rest Express MongoDB
 
 ### DEV
