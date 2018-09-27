@@ -6,7 +6,8 @@
     "no-use-before-define": ["error", { "variables": false }],
     "no-multi-str": 0,
     "arrow-parens": 0,
-    "comma-dangle": 0
+    "comma-dangle": 0,
+    "object-curly-newline": 0
   },
   "env": {
     "node": true,

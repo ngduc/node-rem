@@ -73,7 +73,8 @@ exports.update = (req, res, next) => {
   const updatedUser = omit(req.body, ommitRole);
   const user = Object.assign(req.locals.user, updatedUser);
 
-  user.save()
+  user
+    .save()
     .then(savedUser => res.json(savedUser.transform()))
     .catch(e => next(User.checkDuplicateEmail(e)));
 };
@@ -86,7 +87,14 @@ exports.list = async (req, res, next) => {
   try {
     const users = await User.list(req.query);
     const transformedUsers = users.map(user => user.transform());
-    res.json(transformedUsers);
+
+    // e.g. https://localhost:3009/v1/users?limit=5&skip=0
+    if (req.query.limit) {
+      const total = await User.count();
+      res.json({ limit: parseInt(req.query.limit, 10), total, result: transformedUsers });
+    } else {
+      res.json(transformedUsers);
+    }
   } catch (error) {
     next(error);
   }
@@ -99,7 +107,8 @@ exports.list = async (req, res, next) => {
 exports.remove = (req, res, next) => {
   const { user } = req.locals;
 
-  user.remove()
+  user
+    .remove()
     .then(() => res.status(httpStatus.NO_CONTENT).end())
     .catch(e => next(e));
 };

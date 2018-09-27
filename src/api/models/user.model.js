@@ -9,51 +9,54 @@ const APIError = require('../utils/APIError');
 const { env, jwtSecret, jwtExpirationInterval } = require('../../config/vars');
 
 /**
-* User Roles
-*/
+ * User Roles
+ */
 const roles = ['user', 'admin'];
 
 /**
  * User Schema
  * @private
  */
-const userSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    match: /^\S+@\S+\.\S+$/,
-    required: true,
-    unique: true,
-    trim: true,
-    lowercase: true,
+const userSchema = new mongoose.Schema(
+  {
+    email: {
+      type: String,
+      match: /^\S+@\S+\.\S+$/,
+      required: true,
+      unique: true,
+      trim: true,
+      lowercase: true
+    },
+    password: {
+      type: String,
+      required: true,
+      minlength: 6,
+      maxlength: 128
+    },
+    name: {
+      type: String,
+      maxlength: 128,
+      index: true,
+      trim: true
+    },
+    services: {
+      facebook: String,
+      google: String
+    },
+    role: {
+      type: String,
+      enum: roles,
+      default: 'user'
+    },
+    picture: {
+      type: String,
+      trim: true
+    }
   },
-  password: {
-    type: String,
-    required: true,
-    minlength: 6,
-    maxlength: 128,
-  },
-  name: {
-    type: String,
-    maxlength: 128,
-    index: true,
-    trim: true,
-  },
-  services: {
-    facebook: String,
-    google: String,
-  },
-  role: {
-    type: String,
-    enum: roles,
-    default: 'user',
-  },
-  picture: {
-    type: String,
-    trim: true,
-  },
-}, {
-  timestamps: true,
-});
+  {
+    timestamps: true
+  }
+);
 
 /**
  * Add your
@@ -84,7 +87,7 @@ userSchema.method({
     const transformed = {};
     const fields = ['id', 'name', 'email', 'picture', 'role', 'createdAt'];
 
-    fields.forEach((field) => {
+    fields.forEach(field => {
       transformed[field] = this[field];
     });
 
@@ -93,23 +96,24 @@ userSchema.method({
 
   token() {
     const playload = {
-      exp: moment().add(jwtExpirationInterval, 'minutes').unix(),
+      exp: moment()
+        .add(jwtExpirationInterval, 'minutes')
+        .unix(),
       iat: moment().unix(),
-      sub: this._id,
+      sub: this._id
     };
     return jwt.encode(playload, jwtSecret);
   },
 
   async passwordMatches(password) {
     return bcrypt.compare(password, this.password);
-  },
+  }
 });
 
 /**
  * Statics
  */
 userSchema.statics = {
-
   roles,
 
   /**
@@ -131,7 +135,7 @@ userSchema.statics = {
 
       throw new APIError({
         message: 'User does not exist',
-        status: httpStatus.NOT_FOUND,
+        status: httpStatus.NOT_FOUND
       });
     } catch (error) {
       throw error;
@@ -151,10 +155,10 @@ userSchema.statics = {
     const user = await this.findOne({ email }).exec();
     const err = {
       status: httpStatus.UNAUTHORIZED,
-      isPublic: true,
+      isPublic: true
     };
     if (password) {
-      if (user && await user.passwordMatches(password)) {
+      if (user && (await user.passwordMatches(password))) {
         return { user, accessToken: user.token() };
       }
       err.message = 'Incorrect email or password';
@@ -177,15 +181,13 @@ userSchema.statics = {
    * @param {number} limit - Limit number of users to be returned.
    * @returns {Promise<User[]>}
    */
-  list({
-    page = 1, perPage = 30, name, email, role,
-  }) {
+  list({ page = 1, perPage = 30, name, email, role, limit, skip }) {
     const options = omitBy({ name, email, role }, isNil);
 
     return this.find(options)
       .sort({ createdAt: -1 })
-      .skip(perPage * (page - 1))
-      .limit(perPage)
+      .skip((skip ? parseInt(skip, 10) : null) || perPage * (page - 1))
+      .limit((limit ? parseInt(limit, 10) : null) || perPage)
       .exec();
   },
 
@@ -200,22 +202,22 @@ userSchema.statics = {
     if (error.name === 'MongoError' && error.code === 11000) {
       return new APIError({
         message: 'Validation Error',
-        errors: [{
-          field: 'email',
-          location: 'body',
-          messages: ['"email" already exists'],
-        }],
+        errors: [
+          {
+            field: 'email',
+            location: 'body',
+            messages: ['"email" already exists']
+          }
+        ],
         status: httpStatus.CONFLICT,
         isPublic: true,
-        stack: error.stack,
+        stack: error.stack
       });
     }
     return error;
   },
 
-  async oAuthLogin({
-    service, id, email, name, picture,
-  }) {
+  async oAuthLogin({ service, id, email, name, picture }) {
     const user = await this.findOne({ $or: [{ [`services.${service}`]: id }, { email }] });
     if (user) {
       user.services[service] = id;
@@ -225,9 +227,17 @@ userSchema.statics = {
     }
     const password = uuidv4();
     return this.create({
-      services: { [service]: id }, email, password, name, picture,
+      services: { [service]: id },
+      email,
+      password,
+      name,
+      picture
     });
   },
+
+  async count() {
+    return this.find().count();
+  }
 };
 
 /**
