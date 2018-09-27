@@ -1,6 +1,7 @@
 const httpStatus = require('http-status');
 const { omit } = require('lodash');
 const User = require('../models/user.model');
+const Utils = require('api/utils/Utils');
 const { handler: errorHandler } = require('../middlewares/error');
 
 /**
@@ -85,16 +86,11 @@ exports.update = (req, res, next) => {
  */
 exports.list = async (req, res, next) => {
   try {
+    // e.g. https://localhost:3009/v1/users?role=admin&limit=5&offset=0&sort=email:desc,createdAt
     const users = await User.list(req.query);
     const transformedUsers = users.map(user => user.transform());
 
-    // e.g. https://localhost:3009/v1/users?limit=5&skip=0
-    if (req.query.limit) {
-      const total = await User.count();
-      res.json({ limit: parseInt(req.query.limit, 10), total, result: transformedUsers });
-    } else {
-      res.json(transformedUsers);
-    }
+    res.json(await Utils.buildResponse({ req, data: transformedUsers, listEntity: User }));
   } catch (error) {
     next(error);
   }

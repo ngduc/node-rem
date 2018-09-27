@@ -6,7 +6,6 @@ const methodOverride = require('method-override');
 const cors = require('cors');
 const helmet = require('helmet');
 const passport = require('passport');
-const paginate = require('express-paginate');
 const routes = require('../api/routes/v1');
 const { logs } = require('./vars');
 const strategies = require('./passport');
@@ -55,8 +54,5 @@ app.use(error.notFound);
 
 // error handler, send stacktrace only during development
 app.use(error.handler);
-
-// support pagination
-app.use(paginate.middleware(10, 50));
 
 module.exports = app;

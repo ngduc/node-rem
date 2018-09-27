@@ -6,7 +6,8 @@ const moment = require('moment-timezone');
 const jwt = require('jwt-simple');
 const uuidv4 = require('uuid/v4');
 const APIError = require('../utils/APIError');
-const { env, jwtSecret, jwtExpirationInterval } = require('../../config/vars');
+const Utils = require('api/utils/Utils');
+const { env, jwtSecret, jwtExpirationInterval } = require('config/vars');
 
 /**
  * User Roles
@@ -181,13 +182,15 @@ userSchema.statics = {
    * @param {number} limit - Limit number of users to be returned.
    * @returns {Promise<User[]>}
    */
-  list({ page = 1, perPage = 30, name, email, role, limit, skip }) {
-    const options = omitBy({ name, email, role }, isNil);
+  list(query) {
+    const { name, email, role } = query;
+    const options = omitBy({ name, email, role }, isNil); // allowed filter fields
+    const { page = 1, perPage = 30, limit, offset, sort } = Utils.getPageQuery(query);
 
     return this.find(options)
-      .sort({ createdAt: -1 })
-      .skip((skip ? parseInt(skip, 10) : null) || perPage * (page - 1))
-      .limit((limit ? parseInt(limit, 10) : null) || perPage)
+      .sort(sort)
+      .skip(typeof offset !== 'undefined' ? offset : perPage * (page - 1))
+      .limit(typeof limit !== 'undefined' ? limit : perPage)
       .exec();
   },
 

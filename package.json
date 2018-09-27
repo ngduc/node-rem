@@ -11,6 +11,7 @@
     "yarn": "*"
   },
   "scripts": {
+    "postinstall": "cd ./node_modules && node ../package_symlinks.js && cd ..",
     "precommit": "yarn lint",
     "prestart": "yarn docs",
     "start": "cross-env NODE_ENV=production pm2 start ./src/index.js --name node-rem",
@@ -73,7 +74,6 @@
     "cross-env": "^5.0.1",
     "dotenv-safe": "^6.0.0",
     "express": "^4.15.2",
-    "express-paginate": "^1.0.0",
     "express-validation": "^1.0.2",
     "helmet": "^3.5.0",
     "http-status": "^1.0.1",
