@@ -1,6 +1,7 @@
 const httpStatus = require('http-status');
 const { omit } = require('lodash');
 const User = require('../models/user.model');
+const Utils = require('api/utils/Utils');
 const { handler: errorHandler } = require('../middlewares/error');
 
 /**
@@ -73,7 +74,8 @@ exports.update = (req, res, next) => {
   const updatedUser = omit(req.body, ommitRole);
   const user = Object.assign(req.locals.user, updatedUser);
 
-  user.save()
+  user
+    .save()
     .then(savedUser => res.json(savedUser.transform()))
     .catch(e => next(User.checkDuplicateEmail(e)));
 };
@@ -84,9 +86,11 @@ exports.update = (req, res, next) => {
  */
 exports.list = async (req, res, next) => {
   try {
+    // e.g. https://localhost:3009/v1/users?role=admin&limit=5&offset=0&sort=email:desc,createdAt
     const users = await User.list(req.query);
     const transformedUsers = users.map(user => user.transform());
-    res.json(transformedUsers);
+
+    res.json(await Utils.buildResponse({ req, data: transformedUsers, listEntity: User }));
   } catch (error) {
     next(error);
   }
@@ -99,7 +103,8 @@ exports.list = async (req, res, next) => {
 exports.remove = (req, res, next) => {
   const { user } = req.locals;
 
-  user.remove()
+  user
+    .remove()
     .then(() => res.status(httpStatus.NO_CONTENT).end())
     .catch(e => next(e));
 };
