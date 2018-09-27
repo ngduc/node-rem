@@ -43,26 +43,26 @@ describe('Users API', async () => {
         email: 'branstark@gmail.com',
         password: passwordHashed,
         name: 'Bran Stark',
-        role: 'admin',
+        role: 'admin'
       },
       jonSnow: {
         email: 'jonsnow@gmail.com',
         password: passwordHashed,
-        name: 'Jon Snow',
-      },
+        name: 'Jon Snow'
+      }
     };
 
     user = {
       email: 'sousa.dfs@gmail.com',
       password,
-      name: 'Daniel Sousa',
+      name: 'Daniel Sousa'
     };
 
     admin = {
       email: 'sousa.dfs@gmail.com',
       password,
       name: 'Daniel Sousa',
-      role: 'admin',
+      role: 'admin'
     };
 
     await User.remove({});
@@ -80,7 +80,7 @@ describe('Users API', async () => {
         .set('Authorization', `Bearer ${adminAccessToken}`)
         .send(admin)
         .expect(httpStatus.CREATED)
-        .then((res) => {
+        .then(res => {
           delete admin.password;
           expect(res.body).to.include(admin);
         });
@@ -92,7 +92,7 @@ describe('Users API', async () => {
         .set('Authorization', `Bearer ${adminAccessToken}`)
         .send(user)
         .expect(httpStatus.CREATED)
-        .then((res) => {
+        .then(res => {
           expect(res.body.role).to.be.equal('user');
         });
     });
@@ -105,7 +105,7 @@ describe('Users API', async () => {
         .set('Authorization', `Bearer ${adminAccessToken}`)
         .send(user)
         .expect(httpStatus.CONFLICT)
-        .then((res) => {
+        .then(res => {
           const { field } = res.body.errors[0];
           const { location } = res.body.errors[0];
           const { messages } = res.body.errors[0];
@@ -123,7 +123,7 @@ describe('Users API', async () => {
         .set('Authorization', `Bearer ${adminAccessToken}`)
         .send(user)
         .expect(httpStatus.BAD_REQUEST)
-        .then((res) => {
+        .then(res => {
           const { field } = res.body.errors[0];
           const { location } = res.body.errors[0];
           const { messages } = res.body.errors[0];
@@ -141,7 +141,7 @@ describe('Users API', async () => {
         .set('Authorization', `Bearer ${adminAccessToken}`)
         .send(user)
         .expect(httpStatus.BAD_REQUEST)
-        .then((res) => {
+        .then(res => {
           const { field } = res.body.errors[0];
           const { location } = res.body.errors[0];
           const { messages } = res.body.errors[0];
@@ -157,7 +157,7 @@ describe('Users API', async () => {
         .set('Authorization', `Bearer ${userAccessToken}`)
         .send(user)
         .expect(httpStatus.FORBIDDEN)
-        .then((res) => {
+        .then(res => {
           expect(res.body.code).to.be.equal(httpStatus.FORBIDDEN);
           expect(res.body.message).to.be.equal('Forbidden');
         });
@@ -170,19 +170,20 @@ describe('Users API', async () => {
         .get('/v1/users')
         .set('Authorization', `Bearer ${adminAccessToken}`)
         .expect(httpStatus.OK)
-        .then(async (res) => {
+        .then(async res => {
           const bran = format(dbUsers.branStark);
           const john = format(dbUsers.jonSnow);
 
-          const includesBranStark = some(res.body, bran);
-          const includesjonSnow = some(res.body, john);
+          const { data } = res.body;
+          const includesBranStark = some(data, bran);
+          const includesjonSnow = some(data, john);
 
           // before comparing it is necessary to convert String to Date
-          res.body[0].createdAt = new Date(res.body[0].createdAt);
-          res.body[1].createdAt = new Date(res.body[1].createdAt);
+          data[0].createdAt = new Date(data[0].createdAt);
+          data[1].createdAt = new Date(data[1].createdAt);
 
-          expect(res.body).to.be.an('array');
-          expect(res.body).to.have.lengthOf(2);
+          expect(data).to.be.an('array');
+          expect(data).to.have.lengthOf(2);
           expect(includesBranStark).to.be.true;
           expect(includesjonSnow).to.be.true;
         });
@@ -194,16 +195,18 @@ describe('Users API', async () => {
         .set('Authorization', `Bearer ${adminAccessToken}`)
         .query({ page: 2, perPage: 1 })
         .expect(httpStatus.OK)
-        .then((res) => {
+        .then(res => {
           delete dbUsers.jonSnow.password;
           const john = format(dbUsers.jonSnow);
-          const includesjonSnow = some(res.body, john);
+
+          const { data } = res.body;
+          const includesjonSnow = some(data, john);
 
           // before comparing it is necessary to convert String to Date
-          res.body[0].createdAt = new Date(res.body[0].createdAt);
+          data[0].createdAt = new Date(data[0].createdAt);
 
-          expect(res.body).to.be.an('array');
-          expect(res.body).to.have.lengthOf(1);
+          expect(data).to.be.an('array');
+          expect(data).to.have.lengthOf(1);
           expect(includesjonSnow).to.be.true;
         });
     });
@@ -214,27 +217,29 @@ describe('Users API', async () => {
         .set('Authorization', `Bearer ${adminAccessToken}`)
         .query({ email: dbUsers.jonSnow.email })
         .expect(httpStatus.OK)
-        .then((res) => {
+        .then(res => {
           delete dbUsers.jonSnow.password;
           const john = format(dbUsers.jonSnow);
-          const includesjonSnow = some(res.body, john);
+
+          const { data } = res.body;
+          const includesjonSnow = some(data, john);
 
           // before comparing it is necessary to convert String to Date
-          res.body[0].createdAt = new Date(res.body[0].createdAt);
+          data[0].createdAt = new Date(data[0].createdAt);
 
-          expect(res.body).to.be.an('array');
-          expect(res.body).to.have.lengthOf(1);
+          expect(data).to.be.an('array');
+          expect(data).to.have.lengthOf(1);
           expect(includesjonSnow).to.be.true;
         });
     });
 
-    it('should report error when pagination\'s parameters are not a number', () => {
+    it("should report error when pagination's parameters are not a number", () => {
       return request(app)
         .get('/v1/users')
         .set('Authorization', `Bearer ${adminAccessToken}`)
         .query({ page: '?', perPage: 'whaat' })
         .expect(httpStatus.BAD_REQUEST)
-        .then((res) => {
+        .then(res => {
           const { field } = res.body.errors[0];
           const { location } = res.body.errors[0];
           const { messages } = res.body.errors[0];
@@ -243,7 +248,7 @@ describe('Users API', async () => {
           expect(messages).to.include('"page" must be a number');
           return Promise.resolve(res);
         })
-        .then((res) => {
+        .then(res => {
           const { field } = res.body.errors[1];
           const { location } = res.body.errors[1];
           const { messages } = res.body.errors[1];
@@ -258,7 +263,7 @@ describe('Users API', async () => {
         .get('/v1/users')
         .set('Authorization', `Bearer ${userAccessToken}`)
         .expect(httpStatus.FORBIDDEN)
-        .then((res) => {
+        .then(res => {
           expect(res.body.code).to.be.equal(httpStatus.FORBIDDEN);
           expect(res.body.message).to.be.equal('Forbidden');
         });
@@ -274,7 +279,7 @@ describe('Users API', async () => {
         .get(`/v1/users/${id}`)
         .set('Authorization', `Bearer ${adminAccessToken}`)
         .expect(httpStatus.OK)
-        .then((res) => {
+        .then(res => {
           expect(res.body).to.include(dbUsers.branStark);
         });
     });
@@ -284,7 +289,7 @@ describe('Users API', async () => {
         .get('/v1/users/56c787ccc67fc16ccc1a5e92')
         .set('Authorization', `Bearer ${adminAccessToken}`)
         .expect(httpStatus.NOT_FOUND)
-        .then((res) => {
+        .then(res => {
           expect(res.body.code).to.be.equal(404);
           expect(res.body.message).to.be.equal('User does not exist');
         });
@@ -295,7 +300,7 @@ describe('Users API', async () => {
         .get('/v1/users/palmeiras1914')
         .set('Authorization', `Bearer ${adminAccessToken}`)
         .expect(httpStatus.NOT_FOUND)
-        .then((res) => {
+        .then(res => {
           expect(res.body.code).to.be.equal(404);
           expect(res.body.message).to.equal('User does not exist');
         });
@@ -308,7 +313,7 @@ describe('Users API', async () => {
         .get(`/v1/users/${id}`)
         .set('Authorization', `Bearer ${userAccessToken}`)
         .expect(httpStatus.FORBIDDEN)
-        .then((res) => {
+        .then(res => {
           expect(res.body.code).to.be.equal(httpStatus.FORBIDDEN);
           expect(res.body.message).to.be.equal('Forbidden');
         });
@@ -325,7 +330,7 @@ describe('Users API', async () => {
         .set('Authorization', `Bearer ${adminAccessToken}`)
         .send(user)
         .expect(httpStatus.OK)
-        .then((res) => {
+        .then(res => {
           delete user.password;
           expect(res.body).to.include(user);
           expect(res.body.role).to.be.equal('user');
@@ -341,7 +346,7 @@ describe('Users API', async () => {
         .set('Authorization', `Bearer ${adminAccessToken}`)
         .send(user)
         .expect(httpStatus.BAD_REQUEST)
-        .then((res) => {
+        .then(res => {
           const { field } = res.body.errors[0];
           const { location } = res.body.errors[0];
           const { messages } = res.body.errors[0];
@@ -360,7 +365,7 @@ describe('Users API', async () => {
         .set('Authorization', `Bearer ${adminAccessToken}`)
         .send(user)
         .expect(httpStatus.BAD_REQUEST)
-        .then((res) => {
+        .then(res => {
           const { field } = res.body.errors[0];
           const { location } = res.body.errors[0];
           const { messages } = res.body.errors[0];
@@ -375,7 +380,7 @@ describe('Users API', async () => {
         .put('/v1/users/palmeiras1914')
         .set('Authorization', `Bearer ${adminAccessToken}`)
         .expect(httpStatus.NOT_FOUND)
-        .then((res) => {
+        .then(res => {
           expect(res.body.code).to.be.equal(404);
           expect(res.body.message).to.be.equal('User does not exist');
         });
@@ -388,7 +393,7 @@ describe('Users API', async () => {
         .put(`/v1/users/${id}`)
         .set('Authorization', `Bearer ${userAccessToken}`)
         .expect(httpStatus.FORBIDDEN)
-        .then((res) => {
+        .then(res => {
           expect(res.body.code).to.be.equal(httpStatus.FORBIDDEN);
           expect(res.body.message).to.be.equal('Forbidden');
         });
@@ -403,7 +408,7 @@ describe('Users API', async () => {
         .set('Authorization', `Bearer ${userAccessToken}`)
         .send(admin)
         .expect(httpStatus.OK)
-        .then((res) => {
+        .then(res => {
           expect(res.body.role).to.not.be.equal(role);
         });
     });
@@ -420,7 +425,7 @@ describe('Users API', async () => {
         .set('Authorization', `Bearer ${adminAccessToken}`)
         .send({ name })
         .expect(httpStatus.OK)
-        .then((res) => {
+        .then(res => {
           expect(res.body.name).to.be.equal(name);
           expect(res.body.email).to.be.equal(dbUsers.branStark.email);
         });
@@ -435,7 +440,7 @@ describe('Users API', async () => {
         .set('Authorization', `Bearer ${adminAccessToken}`)
         .send()
         .expect(httpStatus.OK)
-        .then((res) => {
+        .then(res => {
           expect(res.body).to.include(dbUsers.branStark);
         });
     });
@@ -445,7 +450,7 @@ describe('Users API', async () => {
         .patch('/v1/users/palmeiras1914')
         .set('Authorization', `Bearer ${adminAccessToken}`)
         .expect(httpStatus.NOT_FOUND)
-        .then((res) => {
+        .then(res => {
           expect(res.body.code).to.be.equal(404);
           expect(res.body.message).to.be.equal('User does not exist');
         });
@@ -458,7 +463,7 @@ describe('Users API', async () => {
         .patch(`/v1/users/${id}`)
         .set('Authorization', `Bearer ${userAccessToken}`)
         .expect(httpStatus.FORBIDDEN)
-        .then((res) => {
+        .then(res => {
           expect(res.body.code).to.be.equal(httpStatus.FORBIDDEN);
           expect(res.body.message).to.be.equal('Forbidden');
         });
@@ -473,7 +478,7 @@ describe('Users API', async () => {
         .set('Authorization', `Bearer ${userAccessToken}`)
         .send({ role })
         .expect(httpStatus.OK)
-        .then((res) => {
+        .then(res => {
           expect(res.body.role).to.not.be.equal(role);
         });
     });
@@ -499,7 +504,7 @@ describe('Users API', async () => {
         .delete('/v1/users/palmeiras1914')
         .set('Authorization', `Bearer ${adminAccessToken}`)
         .expect(httpStatus.NOT_FOUND)
-        .then((res) => {
+        .then(res => {
           expect(res.body.code).to.be.equal(404);
           expect(res.body.message).to.be.equal('User does not exist');
         });
@@ -512,7 +517,7 @@ describe('Users API', async () => {
         .delete(`/v1/users/${id}`)
         .set('Authorization', `Bearer ${userAccessToken}`)
         .expect(httpStatus.FORBIDDEN)
-        .then((res) => {
+        .then(res => {
           expect(res.body.code).to.be.equal(httpStatus.FORBIDDEN);
           expect(res.body.message).to.be.equal('Forbidden');
         });
@@ -520,14 +525,14 @@ describe('Users API', async () => {
   });
 
   describe('GET /v1/users/profile', () => {
-    it('should get the logged user\'s info', () => {
+    it("should get the logged user's info", () => {
       delete dbUsers.jonSnow.password;
 
       return request(app)
         .get('/v1/users/profile')
         .set('Authorization', `Bearer ${userAccessToken}`)
         .expect(httpStatus.OK)
-        .then((res) => {
+        .then(res => {
           expect(res.body).to.include(dbUsers.jonSnow);
         });
     });
@@ -538,13 +543,13 @@ describe('Users API', async () => {
       const expiredAccessToken = (await User.findAndGenerateToken(dbUsers.branStark)).accessToken;
 
       // move clock forward by minutes set in config + 1 minute
-      clock.tick((JWT_EXPIRATION * 60000) + 60000);
+      clock.tick(JWT_EXPIRATION * 60000 + 60000);
 
       return request(app)
         .get('/v1/users/profile')
         .set('Authorization', `Bearer ${expiredAccessToken}`)
         .expect(httpStatus.UNAUTHORIZED)
-        .then((res) => {
+        .then(res => {
           expect(res.body.code).to.be.equal(httpStatus.UNAUTHORIZED);
           expect(res.body.message).to.be.equal('jwt expired');
           expect(res.body).to.not.have.a.property('stack');
