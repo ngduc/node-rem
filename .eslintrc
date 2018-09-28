@@ -9,7 +9,8 @@
     "comma-dangle": 0,
     "object-curly-newline": 0,
     "import/no-extraneous-dependencies": 0,
-    "no-mixed-operators": 0
+    "no-mixed-operators": 0,
+    "max-len": ["error", 120]
   },
   "env": {
     "node": true,
