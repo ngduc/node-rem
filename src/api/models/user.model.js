@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 const moment = require('moment-timezone');
 const jwt = require('jwt-simple');
 const uuidv4 = require('uuid/v4');
-const APIError = require('../utils/APIError');
+const APIError = require('api/utils/APIError');
 const Utils = require('api/utils/Utils');
 const { env, jwtSecret, jwtExpirationInterval } = require('config/vars');
 
@@ -187,11 +187,12 @@ userSchema.statics = {
     const options = omitBy({ name, email, role }, isNil); // allowed filter fields
     const { page = 1, perPage = 30, limit, offset, sort } = Utils.getPageQuery(query);
 
-    return this.find(options)
+    const result = this.find(options)
       .sort(sort)
       .skip(typeof offset !== 'undefined' ? offset : perPage * (page - 1))
       .limit(typeof limit !== 'undefined' ? limit : perPage)
       .exec();
+    return Utils.queryPromise(result);
   },
 
   /**
