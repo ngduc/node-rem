@@ -1,4 +1,4 @@
-# Node REM
+# 🌟 Node REM
 
 NodeJS Rest Express MongoDB
 
@@ -19,7 +19,7 @@ Express 4.15     CORS   Helmet    DotEnv   joi (validation)   PM2
                  Dependabot       Codacy
 ```
 
-### Installation
+### 📦 Installation
 
 Clone this project:
 ```
@@ -30,7 +30,7 @@ yarn
 ```
 Update `package.json` and `.env` file with your information.
 
-### Commands
+### 🔧 Commands
 
 Require: `MongoDB`
 
@@ -42,7 +42,7 @@ yarn stop
 yarn test     Run tests
 ```
 
-### Features
+### 📖 Features
 
 Your simple `API Route Handler` will have a nice syntax like this: (packed with ~~vitamins~~ cool stuffs)
 ```js
@@ -85,6 +85,6 @@ GET https://localhost:3009/v1/users?role=admin&limit=5&offset=0&sort=email:desc,
 ```
 Example of generated API Docs (using `apidoc`) - https://node-rem.netlify.com
 
-### Thanks
+### 🙌 Thanks
 
 [danielfsousa/express-rest-es2017-boilerplate](https://github.com/danielfsousa/express-rest-es2017-boilerplate)
