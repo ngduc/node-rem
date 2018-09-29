@@ -9,10 +9,13 @@ Clone this project:
 git clone https://github.com/ngduc/node-rem.git your-app
 cd your-app
 rm -rf .git
+yarn
 ```
-Update `package.json` file with your information.
+Update `package.json` and `.env` file with your information.
 
-### Build
+### Commands
+
+Require: `MongoDB`
 
 ```
 yarn dev      launch DEV mode
@@ -24,7 +27,7 @@ yarn test     Run tests
 
 ### Features
 
-Your simple `Route Handler` will look like this (packed with ~~vitamins~~ features):
+Your simple `API Route Handler` will have a nice syntax like this: (packed with ~~vitamins~~ features)
 ```js
 exports.list = async (req, res, next) => {
   try {
@@ -35,6 +38,7 @@ exports.list = async (req, res, next) => {
   }
 };
 
+Example: GET https://localhost:3009/v1/users?role=admin&page=1&perPage=20
 Example: GET https://localhost:3009/v1/users?role=admin&limit=5&offset=0&sort=email:desc,createdAt
 
 {
@@ -45,8 +49,7 @@ Example: GET https://localhost:3009/v1/users?role=admin&limit=5&offset=0&sort=em
             "email": -1,
             "createdAt": 1
         },
-        "totalCount": 4,
-        "pageCount": null
+        "totalCount": 4
     },
     "data": [
         {
@@ -61,6 +64,6 @@ Example: GET https://localhost:3009/v1/users?role=admin&limit=5&offset=0&sort=em
 }
 ```
 
-### Based on
+### Thanks
 
 [danielfsousa/express-rest-es2017-boilerplate](https://github.com/danielfsousa/express-rest-es2017-boilerplate)
