@@ -2,6 +2,23 @@
 
 NodeJS Rest Express MongoDB
 
+It rains ~~cats and dogs~~ features:
+
+```
+Express 4.15     CORS   Helmet    DotEnv   joi (validation)   PM2
+        Mongoose 4.9    Passport  JWT      Await
+        Eslint          Apidoc    Docker   Husky    Morgan    Travis    Docker
+        Tests
+                 Mocha  Chai      Sinon    istanbul
+        API
+                 API response    (data, meta: limit, offset, sort)    transform list
+                 Stack trace in Response
+        MORE:
+                 HTTPS            HTTP2 (spdy)      Socketio 2.1
+                 Utils.buildResponse       Page Query
+                 Dependabot       Codacy
+```
+
 ### Installation
 
 Clone this project:
@@ -27,7 +44,7 @@ yarn test     Run tests
 
 ### Features
 
-Your simple `API Route Handler` will have a nice syntax like this: (packed with ~~vitamins~~ features)
+Your simple `API Route Handler` will have a nice syntax like this: (packed with ~~vitamins~~ cool stuffs)
 ```js
 exports.list = async (req, res, next) => {
   try {
