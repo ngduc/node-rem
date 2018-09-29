@@ -1,6 +1,6 @@
 // make bluebird default Promise
 Promise = require('bluebird'); // eslint-disable-line no-global-assign
-const { port, env } = require('./config/vars');
+const { port, env, socketEnabled } = require('./config/vars');
 
 const https = require('https');
 const fs = require('fs');
@@ -19,8 +19,10 @@ const options = {
 };
 const server = https.createServer(options, app);
 
-socket.setup(server);
-server.listen(port, () => console.info(`🌟 Started (${env}) --- https://localhost:${port}`));
+if (socketEnabled) {
+  socket.setup(server);
+}
+server.listen(port, () => console.info(`--- 🌟 Started (${env}) --- https://localhost:${port}`));
 
 // HTTP
 // app.listen(port, () => console.info(`server started on port ${port} (${env})`));
