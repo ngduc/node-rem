@@ -1,8 +1,8 @@
-# 🌟 Node REM
+# Node REM
 
 NodeJS Rest Express MongoDB
 
-It rains ~~cats and dogs~~ features:
+🌟 It rains ~~cats and dogs~~ features:
 
 ```
 Express 4.15     CORS   Helmet    DotEnv   joi (validation)   PM2
