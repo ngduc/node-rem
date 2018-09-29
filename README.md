@@ -83,6 +83,7 @@ GET https://localhost:3009/v1/users?role=admin&limit=5&offset=0&sort=email:desc,
     ]
 }
 ```
+Example of generated API Docs (using `apidoc`) - https://node-rem.netlify.com
 
 ### Thanks
 
