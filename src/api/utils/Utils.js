@@ -38,14 +38,14 @@ exports.getPageQuery = reqQuery => {
 };
 
 // prepare a standard API Response, e.g. { meta: {...}, data: [...], errors: [...] }
-exports.buildResponse = async ({ req, data, meta, listEntity }) => {
+exports.buildResponse = async ({ req, data, meta, listModel }) => {
   const queryObj = this.getPageQuery(req.query);
   const metaData = { ...queryObj, ...meta };
-  if (listEntity) {
-    // if pass in "listEntity" => query for totalCount & put in "meta"
+  if (listModel) {
+    // if pass in "listModel" => query for totalCount & put in "meta"
     const isPagination = req.query.limit || req.query.page;
-    if (isPagination && listEntity.countDocuments) {
-      const totalCount = await listEntity.countDocuments();
+    if (isPagination && listModel.countDocuments) {
+      const totalCount = await listModel.countDocuments();
       metaData.totalCount = totalCount;
       if (queryObj.perPage) {
         metaData.pageCount = Math.ceil(totalCount / queryObj.perPage);

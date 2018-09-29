@@ -88,7 +88,7 @@ exports.update = (req, res, next) => {
 exports.list = async (req, res, next) => {
   try {
     const data = (await User.list(req.query)).transform();
-    res.json(await Utils.buildResponse({ req, data, listEntity: User }));
+    res.json(await Utils.buildResponse({ req, data, listModel: User }));
   } catch (e) {
     next(e);
   }
