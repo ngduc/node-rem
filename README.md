@@ -37,10 +37,13 @@ exports.list = async (req, res, next) => {
     next(e);
   }
 };
+```
 
-Example: GET https://localhost:3009/v1/users?role=admin&page=1&perPage=20
-Example: GET https://localhost:3009/v1/users?role=admin&limit=5&offset=0&sort=email:desc,createdAt
+API Response is similar to [JSON API](http://jsonapi.org/examples/#pagination) standard:
 
+```json
+GET https://localhost:3009/v1/users?role=admin&page=1&perPage=20
+GET https://localhost:3009/v1/users?role=admin&limit=5&offset=0&sort=email:desc,createdAt
 {
     "meta": {
         "limit": 5,

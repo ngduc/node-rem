@@ -3,11 +3,12 @@
 //
 // - "$ yarn" command will run this automatically. (package.json - postinstall)
 // - This script creates symlinks (e.g. "src/api" to "node_modules/api")
-// so we can do this from anywhere: require("api/utils/Utils") without using ".." paths.
+//   so we can do this from anywhere: require("api/utils/Utils") without using ".." paths.
 // ***
 
-var fs = require('fs');
-const execSync = require('child_process').execSync;
+/* eslint-disable */
+const fs = require('fs');
+// const execSync = require('child_process').execSync;
 
 const arr = ['api', 'config']; // symlinks
 
