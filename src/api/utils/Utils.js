@@ -9,11 +9,11 @@ exports.getSortQuery = (sortStr, defaultKey = 'createdAt') => {
   let ret = {};
   for (let i = 0; i < arr.length; i += 1) {
     let order = 1; // default: ascending (a-z)
-    let keyName = arr[i];
-    if (keyName.indexOf(':')) {
+    let keyName = arr[i].trim();
+    if (keyName.indexOf(':') >= 0) {
       const [keyStr, orderStr] = keyName.split(':'); // e.g. "name:desc"
       keyName = keyStr.trim();
-      order = orderStr === 'desc' || orderStr === '-1' ? -1 : 1;
+      order = orderStr.trim() === 'desc' || orderStr.trim() === '-1' ? -1 : 1;
     }
     ret = { ...ret, [keyName]: order };
   }
