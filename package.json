@@ -25,7 +25,7 @@
     "test:integration": "cross-env NODE_ENV=test mocha --timeout 20000 src/api/tests/integration",
     "test:watch": "cross-env NODE_ENV=test mocha --watch src/api/tests/unit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "codacy": "nyc report --reporter=text-lcov | codacy-coverage -t $CODACY_PROJECT_TOKEN",
+    "codacy": "cat coverage/lcov.info | codacy-coverage -t $CODACY_PROJECT_TOKEN",
     "postcoverage": "opn coverage/lcov-report/index.html",
     "validate": "yarn lint && yarn test",
     "postpublish": "git push --tags",
