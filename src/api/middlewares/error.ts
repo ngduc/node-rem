@@ -1,3 +1,4 @@
+export {};
 import * as httpStatus from 'http-status';
 const expressValidation = require('express-validation');
 const APIError = require('../utils/APIError');

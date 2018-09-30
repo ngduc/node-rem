@@ -1,3 +1,4 @@
+export {};
 const path = require('path');
 
 // import .env variables

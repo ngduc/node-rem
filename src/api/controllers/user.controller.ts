@@ -1,3 +1,4 @@
+export {};
 import { NextFunction, Request, Response, Router } from 'express';
 const httpStatus = require('http-status');
 const { omit } = require('lodash');

@@ -1,5 +1,4 @@
 export {};
-
 const mongoose = require('mongoose');
 const { mongo, env } = require('./vars');
 

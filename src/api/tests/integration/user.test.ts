@@ -1,6 +1,6 @@
-export {};
 /* eslint-disable arrow-body-style */
 /* eslint-disable no-unused-expressions */
+export {};
 const request = require('supertest');
 const httpStatus = require('http-status');
 const { expect } = require('chai');

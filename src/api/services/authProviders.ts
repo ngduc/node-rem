@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+export {};
 const axios = require('axios');
 
 exports.facebook = async (access_token: string) => {

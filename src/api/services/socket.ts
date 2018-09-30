@@ -1,3 +1,4 @@
+export {};
 const socketio = require('socket.io');
 
 exports.setup = (server: any) => {

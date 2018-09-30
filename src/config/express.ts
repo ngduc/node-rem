@@ -1,3 +1,4 @@
+export {};
 import * as express from 'express';
 const morgan = require('morgan');
 const bodyParser = require('body-parser');

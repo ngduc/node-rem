@@ -1,3 +1,4 @@
+export {};
 import { NextFunction, Request, Response, Router } from 'express';
 const mongoose = require('mongoose');
 const httpStatus = require('http-status');
