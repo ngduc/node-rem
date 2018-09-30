@@ -5,19 +5,21 @@ NodeJS Rest Express MongoDB
 🌟 It rains ~~cats and dogs~~ features:
 
 ```
-Express 4.15     CORS   Helmet    DotEnv   joi (validation)   PM2
-        Mongoose 4.9    Passport  JWT      Await
-        Eslint          Apidoc    Docker   Husky    Morgan    Travis    Docker
-        Tests
-                 Mocha  Chai      Sinon    istanbul
-        API
-                 API response    (data, meta: limit, offset, sort)    transform list
-                 Stack trace in Response
-        MORE:
-                 HTTPS            HTTP2 (spdy)      Socketio 2.1
-                 Utils.buildResponse       Page Query
-                 Dependabot       Codacy
+  Typescript      Express 4.15       CORS     Helmet    DotEnv   joi (validation)   forever
+  Mongoose 4.9    Passport  JWT      Await
+  Eslint          Apidoc    Docker   Husky    Morgan    Travis    Docker
+  Tests
+            Mocha  Chai      Sinon    istanbul
+  API
+            API response    (data, meta: limit, offset, sort)    transform list
+            Stack trace in Response
+  MORE:
+            HTTPS            HTTP2 (spdy)      Socketio 2.1
+            Utils.buildResponse       Page Query
+            Dependabot       Codacy
 ```
+
+If you don't want Typescript, check the branch `node-rem-without-typescript`
 
 ### 📦 Installation
 
@@ -32,7 +34,7 @@ Update `package.json` and `.env` file with your information.
 
 ### 🔧 Commands
 
-Require: `MongoDB`
+Require: `MongoDB` and `NodeJS v8.12.0`
 
 ```
 yarn dev      launch DEV mode
