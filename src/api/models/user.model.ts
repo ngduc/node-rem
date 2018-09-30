@@ -1,3 +1,4 @@
+import { NextFunction, Request, Response, Router } from 'express';
 const mongoose = require('mongoose');
 const httpStatus = require('http-status');
 const { omitBy, isNil } = require('lodash');
@@ -65,7 +66,7 @@ const userSchema = new mongoose.Schema(
  * - validations
  * - virtuals
  */
-userSchema.pre('save', async function save(next) {
+userSchema.pre('save', async function save(next: NextFunction) {
   try {
     if (!this.isModified('password')) return next();
 
@@ -85,7 +86,7 @@ userSchema.pre('save', async function save(next) {
  */
 userSchema.method({
   transform() {
-    const transformed = {};
+    const transformed: any = {};
     const fields = ['id', 'name', 'email', 'picture', 'role', 'createdAt'];
 
     fields.forEach(field => {
@@ -106,7 +107,7 @@ userSchema.method({
     return jwt.encode(playload, jwtSecret);
   },
 
-  async passwordMatches(password) {
+  async passwordMatches(password: string) {
     return bcrypt.compare(password, this.password);
   }
 });
@@ -123,7 +124,7 @@ userSchema.statics = {
    * @param {ObjectId} id - The objectId of user.
    * @returns {Promise<User, APIError>}
    */
-  async get(id) {
+  async get(id: any) {
     try {
       let user;
 
@@ -149,12 +150,12 @@ userSchema.statics = {
    * @param {ObjectId} id - The objectId of user.
    * @returns {Promise<User, APIError>}
    */
-  async findAndGenerateToken(options) {
+  async findAndGenerateToken(options: any) {
     const { email, password, refreshObject } = options;
     if (!email) throw new APIError({ message: 'An email is required to generate a token' });
 
     const user = await this.findOne({ email }).exec();
-    const err = {
+    const err: any = {
       status: httpStatus.UNAUTHORIZED,
       isPublic: true
     };
@@ -182,7 +183,7 @@ userSchema.statics = {
    * @param {number} limit - Limit number of users to be returned.
    * @returns {Promise<User[]>}
    */
-  list(query) {
+  list(query: any) {
     const { name, email, role } = query;
     const options = omitBy({ name, email, role }, isNil); // allowed filter fields
     const { page = 1, perPage = 30, limit, offset, sort } = Utils.getPageQuery(query);
@@ -202,7 +203,7 @@ userSchema.statics = {
    * @param {Error} error
    * @returns {Error|APIError}
    */
-  checkDuplicateEmail(error) {
+  checkDuplicateEmail(error: any) {
     if (error.name === 'MongoError' && error.code === 11000) {
       return new APIError({
         message: 'Validation Error',
@@ -221,7 +222,7 @@ userSchema.statics = {
     return error;
   },
 
-  async oAuthLogin({ service, id, email, name, picture }) {
+  async oAuthLogin({ service, id, email, name, picture }: any) {
     const user = await this.findOne({ $or: [{ [`services.${service}`]: id }, { email }] });
     if (user) {
       user.services[service] = id;

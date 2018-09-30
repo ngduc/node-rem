@@ -9,7 +9,7 @@ require('dotenv-safe').load({
 module.exports = {
   env: process.env.NODE_ENV,
   port: process.env.PORT,
-  socketEnabled: ['1', 'true', 'yes'].indexOf(process.env.SOCKET_ENABLED) >= 0,
+  socketEnabled: ['1', 'true', 'yes'].indexOf(process.env.SOCKET_ENABLED || '') >= 0,
   jwtSecret: process.env.JWT_SECRET,
   jwtExpirationInterval: process.env.JWT_EXPIRATION_MINUTES,
   mongo: {
