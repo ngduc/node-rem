@@ -1,3 +1,4 @@
+export {};
 const httpStatus = require('http-status');
 const passport = require('passport');
 const User = require('../models/user.model');
@@ -6,13 +7,18 @@ const APIError = require('../utils/APIError');
 const ADMIN = 'admin';
 const LOGGED_USER = '_loggedUser';
 
-const handleJWT = (req, res, next, roles) => async (err, user, info) => {
+import * as Bluebird from 'bluebird';
+// declare global {
+//   export interface Promise<T> extends Bluebird<T> {}
+// }
+
+const handleJWT = (req: any, res: any, next: any, roles: any) => async (err: any, user: any, info: any) => {
   const error = err || info;
-  const logIn = Promise.promisify(req.logIn);
+  const logIn: any = Bluebird.promisify(req.logIn);
   const apiError = new APIError({
     message: error ? error.message : 'Unauthorized',
     status: httpStatus.UNAUTHORIZED,
-    stack: error ? error.stack : undefined,
+    stack: error ? error.stack : undefined
   });
 
   try {
@@ -44,11 +50,7 @@ const handleJWT = (req, res, next, roles) => async (err, user, info) => {
 exports.ADMIN = ADMIN;
 exports.LOGGED_USER = LOGGED_USER;
 
-exports.authorize = (roles = User.roles) => (req, res, next) =>
-  passport.authenticate(
-    'jwt', { session: false },
-    handleJWT(req, res, next, roles),
-  )(req, res, next);
+exports.authorize = (roles = User.roles) => (req: any, res: any, next: any) =>
+  passport.authenticate('jwt', { session: false }, handleJWT(req, res, next, roles))(req, res, next);
 
-exports.oAuth = service =>
-  passport.authenticate(service, { session: false });
+exports.oAuth = (service: any) => passport.authenticate(service, { session: false });

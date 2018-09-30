@@ -1,7 +1,7 @@
 const Const = require('api/utils/Const');
 
 // from "sort" string (URL param) => build sort object (mongoose), e.g. "sort=name:desc,age"
-exports.getSortQuery = (sortStr, defaultKey = 'createdAt') => {
+exports.getSortQuery = (sortStr: string, defaultKey = 'createdAt') => {
   let arr = [sortStr || defaultKey];
   if (sortStr && sortStr.indexOf(',')) {
     arr = sortStr.split(',');
@@ -21,8 +21,8 @@ exports.getSortQuery = (sortStr, defaultKey = 'createdAt') => {
 };
 
 // from "req" (req.query) => transform to: query object, e.g. { limit: 5, sort: { name: 1 } }
-exports.getPageQuery = reqQuery => {
-  const output = {};
+exports.getPageQuery = (reqQuery: any) => {
+  const output: any = {};
   if (reqQuery.page) {
     output.perPage = reqQuery.perPage || Const.ITEMS_PER_PAGE; // if page is set => take (or set default) perPage
   }
@@ -38,7 +38,7 @@ exports.getPageQuery = reqQuery => {
 };
 
 // prepare a standard API Response, e.g. { meta: {...}, data: [...], errors: [...] }
-exports.buildResponse = async ({ req, data, meta, listModel }) => {
+exports.buildResponse = async ({ req, data, meta, listModel }: any) => {
   const queryObj = this.getPageQuery(req.query);
   const metaData = { ...queryObj, ...meta };
   if (listModel) {
@@ -56,11 +56,11 @@ exports.buildResponse = async ({ req, data, meta, listModel }) => {
 };
 
 // e.g. return Utils.queryPromise( this.find(options) )
-exports.queryPromise = promise =>
+exports.queryPromise = (promise: any) =>
   new Promise(async resolve => {
     const items = await promise;
 
     // decorate => transform() on the result
-    items.transform = () => items.map(item => (item.transform ? item.transform() : item));
+    items.transform = () => items.map((item: any) => (item.transform ? item.transform() : item));
     resolve(items);
   });

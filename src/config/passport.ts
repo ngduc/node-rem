@@ -1,3 +1,4 @@
+export {};
 const JwtStrategy = require('passport-jwt').Strategy;
 const BearerStrategy = require('passport-http-bearer');
 const { ExtractJwt } = require('passport-jwt');
@@ -7,10 +8,10 @@ const User = require('../api/models/user.model');
 
 const jwtOptions = {
   secretOrKey: jwtSecret,
-  jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
+  jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer')
 };
 
-const jwt = async (payload, done) => {
+const jwt = async (payload: any, done: any) => {
   try {
     const user = await User.findById(payload.sub);
     if (user) return done(null, user);
@@ -20,7 +21,7 @@ const jwt = async (payload, done) => {
   }
 };
 
-const oAuth = service => async (token, done) => {
+const oAuth = (service: any) => async (token: any, done: any) => {
   try {
     const userData = await authProviders[service](token);
     const user = await User.oAuthLogin(userData);

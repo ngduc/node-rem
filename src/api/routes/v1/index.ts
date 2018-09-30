@@ -1,4 +1,5 @@
-const express = require('express');
+export {};
+import * as express from 'express';
 const userRoutes = require('./user.route');
 const authRoutes = require('./auth.route');
 

@@ -10,7 +10,8 @@
     "object-curly-newline": 0,
     "import/no-extraneous-dependencies": 0,
     "no-mixed-operators": 0,
-    "max-len": ["error", 120]
+    "max-len": ["error", 120],
+    "import/no-unresolved": 0
   },
   "env": {
     "node": true,

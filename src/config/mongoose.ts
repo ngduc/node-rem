@@ -1,3 +1,4 @@
+export {};
 const mongoose = require('mongoose');
 const { mongo, env } = require('./vars');
 
@@ -5,7 +6,7 @@ const { mongo, env } = require('./vars');
 mongoose.Promise = Promise;
 
 // Exit application on error
-mongoose.connection.on('error', err => {
+mongoose.connection.on('error', (err: any) => {
   console.error(`MongoDB connection error: ${err}`);
   process.exit(-1);
 });

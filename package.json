@@ -14,13 +14,13 @@
     "postinstall": "cd ./node_modules && node ../package_symlinks.js && cd ..",
     "precommit": "yarn lint",
     "prestart": "yarn docs",
-    "start": "cross-env NODE_ENV=production pm2 start ./src/index.js --name node-rem",
-    "stop": "cross-env NODE_ENV=production pm2 stop node-rem",
-    "dev": "nodemon ./src/index.js",
+    "start": "cross-env NODE_ENV=production forever start -a --uid 'node-rem' -v -c ts-node src/index.ts",
+    "stop": "cross-env NODE_ENV=production forever stop 'node-rem'",
+    "dev": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/index.ts",
     "lint": "eslint ./src/ --ignore-path .gitignore --ignore-pattern internals/scripts",
     "lint:fix": "yarn lint --fix",
     "lint:watch": "yarn lint --watch",
-    "test": "cross-env NODE_ENV=test nyc --reporter=html --reporter=text --reporter=lcov mocha --timeout 20000 --recursive src/api/tests",
+    "test": "cross-env NODE_ENV=test nyc --reporter=html --reporter=text --reporter=lcov mocha --compilers ts:ts-node/register --timeout 20000 --recursive src/api/tests",
     "test:unit": "cross-env NODE_ENV=test mocha src/api/tests/unit",
     "test:integration": "cross-env NODE_ENV=test mocha --timeout 20000 src/api/tests/integration",
     "test:watch": "cross-env NODE_ENV=test mocha --watch src/api/tests/unit",
@@ -94,6 +94,10 @@
     "uuid": "^3.1.0"
   },
   "devDependencies": {
+    "@types/bluebird": "^3.5.24",
+    "@types/express": "^4.16.0",
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^8.10.30",
     "apidoc": "^0.17.5",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
@@ -102,6 +106,7 @@
     "eslint": "^5.6.1",
     "eslint-config-airbnb-base": "^12.0.1",
     "eslint-plugin-import": "^2.14.0",
+    "forever": "^0.15.3",
     "husky": "^1.0.1",
     "mocha": "^3.3.0",
     "nodemon": "^1.18.4",
@@ -109,6 +114,8 @@
     "opn-cli": "^3.1.0",
     "sinon": "^6.0.0",
     "sinon-chai": "^3.0.0",
-    "supertest": "^3.3.0"
+    "supertest": "^3.3.0",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.1.1"
   }
 }

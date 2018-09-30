@@ -1,35 +1,32 @@
 /* eslint-disable camelcase */
+export {};
 const axios = require('axios');
 
-exports.facebook = async (access_token) => {
+exports.facebook = async (access_token: string) => {
   const fields = 'id, name, email, picture';
   const url = 'https://graph.facebook.com/me';
   const params = { access_token, fields };
   const response = await axios.get(url, { params });
-  const {
-    id, name, email, picture,
-  } = response.data;
+  const { id, name, email, picture } = response.data;
   return {
     service: 'facebook',
     picture: picture.data.url,
     id,
     name,
-    email,
+    email
   };
 };
 
-exports.google = async (access_token) => {
+exports.google = async (access_token: string) => {
   const url = 'https://www.googleapis.com/oauth2/v3/userinfo';
   const params = { access_token };
   const response = await axios.get(url, { params });
-  const {
-    sub, name, email, picture,
-  } = response.data;
+  const { sub, name, email, picture } = response.data;
   return {
     service: 'google',
     picture,
     id: sub,
     name,
-    email,
+    email
   };
 };
