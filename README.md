@@ -19,7 +19,7 @@ NodeJS Rest Express MongoDB
             Dependabot       Codacy
 ```
 
-If you don't want Typescript, check the branch `node-rem-without-typescript`
+If you don't want Typescript, use this branch: `node-rem-without-typescript`
 
 ### 📦 Installation
 
