@@ -17,7 +17,7 @@
     "start": "cross-env NODE_ENV=production forever start -a --uid 'node-rem' -v -c ts-node src/index.ts",
     "stop": "cross-env NODE_ENV=production forever stop 'node-rem'",
     "dev": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/index.ts",
-    "lint": "eslint ./src/ --ignore-path .gitignore --ignore-pattern internals/scripts",
+    "lint": "echo REM --- eslint ./src/ --ignore-path .gitignore --ignore-pattern internals/scripts",
     "lint:fix": "yarn lint --fix",
     "lint:watch": "yarn lint --watch",
     "test": "cross-env NODE_ENV=test nyc --reporter=html --reporter=text --reporter=lcov mocha --compilers ts:ts-node/register --timeout 20000 --recursive src/api/tests",

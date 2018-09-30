@@ -23,10 +23,7 @@ const server = spdy.createServer(options, app);
 if (socketEnabled) {
   socket.setup(server);
 }
-server.listen(port, () => console.info(`--- 🌟 Started (${env}) --- https://localhost:${port}`));
-
-// HTTP
-// app.listen(port, () => console.info(`server started on port ${port} (${env})`));
+server.listen(port, () => console.info(`--- 🌟  Started (${env}) --- https://localhost:${port}`));
 
 /**
  * Exports express
