@@ -1,7 +1,7 @@
 {
   "name": "node-rem",
-  "version": "0.1.0",
-  "description": "Node REM - NodeJS Rest Express MongoDB",
+  "version": "0.2.0",
+  "description": "Node REM - NodeJS Rest Express MongoDB and more: typescript, passport, JWT, socket.io, HTTPS, HTTP2, async/await, etc.",
   "author": "Duc Nguyen",
   "main": "src/index.js",
   "private": false,
@@ -14,8 +14,9 @@
     "postinstall": "cd ./node_modules && node ../package_symlinks.js && cd ..",
     "precommit": "yarn lint",
     "prestart": "yarn docs",
-    "start": "cross-env NODE_ENV=production forever start -a --uid 'node-rem' -v -c ts-node src/index.ts",
+    "start": "cross-env NODE_ENV=production forever start -a --uid 'node-rem' -v -c 'ts-node' src/index.ts",
     "stop": "cross-env NODE_ENV=production forever stop 'node-rem'",
+    "logs": "forever logs",
     "dev": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/index.ts",
     "lint": "tslint --project tsconfig.json src/**/*.ts",
     "lint:fix": "yarn lint --fix",
@@ -63,7 +64,9 @@
     "API",
     "boilerplate",
     "generator",
-    "starter project"
+    "starter project",
+    "typescript",
+    "tslint"
   ],
   "dependencies": {
     "axios": "^0.18.0",
