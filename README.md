@@ -16,7 +16,7 @@ NodeJS Rest Express MongoDB
   MORE:
             HTTPS            HTTP2 (spdy)      Socketio 2.1
             Utils.buildResponse       Page Query
-            Dependabot       Codacy
+            Dependabot       Codacy   tslint
 ```
 
 If you don't want Typescript, use this branch: `node-rem-without-typescript`
@@ -88,5 +88,7 @@ GET https://localhost:3009/v1/users?role=admin&limit=5&offset=0&sort=email:desc,
 Example of generated API Docs (using `apidoc`) - https://node-rem.netlify.com
 
 ### 🙌 Thanks
+
+All contributions are welcome!
 
 [danielfsousa/express-rest-es2017-boilerplate](https://github.com/danielfsousa/express-rest-es2017-boilerplate)

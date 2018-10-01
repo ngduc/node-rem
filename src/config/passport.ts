@@ -1,6 +1,6 @@
 export {};
-const JwtStrategy = require('passport-jwt').Strategy;
-const BearerStrategy = require('passport-http-bearer');
+const jwtStrategy = require('passport-jwt').Strategy;
+const bearerStrategy = require('passport-http-bearer');
 const { ExtractJwt } = require('passport-jwt');
 const { jwtSecret } = require('./vars');
 const authProviders = require('../api/services/authProviders');
@@ -14,7 +14,9 @@ const jwtOptions = {
 const jwt = async (payload: any, done: any) => {
   try {
     const user = await User.findById(payload.sub);
-    if (user) return done(null, user);
+    if (user) {
+      return done(null, user);
+    }
     return done(null, false);
   } catch (error) {
     return done(error, false);
@@ -31,6 +33,6 @@ const oAuth = (service: any) => async (token: any, done: any) => {
   }
 };
 
-exports.jwt = new JwtStrategy(jwtOptions, jwt);
-exports.facebook = new BearerStrategy(oAuth('facebook'));
-exports.google = new BearerStrategy(oAuth('google'));
+exports.jwt = new jwtStrategy(jwtOptions, jwt);
+exports.facebook = new bearerStrategy(oAuth('facebook'));
+exports.google = new bearerStrategy(oAuth('google'));
