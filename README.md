@@ -7,7 +7,7 @@ NodeJS Rest Express MongoDB
 ```
   Typescript      Express 4.15       CORS     Helmet    DotEnv   joi (validation)   forever
   Mongoose 4.9    Passport  JWT      Await
-  Eslint          Apidoc    Docker   Husky    Morgan    Travis    Docker
+  Tslint          Apidoc    Docker   Husky    Morgan    Travis    Docker
   Tests
             Mocha  Chai      Sinon    istanbul
   API
@@ -16,7 +16,7 @@ NodeJS Rest Express MongoDB
   MORE:
             HTTPS            HTTP2 (spdy)      Socketio 2.1
             Utils.buildResponse       Page Query
-            Dependabot       Codacy   tslint
+            Dependabot       Codacy
 ```
 
 If you don't want Typescript, use this branch: `node-rem-without-typescript`
@@ -34,7 +34,7 @@ Update `package.json` and `.env` file with your information.
 
 ### 🔧 Commands
 
-Require: `MongoDB` and `NodeJS v8.12.0`
+Require: `MongoDB` and `NodeJS v8.12.0 +`
 
 ```
 yarn dev      launch DEV mode
