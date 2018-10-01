@@ -92,7 +92,7 @@
     "dotenv-safe": "^6.0.0",
     "express": "^4.15.2",
     "express-validation": "^1.0.2",
-    "helmet": "^3.5.0",
+    "helmet": "^3.13.0",
     "http-status": "^1.0.1",
     "joi": "^10.6.0",
     "jwt-simple": "0.5.5",
