@@ -2,6 +2,8 @@
 
 NodeJS Rest Express MongoDB
 
+[![Build Status](https://travis-ci.org/ngduc/node-rem.svg?branch=master)](https://travis-ci.org/ngduc/node-rem)
+
 🌟 It rains ~~cats and dogs~~ features:
 
 ```
