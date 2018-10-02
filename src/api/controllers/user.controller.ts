@@ -3,17 +3,18 @@ import { NextFunction, Request, Response, Router } from 'express';
 const httpStatus = require('http-status');
 const { omit } = require('lodash');
 const User = require('api/models/user.model');
-const Utils = require('api/utils/Utils');
+import { apiJson } from 'api/utils/Utils';
 const { handler: errorHandler } = require('../middlewares/error');
 
 /**
  * Load user and append to req.
  * @public
  */
-exports.load = async (req: any, res: Response, next: NextFunction, id: any) => {
+exports.load = async (req: Request, res: Response, next: NextFunction, id: any) => {
   try {
     const user = await User.get(id);
-    req.locals = { user };
+    req.route.meta = req.route.meta || {};
+    req.route.meta.user = user;
     return next();
   } catch (error) {
     return errorHandler(error, req, res);
@@ -24,13 +25,13 @@ exports.load = async (req: any, res: Response, next: NextFunction, id: any) => {
  * Get user
  * @public
  */
-exports.get = (req: any, res: Response) => res.json(req.locals.user.transform());
+exports.get = (req: Request, res: Response) => res.json(req.route.meta.user.transform());
 
 /**
  * Get logged in user info
  * @public
  */
-exports.loggedIn = (req: any, res: Response) => res.json(req.user.transform());
+exports.loggedIn = (req: Request, res: Response) => res.json(req.route.meta.user.transform());
 
 /**
  * Create new user
@@ -51,9 +52,9 @@ exports.create = async (req: Request, res: Response, next: NextFunction) => {
  * Replace existing user
  * @public
  */
-exports.replace = async (req: any, res: Response, next: NextFunction) => {
+exports.replace = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { user } = req.locals;
+    const { user } = req.route.meta;
     const newUser = new User(req.body);
     const ommitRole = user.role !== 'admin' ? 'role' : '';
     const newUserObject = omit(newUser.toObject(), '_id', ommitRole);
@@ -71,10 +72,10 @@ exports.replace = async (req: any, res: Response, next: NextFunction) => {
  * Update existing user
  * @public
  */
-exports.update = (req: any, res: Response, next: NextFunction) => {
-  const ommitRole = req.locals.user.role !== 'admin' ? 'role' : '';
+exports.update = (req: Request, res: Response, next: NextFunction) => {
+  const ommitRole = req.route.meta.user.role !== 'admin' ? 'role' : '';
   const updatedUser = omit(req.body, ommitRole);
-  const user = Object.assign(req.locals.user, updatedUser);
+  const user = Object.assign(req.route.meta.user, updatedUser);
 
   user
     .save()
@@ -90,7 +91,7 @@ exports.update = (req: any, res: Response, next: NextFunction) => {
 exports.list = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const data = (await User.list(req.query)).transform();
-    res.json(await Utils.buildResponse({ req, data, listModel: User }));
+    apiJson({ req, res, data, listModel: User });
   } catch (e) {
     next(e);
   }
@@ -100,8 +101,8 @@ exports.list = async (req: Request, res: Response, next: NextFunction) => {
  * Delete user
  * @public
  */
-exports.remove = (req: any, res: Response, next: NextFunction) => {
-  const { user } = req.locals;
+exports.remove = (req: Request, res: Response, next: NextFunction) => {
+  const { user } = req.route.meta;
 
   user
     .remove()

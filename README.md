@@ -9,16 +9,15 @@ NodeJS Rest Express MongoDB
 ```
   Typescript      Express 4.15       CORS     Helmet    DotEnv   joi (validation)   forever
   Mongoose 4.9    Passport  JWT      Await
-  Tslint          Apidoc    Docker   Husky    Morgan    Travis    Docker
+  Tslint          Apidoc    Docker   Husky    Morgan    Travis   Docker
   Tests
-            Mocha  Chai      Sinon    istanbul
-  API
-            API response    (data, meta: limit, offset, sort)    transform list
-            Stack trace in Response
+            Mocha  Chai     Sinon    istanbul
   MORE:
-            HTTPS            HTTP2 (spdy)      Socketio 2.1
-            Utils.buildResponse       Page Query
-            Dependabot       Codacy
+            HTTPS           HTTP2 (spdy)      Socketio 2.1    VSCode Debug
+            Dependabot      Codacy
+      API
+            API response    (data, meta: limit, offset, sort)    transform res
+            apiJson         Page Query        Stack trace in Response
 ```
 
 If you don't want Typescript, use this branch: `node-rem-without-typescript`
@@ -50,10 +49,10 @@ yarn test     Run tests
 
 Your simple `API Route Handler` will have a nice syntax like this: (packed with ~~vitamins~~ cool stuffs)
 ```js
-exports.list = async (req, res, next) => {
+exports.list = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const data = (await User.list(req.query)).transform();
-    res.json(await Utils.buildResponse({ req, data, listModel: User }));
+    apiJson({ req, res, data, listModel: User });
   } catch (e) {
     next(e);
   }
@@ -83,7 +82,7 @@ GET https://localhost:3009/v1/users?role=admin&limit=5&offset=0&sort=email:desc,
             "role": "admin",
             "createdAt": "2018-09-27T16:39:41.498Z"
         },
-        ...
+        // ...
     ]
 }
 ```

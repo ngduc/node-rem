@@ -77,10 +77,10 @@ describe('Authentication API', () => {
         .expect(httpStatus.CREATED)
         .then((res: any) => {
           delete user.password;
-          expect(res.body.token).to.have.a.property('accessToken');
-          expect(res.body.token).to.have.a.property('refreshToken');
-          expect(res.body.token).to.have.a.property('expiresIn');
-          expect(res.body.user).to.include(user);
+          expect(res.body.data.token).to.have.a.property('accessToken');
+          expect(res.body.data.token).to.have.a.property('refreshToken');
+          expect(res.body.data.token).to.have.a.property('expiresIn');
+          expect(res.body.data.user).to.include(user);
         });
     });
 
@@ -139,10 +139,10 @@ describe('Authentication API', () => {
         .expect(httpStatus.OK)
         .then((res: any) => {
           delete dbUser.password;
-          expect(res.body.token).to.have.a.property('accessToken');
-          expect(res.body.token).to.have.a.property('refreshToken');
-          expect(res.body.token).to.have.a.property('expiresIn');
-          expect(res.body.user).to.include(dbUser);
+          expect(res.body.data.token).to.have.a.property('accessToken');
+          expect(res.body.data.token).to.have.a.property('refreshToken');
+          expect(res.body.data.token).to.have.a.property('expiresIn');
+          expect(res.body.data.user).to.include(dbUser);
         });
     });
 
