@@ -1,9 +1,11 @@
 export {};
+import { NextFunction, Request, Response, Router } from 'express';
 const httpStatus = require('http-status');
 // import * as User from '../models/user.model';
 const User = require('../models/user.model');
 const RefreshToken = require('../models/refreshToken.model');
 const moment = require('moment-timezone');
+import { apiJson } from 'api/utils/Utils';
 const { jwtExpirationInterval } = require('../../config/vars');
 
 /**
@@ -26,13 +28,14 @@ function generateTokenResponse(user: any, accessToken: string) {
  * Returns jwt token if registration was successful
  * @public
  */
-exports.register = async (req: any, res: any, next: any) => {
+exports.register = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = await new User(req.body).save();
     const userTransformed = user.transform();
     const token = generateTokenResponse(user, user.token());
     res.status(httpStatus.CREATED);
-    return res.json({ token, user: userTransformed });
+    const data = { token, user: userTransformed };
+    return apiJson({ req, res, data });
   } catch (error) {
     return next(User.checkDuplicateEmail(error));
   }
@@ -42,12 +45,13 @@ exports.register = async (req: any, res: any, next: any) => {
  * Returns jwt token if valid username and password is provided
  * @public
  */
-exports.login = async (req: any, res: any, next: any) => {
+exports.login = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { user, accessToken } = await User.findAndGenerateToken(req.body);
     const token = generateTokenResponse(user, accessToken);
     const userTransformed = user.transform();
-    return res.json({ token, user: userTransformed });
+    const data = { token, user: userTransformed };
+    return apiJson({ req, res, data });
   } catch (error) {
     return next(error);
   }
@@ -58,7 +62,7 @@ exports.login = async (req: any, res: any, next: any) => {
  * Returns jwt token
  * @public
  */
-exports.oAuth = async (req: any, res: any, next: any) => {
+exports.oAuth = async (req: any, res: Response, next: NextFunction) => {
   try {
     const { user } = req;
     const accessToken = user.token();
@@ -74,7 +78,7 @@ exports.oAuth = async (req: any, res: any, next: any) => {
  * Returns a new jwt when given a valid refresh token
  * @public
  */
-exports.refresh = async (req: any, res: any, next: any) => {
+exports.refresh = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { email, refreshToken } = req.body;
     const refreshObject = await RefreshToken.findOneAndRemove({

@@ -12,5 +12,9 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "paths": {
+    "api/*": ["api/*"],
+    "config/*": ["config/*"]
+  }
 }

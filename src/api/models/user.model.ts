@@ -8,7 +8,7 @@ const moment = require('moment-timezone');
 const jwt = require('jwt-simple');
 const uuidv4 = require('uuid/v4');
 const APIError = require('api/utils/APIError');
-const Utils = require('api/utils/Utils');
+import { getPageQuery, queryPromise } from 'api/utils/Utils';
 const { env, jwtSecret, jwtExpirationInterval } = require('config/vars');
 
 /**
@@ -69,7 +69,9 @@ const userSchema = new mongoose.Schema(
  */
 userSchema.pre('save', async function save(next: NextFunction) {
   try {
-    if (!this.isModified('password')) return next();
+    if (!this.isModified('password')) {
+      return next();
+    }
 
     const rounds = env === 'test' ? 1 : 10;
 
@@ -153,7 +155,9 @@ userSchema.statics = {
    */
   async findAndGenerateToken(options: any) {
     const { email, password, refreshObject } = options;
-    if (!email) throw new APIError({ message: 'An email is required to generate a token' });
+    if (!email) {
+      throw new APIError({ message: 'An email is required to generate a token' });
+    }
 
     const user = await this.findOne({ email }).exec();
     const err: any = {
@@ -187,14 +191,14 @@ userSchema.statics = {
   list(query: any) {
     const { name, email, role } = query;
     const options = omitBy({ name, email, role }, isNil); // allowed filter fields
-    const { page = 1, perPage = 30, limit, offset, sort } = Utils.getPageQuery(query);
+    const { page = 1, perPage = 30, limit, offset, sort } = getPageQuery(query);
 
     const result = this.find(options)
       .sort(sort)
       .skip(typeof offset !== 'undefined' ? offset : perPage * (page - 1))
       .limit(typeof limit !== 'undefined' ? limit : perPage)
       .exec();
-    return Utils.queryPromise(result);
+    return queryPromise(result);
   },
 
   /**
@@ -227,8 +231,12 @@ userSchema.statics = {
     const user = await this.findOne({ $or: [{ [`services.${service}`]: id }, { email }] });
     if (user) {
       user.services[service] = id;
-      if (!user.name) user.name = name;
-      if (!user.picture) user.picture = picture;
+      if (!user.name) {
+        user.name = name;
+      }
+      if (!user.picture) {
+        user.picture = picture;
+      }
       return user.save();
     }
     const password = uuidv4();

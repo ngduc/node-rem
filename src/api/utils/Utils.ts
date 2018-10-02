@@ -1,7 +1,8 @@
+import { NextFunction, Request, Response, Router } from 'express';
 const Const = require('api/utils/Const');
 
 // from "sort" string (URL param) => build sort object (mongoose), e.g. "sort=name:desc,age"
-exports.getSortQuery = (sortStr: string, defaultKey = 'createdAt') => {
+export function getSortQuery(sortStr: string, defaultKey = 'createdAt') {
   let arr = [sortStr || defaultKey];
   if (sortStr && sortStr.indexOf(',')) {
     arr = sortStr.split(',');
@@ -18,10 +19,10 @@ exports.getSortQuery = (sortStr: string, defaultKey = 'createdAt') => {
     ret = { ...ret, [keyName]: order };
   }
   return ret;
-};
+}
 
 // from "req" (req.query) => transform to: query object, e.g. { limit: 5, sort: { name: 1 } }
-exports.getPageQuery = (reqQuery: any) => {
+export function getPageQuery(reqQuery: any) {
   const output: any = {};
   if (reqQuery.page) {
     output.perPage = reqQuery.perPage || Const.ITEMS_PER_PAGE; // if page is set => take (or set default) perPage
@@ -33,13 +34,35 @@ exports.getPageQuery = (reqQuery: any) => {
       output[field] = parseInt(reqQuery[field], 10);
     }
   });
-  output.sort = this.getSortQuery(reqQuery.sort, 'createdAt');
+  output.sort = getSortQuery(reqQuery.sort, 'createdAt');
   return output;
-};
+}
 
-// prepare a standard API Response, e.g. { meta: {...}, data: [...], errors: [...] }
-exports.buildResponse = async ({ req, data, meta, listModel }: any) => {
-  const queryObj = this.getPageQuery(req.query);
+// e.g. return Utils.queryPromise( this.find(options) )
+export function queryPromise(promise: any) {
+  return new Promise(async resolve => {
+    const items = await promise;
+
+    // decorate => transform() on the result
+    items.transform = () => items.map((item: any) => (item.transform ? item.transform() : item));
+    resolve(items);
+  });
+}
+
+type apiJsonTypes = {
+  req: Request;
+  res: Response;
+  data: any | any[]; // data can be object or array
+  listModel?: any; // e.g. "listModal: User" to get meta.totalCount (User.countDocuments())
+  meta?: any;
+  json?: boolean; // retrieve JSON only (won't use res.json(...))
+};
+/**
+ * prepare a standard API Response, e.g. { meta: {...}, data: [...], errors: [...] }
+ * @param param0
+ */
+export async function apiJson({ req, res, data, listModel, meta = {}, json = false }: apiJsonTypes) {
+  const queryObj = getPageQuery(req.query);
   const metaData = { ...queryObj, ...meta };
   if (listModel) {
     // if pass in "listModel" => query for totalCount & put in "meta"
@@ -52,15 +75,10 @@ exports.buildResponse = async ({ req, data, meta, listModel }: any) => {
       }
     }
   }
-  return { meta: metaData, data };
-};
 
-// e.g. return Utils.queryPromise( this.find(options) )
-exports.queryPromise = (promise: any) =>
-  new Promise(async resolve => {
-    const items = await promise;
-
-    // decorate => transform() on the result
-    items.transform = () => items.map((item: any) => (item.transform ? item.transform() : item));
-    resolve(items);
-  });
+  const output = { data, meta: metaData };
+  if (json) {
+    return output;
+  }
+  return res.json(output);
+}

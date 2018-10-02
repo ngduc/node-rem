@@ -22,7 +22,9 @@ const handleJWT = (req: any, res: any, next: any, roles: any) => async (err: any
   });
 
   try {
-    if (error || !user) throw error;
+    if (error || !user) {
+      throw error;
+    }
     await logIn(user, { session: false });
   } catch (e) {
     return next(apiError);
@@ -42,7 +44,8 @@ const handleJWT = (req: any, res: any, next: any, roles: any) => async (err: any
     return next(apiError);
   }
 
-  req.user = user;
+  req.route.meta = req.route.meta || {};
+  req.route.meta.user = user;
 
   return next();
 };

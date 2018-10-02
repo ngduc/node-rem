@@ -4,33 +4,14 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "nodemon",
-      "runtimeExecutable": "nodemon",
+      "name": "Launch Program",
       "runtimeArgs": [
-        "--inspect"
+          "-r",
+          "ts-node/register"
       ],
-      "program": "${workspaceRoot}/src/index.js",
-      "restart": true,
-      "port": 9229,
-      "protocol": "inspector",
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "node",
-      "runtimeExecutable": "node",
-      "runtimeArgs": [
-        "--inspect"
-      ],
-      "program": "${workspaceRoot}/src/index.js",
-      "restart": true,
-      "port": 9229,
-      "protocol": "inspector",
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen"
-    }
-  ],
-  "compounds": []
+      "args": [
+          "${workspaceFolder}/src/index.ts"
+      ]
+  }
+  ]
 }
