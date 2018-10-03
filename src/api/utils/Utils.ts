@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response, Router } from 'express';
-const Const = require('api/utils/Const');
+import { ITEMS_PER_PAGE } from 'api/utils/Const';
 
 // from "sort" string (URL param) => build sort object (mongoose), e.g. "sort=name:desc,age"
 export function getSortQuery(sortStr: string, defaultKey = 'createdAt') {
@@ -25,7 +25,7 @@ export function getSortQuery(sortStr: string, defaultKey = 'createdAt') {
 export function getPageQuery(reqQuery: any) {
   const output: any = {};
   if (reqQuery.page) {
-    output.perPage = reqQuery.perPage || Const.ITEMS_PER_PAGE; // if page is set => take (or set default) perPage
+    output.perPage = reqQuery.perPage || ITEMS_PER_PAGE; // if page is set => take (or set default) perPage
   }
 
   const numParams = ['page', 'perPage', 'limit', 'offset'];
@@ -38,10 +38,11 @@ export function getPageQuery(reqQuery: any) {
   return output;
 }
 
-// e.g. return Utils.queryPromise( this.find(options) )
-export function queryPromise(promise: any) {
+// function to decorate a promise with useful helpers like: .transform(), etc.
+// @example: return queryPromise( this.find({}) )
+export function queryPromise(mongoosePromise: any) {
   return new Promise(async resolve => {
-    const items = await promise;
+    const items = await mongoosePromise;
 
     // decorate => transform() on the result
     items.transform = () => items.map((item: any) => (item.transform ? item.transform() : item));

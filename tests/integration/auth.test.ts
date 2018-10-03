@@ -7,7 +7,7 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 const moment = require('moment-timezone');
 const app = require('../../src/index');
-const User = require('api/models/user.model');
+import { User } from 'api/models';
 const RefreshToken = require('api/models/refreshToken.model');
 const authProviders = require('api/services/authProviders');
 

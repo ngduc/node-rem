@@ -2,7 +2,7 @@ export {};
 import { NextFunction, Request, Response, Router } from 'express';
 const httpStatus = require('http-status');
 const { omit } = require('lodash');
-const User = require('api/models/user.model');
+import { User } from 'api/models';
 import { apiJson } from 'api/utils/Utils';
 const { handler: errorHandler } = require('../middlewares/error');
 
