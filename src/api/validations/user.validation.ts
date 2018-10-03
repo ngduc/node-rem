@@ -1,6 +1,6 @@
 export {};
 const Joi = require('joi');
-const User = require('../models/user.model');
+import { User } from 'api/models';
 
 module.exports = {
   // GET /v1/users

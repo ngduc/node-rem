@@ -8,7 +8,7 @@ const sinon = require('sinon');
 const bcrypt = require('bcryptjs');
 const { some, omitBy, isNil } = require('lodash');
 const app = require('../../src/index');
-const User = require('api/models/user.model');
+import { User } from 'api/models';
 const JWT_EXPIRATION = require('config/vars').jwtExpirationInterval;
 
 /**

@@ -1,8 +1,7 @@
 export {};
 import { NextFunction, Request, Response, Router } from 'express';
 const httpStatus = require('http-status');
-// import * as User from '../models/user.model';
-const User = require('../models/user.model');
+import { User } from 'api/models';
 const RefreshToken = require('../models/refreshToken.model');
 const moment = require('moment-timezone');
 import { apiJson } from 'api/utils/Utils';
