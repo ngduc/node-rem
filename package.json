@@ -115,7 +115,7 @@
     "@types/express": "^4.16.0",
     "@types/joi": "^13.6.0",
     "@types/mocha": "^5.2.5",
-    "@types/node": "^8.10.30",
+    "@types/node": "^10.11.4",
     "apidoc": "^0.17.5",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
