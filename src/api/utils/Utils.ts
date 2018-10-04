@@ -1,5 +1,16 @@
+const mstime = require('mstime');
 import { NextFunction, Request, Response, Router } from 'express';
 import { ITEMS_PER_PAGE } from 'api/utils/Const';
+
+export function startTimer(req: any) {
+  mstime.start(req.originalUrl);
+}
+
+export function endTimer(req: any) {
+  const end = mstime.end(req.originalUrl);
+  console.log(`avg time - ${end.avg} (ms)`);
+  return end;
+}
 
 // from "sort" string (URL param) => build sort object (mongoose), e.g. "sort=name:desc,age"
 export function getSortQuery(sortStr: string, defaultKey = 'createdAt') {
@@ -54,7 +65,7 @@ type apiJsonTypes = {
   req: Request;
   res: Response;
   data: any | any[]; // data can be object or array
-  listModel?: any; // e.g. "listModal: User" to get meta.totalCount (User.countDocuments())
+  model?: any; // e.g. "listModal: User" to get meta.totalCount (User.countDocuments())
   meta?: any;
   json?: boolean; // retrieve JSON only (won't use res.json(...))
 };
@@ -62,20 +73,25 @@ type apiJsonTypes = {
  * prepare a standard API Response, e.g. { meta: {...}, data: [...], errors: [...] }
  * @param param0
  */
-export async function apiJson({ req, res, data, listModel, meta = {}, json = false }: apiJsonTypes) {
+export async function apiJson({ req, res, data, model, meta = {}, json = false }: apiJsonTypes) {
   const queryObj = getPageQuery(req.query);
   const metaData = { ...queryObj, ...meta };
-  if (listModel) {
-    // if pass in "listModel" => query for totalCount & put in "meta"
+
+  if (model) {
+    // if pass in "model" => query for totalCount & put in "meta"
     const isPagination = req.query.limit || req.query.page;
-    if (isPagination && listModel.countDocuments) {
-      const totalCount = await listModel.countDocuments();
+    if (isPagination && model.countDocuments) {
+      const totalCount = await model.countDocuments();
       metaData.totalCount = totalCount;
       if (queryObj.perPage) {
         metaData.pageCount = Math.ceil(totalCount / queryObj.perPage);
       }
     }
   }
+  // add Timer data
+  const timer = endTimer(req);
+  metaData.timer = timer.last;
+  metaData.timerAvg = timer.avg;
 
   const output = { data, meta: metaData };
   if (json) {

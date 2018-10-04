@@ -1,5 +1,5 @@
 export {};
-const Joi = require('joi');
+import * as Joi from 'joi';
 import { User } from 'api/models';
 
 module.exports = {

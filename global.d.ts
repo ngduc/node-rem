@@ -1,3 +1,3 @@
 // declare module
 
-declare module 'joi';
+declare module 'mstime';
