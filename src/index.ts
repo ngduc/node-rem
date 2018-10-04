@@ -1,4 +1,8 @@
 // make bluebird default Promise
+const mstime = require('mstime');
+mstime.plugins([{ plugin: mstime.mstimePluginTrimMean }]);
+mstime.start('app-start');
+
 Promise = require('bluebird'); // eslint-disable-line no-global-assign
 const { port, env, socketEnabled } = require('./config/vars');
 
@@ -24,7 +28,10 @@ if (socketEnabled) {
   socket.setup(server);
 }
 
-server.listen(port, () => console.info(`--- 🌟  Started (${env}) --- https://localhost:${port}`));
+server.listen(port, () => {
+  console.info(`--- 🌟  Started (${env}) --- https://localhost:${port}`);
+  console.log(`${mstime.end('app-start').last} ms`);
+});
 
 /**
  * Exports express

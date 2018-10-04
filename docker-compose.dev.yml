@@ -4,3 +4,5 @@ services:
     command: yarn dev -- -L
     environment:
       - NODE_ENV=development
+    ports:
+      - "3009:3009"

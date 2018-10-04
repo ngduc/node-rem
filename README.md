@@ -52,7 +52,7 @@ Your simple `API Route Handler` will have a nice syntax like this: (packed with 
 exports.list = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const data = (await User.list(req.query)).transform();
-    apiJson({ req, res, data, listModel: User });
+    apiJson({ req, res, data, model: User });
   } catch (e) {
     next(e);
   }
@@ -87,6 +87,12 @@ GET https://localhost:3009/v1/users?role=admin&limit=5&offset=0&sort=email:desc,
 }
 ```
 Example of generated API Docs (using `apidoc`) - https://node-rem.netlify.com
+
+### 📖 Documentation
+
+- [Build System](https://github.com/ngduc/node-rem/blob/master/src_docs/build.md)
+- [Dependencies Notes](https://github.com/ngduc/node-rem/blob/master/src_docs/dependencies.md)
+- [Change Log](https://github.com/ngduc/node-rem/blob/master/CHANGELOG.md)
 
 ### 🙌 Thanks
 

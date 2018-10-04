@@ -3,7 +3,7 @@ import { NextFunction, Request, Response, Router } from 'express';
 const httpStatus = require('http-status');
 const { omit } = require('lodash');
 import { User } from 'api/models';
-import { apiJson } from 'api/utils/Utils';
+import { startTimer, apiJson } from 'api/utils/Utils';
 const { handler: errorHandler } = require('../middlewares/error');
 
 /**
@@ -90,8 +90,9 @@ exports.update = (req: Request, res: Response, next: NextFunction) => {
  */
 exports.list = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    startTimer(req);
     const data = (await User.list(req.query)).transform();
-    apiJson({ req, res, data, listModel: User });
+    apiJson({ req, res, data, model: User });
   } catch (e) {
     next(e);
   }
