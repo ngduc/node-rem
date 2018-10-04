@@ -1,5 +1,6 @@
 // make bluebird default Promise
 const mstime = require('mstime');
+mstime.plugins([{ plugin: mstime.mstimePluginTrimMean }]);
 mstime.start('app-start');
 
 Promise = require('bluebird'); // eslint-disable-line no-global-assign

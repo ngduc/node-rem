@@ -8,8 +8,11 @@ export function startTimer(req: any) {
 
 export function endTimer(req: any) {
   const end = mstime.end(req.originalUrl);
-  console.log(`avg time - ${end.avg} (ms)`);
-  return end;
+  if (end) {
+    console.log(`avg time - ${end.avg} (ms)`);
+    return end;
+  }
+  return null;
 }
 
 // from "sort" string (URL param) => build sort object (mongoose), e.g. "sort=name:desc,age"
@@ -90,8 +93,11 @@ export async function apiJson({ req, res, data, model, meta = {}, json = false }
   }
   // add Timer data
   const timer = endTimer(req);
-  metaData.timer = timer.last;
-  metaData.timerAvg = timer.avg;
+  if (timer) {
+    metaData.timer = timer.last;
+    metaData.timerAvg = timer.avg;
+  }
+  console.log(111, timer);
 
   const output = { data, meta: metaData };
   if (json) {
