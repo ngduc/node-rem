@@ -18,6 +18,7 @@ NodeJS Rest Express MongoDB
       API
             API response    (data, meta: limit, offset, sort)    transform res
             apiJson         Page Query        Stack trace in Response
+            mstime          API response time
 ```
 
 If you don't want Typescript, use this branch: `node-rem-without-typescript`
@@ -72,7 +73,9 @@ GET https://localhost:3009/v1/users?role=admin&limit=5&offset=0&sort=email:desc,
             "email": -1,
             "createdAt": 1
         },
-        "totalCount": 4
+        "totalCount": 4,
+        "timer": 3.85,
+        "timerAvg": 5.62
     },
     "data": [
         {
