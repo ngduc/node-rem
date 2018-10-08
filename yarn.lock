@@ -4327,10 +4327,10 @@ ms@^2.1.1:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
   integrity sha512-tgp+dl5cGk28utYktBsrFqA7HKgrhgPsg6Z/EfhWI4gl1Hwq8B/GmY/0oXZ6nF8hDVesS/FpnYaD/kOWhYQvyg==
 
-mstime@^0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/mstime/-/mstime-0.3.3.tgz#b35b599ae684bf326174176b819846dfcaf939dc"
-  integrity sha512-3zXSWbYD+QDOsqDug0J1WJXjSrmiedSJhU5uhKta0tcId7tjd9yQrIQjnZt/NZZOGc5SpInfVOKqqn5OAVYXDQ==
+mstime@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/mstime/-/mstime-0.6.1.tgz#75cf23e65cf1283557ffb5fa67e71462eb71d507"
+  integrity sha512-XlpJGR0foTVjbBdReOO06ODSuLHxkCZBmhtj9FE6DYCuypGse0llbRzxbiuCkFmuU9q+a0izUuLEW3AefRVJog==
 
 mute-stream@0.0.7, mute-stream@~0.0.4:
   version "0.0.7"
@@ -6731,12 +6731,7 @@ uuid@^2.0.1:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-2.0.3.tgz#67e2e863797215530dff318e5bf9dcebfd47b21a"
   integrity sha1-Z+LoY3lyFVMN/zGOW/nc6/1Hsho=
 
-uuid@^3.0.1, uuid@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.1.0.tgz#3dd3d3e790abc24d7b0d3a034ffababe28ebbc04"
-  integrity sha512-DIWtzUkw04M4k3bf1IcpS2tngXEL26YUD2M0tMDUpnUrz2hgzUBlD55a4FjdLGPvfHxS6uluGWvaVEqgBcVa+g==
-
-uuid@^3.3.2:
+uuid@^3.0.1, uuid@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
   integrity sha512-yXJmeNaw3DnnKAOKJE51sL/ZaYfWJRl1pK9dr19YFCu0ObS231AB1/LbqTKRAQ5kw8A90rA6fr4riOUpTZvQZA==
