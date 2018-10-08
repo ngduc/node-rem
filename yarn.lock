@@ -127,6 +127,15 @@
     reflect-metadata "^0.1.12"
     tslib "^1.8.1"
 
+"@pm2/agent-node@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@pm2/agent-node/-/agent-node-1.0.5.tgz#5eac0cb088c00a6908b1967290c699e4bbbd1d18"
+  integrity sha512-PR5X6Q+YdnB+JxPrJy3j3OmUfQk86+emSPfD7rCbFH5Okk8j16+Htss8jRAUCbRCcSJYClzN1CzknsOIkk/f9g==
+  dependencies:
+    debug "^3.1.0"
+    eventemitter2 "^5.0.1"
+    ws "^6.0.0"
+
 "@pm2/agent@^0.5.11":
   version "0.5.11"
   resolved "https://registry.yarnpkg.com/@pm2/agent/-/agent-0.5.11.tgz#b84460505b37d6d2f802f79354034f5ca61023f5"
@@ -143,11 +152,12 @@
     semver "^5.5.0"
     ws "^5.1.0"
 
-"@pm2/io@~2.3.11":
-  version "2.3.11"
-  resolved "https://registry.yarnpkg.com/@pm2/io/-/io-2.3.11.tgz#f9b14b8acc9af816dcbeee6c2d027eb89355d8d1"
-  integrity sha512-pYJbEyEyzftjm2ckUZOc9Iubuu8FykCar0jJXNIemgI1FSRAFiK7CPdxWQIOQOrnoxcC+oiqbiowH3a0DkNdKw==
+"@pm2/io@~2.4.2":
+  version "2.4.4"
+  resolved "https://registry.yarnpkg.com/@pm2/io/-/io-2.4.4.tgz#62d673327d4b75f6115634cfaec8aa272f9a64c5"
+  integrity sha512-AcOUJhVc6uaxj9gTz/mcHrR0hKg5dUI/ijfq2DInuEsN1x/8ZEbWJB3sHM80WbN9BpwzA9CVG1uvdoH32ARIHQ==
   dependencies:
+    "@pm2/agent-node" "^1.0.5"
     async "^2.6.1"
     debug "3.1.0"
     deep-metrics "0.0.2"
@@ -1515,6 +1525,11 @@ dasherize@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/dasherize/-/dasherize-2.0.0.tgz#6d809c9cd0cf7bb8952d80fc84fa13d47ddb1308"
   integrity sha1-bYCcnNDPe7iVLYD8hPoT1H3bEwg=
+
+date-fns@^1.29.0:
+  version "1.29.0"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.29.0.tgz#12e609cdcb935127311d04d33334e2960a2a54e6"
+  integrity sha512-lbTXWZ6M20cWH8N9S6afb0SBm6tMk+uUg6z3MqHPKE9atmsY3kJkTm8vKe93izJ2B2+q5MV990sM2CHgtAZaOw==
 
 debug-log@^1.0.1:
   version "1.0.1"
@@ -4327,10 +4342,10 @@ ms@^2.1.1:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
   integrity sha512-tgp+dl5cGk28utYktBsrFqA7HKgrhgPsg6Z/EfhWI4gl1Hwq8B/GmY/0oXZ6nF8hDVesS/FpnYaD/kOWhYQvyg==
 
-mstime@^0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/mstime/-/mstime-0.3.3.tgz#b35b599ae684bf326174176b819846dfcaf939dc"
-  integrity sha512-3zXSWbYD+QDOsqDug0J1WJXjSrmiedSJhU5uhKta0tcId7tjd9yQrIQjnZt/NZZOGc5SpInfVOKqqn5OAVYXDQ==
+mstime@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/mstime/-/mstime-0.6.1.tgz#75cf23e65cf1283557ffb5fa67e71462eb71d507"
+  integrity sha512-XlpJGR0foTVjbBdReOO06ODSuLHxkCZBmhtj9FE6DYCuypGse0llbRzxbiuCkFmuU9q+a0izUuLEW3AefRVJog==
 
 mute-stream@0.0.7, mute-stream@~0.0.4:
   version "0.0.7"
@@ -5064,13 +5079,13 @@ pm2-multimeter@^0.1.2:
   dependencies:
     charm "~0.1.1"
 
-pm2@^3.1.3:
-  version "3.1.3"
-  resolved "https://registry.yarnpkg.com/pm2/-/pm2-3.1.3.tgz#a9ba247e3b34bab3bc7c6fcdfd04a49955c90874"
-  integrity sha512-H/BGMrO3HPHGOxWR4KkFijcY80AwX/8nDLFph0eLq7E8uYEOs4miqnVVpR4bzUh4hk1FCiJlk1ksFVsnISwuaA==
+pm2@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/pm2/-/pm2-3.2.2.tgz#ddde90397d6054feb92a51230c3ae0f1e3d9f2c1"
+  integrity sha512-Un3S5hirVHy48Pqrxgrqt6deLWf2E9pVeKwFCG0zbldyq415D3QW69KG+p1Rc2S36nuW2QEHoQyoTNai7rJz5Q==
   dependencies:
     "@pm2/agent" "^0.5.11"
-    "@pm2/io" "~2.3.11"
+    "@pm2/io" "~2.4.2"
     "@pm2/js-api" "^0.5.15"
     async "^2.6.1"
     blessed "^0.1.81"
@@ -5079,6 +5094,7 @@ pm2@^3.1.3:
     cli-table-redemption "^1.0.0"
     commander "2.15.1"
     cron "^1.3"
+    date-fns "^1.29.0"
     debug "^3.1"
     eventemitter2 "5.0.1"
     fclone "1.0.11"
@@ -6938,6 +6954,13 @@ ws@^5.1.0:
   version "5.2.2"
   resolved "https://registry.yarnpkg.com/ws/-/ws-5.2.2.tgz#dffef14866b8e8dc9133582514d1befaf96e980f"
   integrity sha512-jaHFD6PFv6UgoIVda6qZllptQsMlDEJkTQcybzzXDYM1XO9Y8em691FGMPmM46WGyLU4z9KMgQN+qrux/nhlHA==
+  dependencies:
+    async-limiter "~1.0.0"
+
+ws@^6.0.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-6.1.0.tgz#119a9dbf92c54e190ec18d10e871d55c95cf9373"
+  integrity sha512-H3dGVdGvW2H8bnYpIDc3u3LH8Wue3Qh+Zto6aXXFzvESkTVT6rAfKR6tR/+coaUvxs8yHtmNV0uioBF62ZGSTg==
   dependencies:
     async-limiter "~1.0.0"
 
