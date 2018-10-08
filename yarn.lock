@@ -2944,10 +2944,10 @@ http-status@^1.0.1:
   resolved "https://registry.yarnpkg.com/http-status/-/http-status-1.2.0.tgz#05f2a54c94f94d32d877b3a31ae08479772ba9f1"
   integrity sha512-cSX+i/g4Kj5lkfOqS9w0SrxQF4hX7gsfikBtSDm5PFrAy+8fjRKk9+JRCG5cEZ40b6q6GOJk3P0QyDB5JpE0Ig==
 
-husky@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/husky/-/husky-1.0.1.tgz#749bc6b3a14bdc9cab73d8cc827b92fcd691fac6"
-  integrity sha512-MxwLwwwgY7mqV4auSpGWKPTCkZ9RmsdGojQQBvRtr6vxnjSOyI5l/M58QdUz0vRKb0igTpbzBeoUsScx4XJwQg==
+husky@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/husky/-/husky-1.1.1.tgz#7179043184f68a4d1ffc975cbd1c6132ef1fd7b3"
+  integrity sha512-D8ly8eIZdWzWVG4mh4apaX1PP47uLSaN8CS0RyuuLtHJ20Gt6Ccky5pSecaPsqxNzQj0zon3x6QX/0kCc5/TOQ==
   dependencies:
     cosmiconfig "^5.0.6"
     execa "^0.9.0"
@@ -4327,10 +4327,10 @@ ms@^2.1.1:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
   integrity sha512-tgp+dl5cGk28utYktBsrFqA7HKgrhgPsg6Z/EfhWI4gl1Hwq8B/GmY/0oXZ6nF8hDVesS/FpnYaD/kOWhYQvyg==
 
-mstime@^0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/mstime/-/mstime-0.3.3.tgz#b35b599ae684bf326174176b819846dfcaf939dc"
-  integrity sha512-3zXSWbYD+QDOsqDug0J1WJXjSrmiedSJhU5uhKta0tcId7tjd9yQrIQjnZt/NZZOGc5SpInfVOKqqn5OAVYXDQ==
+mstime@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/mstime/-/mstime-0.6.1.tgz#75cf23e65cf1283557ffb5fa67e71462eb71d507"
+  integrity sha512-XlpJGR0foTVjbBdReOO06ODSuLHxkCZBmhtj9FE6DYCuypGse0llbRzxbiuCkFmuU9q+a0izUuLEW3AefRVJog==
 
 mute-stream@0.0.7, mute-stream@~0.0.4:
   version "0.0.7"
