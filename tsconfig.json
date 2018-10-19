@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
     "outDir": "./built",
     "allowJs": true,
     "noImplicitAny": true,
@@ -8,6 +9,7 @@
     "module": "commonjs"
   },
   "include": [
+    "./tests/**/*",
     "./src/**/*"
   ],
   "exclude": [
