@@ -138,5 +138,8 @@
     "tslint-config-airbnb": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",
     "typescript": "^3.2.1"
+  },
+  "resolutions": {
+    "deep-extend": "^0.5.1"
   }
 }
