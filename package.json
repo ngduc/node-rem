@@ -1,6 +1,6 @@
 {
   "name": "node-rem",
-  "version": "0.4.5",
+  "version": "0.4.7",
   "description": "Node REM - NodeJS Rest Express MongoDB and more: typescript, passport, JWT, socket.io, HTTPS, HTTP2, async/await, etc.",
   "author": "Duc Nguyen",
   "main": "src/index.js",

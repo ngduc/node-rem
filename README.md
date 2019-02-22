@@ -9,7 +9,7 @@ NodeJS Rest Express MongoDB
 ```
   Typescript      Express 4.15       CORS     Helmet    DotEnv   joi (validation)   forever
   Mongoose 4.9    Passport  JWT      Await
-  Tslint          Apidoc    Docker   Husky    Morgan    Travis   Docker
+  Tslint          Apidoc    Docker   Husky    Morgan    Travis
   Tests
             Mocha  Chai     Sinon    istanbul
   MORE:
@@ -32,7 +32,9 @@ cd your-app
 rm -rf .git
 yarn
 ```
-Update `package.json` and `.env` file with your information.
+
+- create a Mongo Database and name it "node-rem".
+- Update `package.json` and `.env` file with your information.
 
 ### 🔧 Commands
 
@@ -62,7 +64,7 @@ exports.list = async (req: Request, res: Response, next: NextFunction) => {
 
 API Response is similar to [JSON API](http://jsonapi.org/examples/#pagination) standard:
 
-```json
+```js
 GET https://localhost:3009/v1/users?role=admin&page=1&perPage=20
 GET https://localhost:3009/v1/users?role=admin&limit=5&offset=0&sort=email:desc,createdAt
 {
@@ -85,7 +87,7 @@ GET https://localhost:3009/v1/users?role=admin&limit=5&offset=0&sort=email:desc,
             "role": "admin",
             "createdAt": "2018-09-27T16:39:41.498Z"
         },
-        // ...
+        // more items...
     ]
 }
 ```
@@ -93,9 +95,9 @@ Example of generated API Docs (using `apidoc`) - https://node-rem.netlify.com
 
 ### 📖 Documentation
 
-- [Build System](https://github.com/ngduc/node-rem/blob/master/src_docs/build.md)
-- [Dependencies Notes](https://github.com/ngduc/node-rem/blob/master/src_docs/dependencies.md)
-- [Change Log](https://github.com/ngduc/node-rem/blob/master/CHANGELOG.md)
+- [Build System](src_docs/build.md)
+- [Dependencies Notes](src_docs/dependencies.md)
+- [Change Log](CHANGELOG.md)
 
 ### 🙌 Thanks
 

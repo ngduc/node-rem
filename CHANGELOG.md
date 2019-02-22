@@ -1,3 +1,8 @@
+## [0.4.7] - 2019-02-21
+
+### Changed
+- upgraded dependencies
+
 ## [0.4.5] - 2018-10-05
 
 ### Added
