@@ -2,7 +2,7 @@
 
 NodeJS Rest Express MongoDB
 
-[![Build Status](https://travis-ci.org/ngduc/node-rem.svg?branch=master)](https://travis-ci.org/ngduc/node-rem)
+[![Build Status](https://travis-ci.org/ngduc/node-rem.svg?branch=master)](https://travis-ci.org/ngduc/node-rem) | [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6fac8568bab841b89cc5c17f6c4133d5)](https://www.codacy.com/app/ducjava/node-rem?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ngduc/node-rem&amp;utm_campaign=Badge_Grade)
 
 🌟 It rains ~~cats and dogs~~ features:
 
