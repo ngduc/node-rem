@@ -1160,10 +1160,10 @@ co@^4.6.0:
   resolved "https://registry.yarnpkg.com/co/-/co-4.6.0.tgz#6ea6bdf3d853ae54ccb8e47bfa0bf3f9031fb184"
   integrity sha1-bqa989hTrlTMuOR7+gvz+QMfsYQ=
 
-codacy-coverage@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/codacy-coverage/-/codacy-coverage-3.1.0.tgz#a49a75d962733dc0b524b3d5eb3b6367d5bece59"
-  integrity sha512-CRxJUokkUVzZlu2nXfDFPbwE+9F8dOzz7jdIv2IffAqv7Yq9QSqSOeSxz0D0+v7Et2YlcpgAeIkx4Le7aQfisQ==
+codacy-coverage@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/codacy-coverage/-/codacy-coverage-3.2.0.tgz#529b54f642bb4d0ff503d660b0b7cfd7535f1f86"
+  integrity sha512-D/EeQ8GkkONK7Sd01hmn/xm+HTEEFWcxzkgF79+PbMDUdXPlYgL7G/gvQKX+lo5eSTEBH0flGWNou07gwJFBPQ==
   dependencies:
     bluebird "^3.5.x"
     commander "^2.x"
@@ -1171,7 +1171,7 @@ codacy-coverage@^3.1.0:
     lcov-parse "^1.x"
     lodash "^4.17.4"
     log-driver "^1.x"
-    request "^2.83.0"
+    request "^2.88.0"
     request-promise "^4.x"
 
 code-point-at@^1.0.0:
@@ -5494,7 +5494,7 @@ request-promise@^4.x:
     stealthy-require "^1.1.0"
     tough-cookie ">=2.3.3"
 
-request@^2.83.0, request@^2.85.0:
+request@^2.85.0, request@^2.88.0:
   version "2.88.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.88.0.tgz#9c2fca4f7d35b592efe57c7f0a55e81052124fef"
   integrity sha512-NAqBSrijGLZdM0WZNsInLJpkJokL72XYjUpnB0iwsRgxh7dB6COrHnTBNwN0E+lHDAJzu7kLAkDeY08z2/A0hg==
