@@ -128,7 +128,7 @@ describe('Users API', async () => {
           const { field } = res.body.errors[0];
           const { location } = res.body.errors[0];
           const { messages } = res.body.errors[0];
-          expect(field).to.be.equal('email');
+          expect(field[0]).to.be.equal('email');
           expect(location).to.be.equal('body');
           expect(messages).to.include('"email" is required');
         });
@@ -146,7 +146,7 @@ describe('Users API', async () => {
           const { field } = res.body.errors[0];
           const { location } = res.body.errors[0];
           const { messages } = res.body.errors[0];
-          expect(field).to.be.equal('password');
+          expect(field[0]).to.be.equal('password');
           expect(location).to.be.equal('body');
           expect(messages).to.include('"password" length must be at least 6 characters long');
         });
@@ -240,7 +240,7 @@ describe('Users API', async () => {
           const { field } = res.body.errors[0];
           const { location } = res.body.errors[0];
           const { messages } = res.body.errors[0];
-          expect(field).to.be.equal('page');
+          expect(field[0]).to.be.equal('page');
           expect(location).to.be.equal('query');
           expect(messages).to.include('"page" must be a number');
           return Promise.resolve(res);
@@ -249,7 +249,7 @@ describe('Users API', async () => {
           const { field } = res.body.errors[1];
           const { location } = res.body.errors[1];
           const { messages } = res.body.errors[1];
-          expect(field).to.be.equal('perPage');
+          expect(field[0]).to.be.equal('perPage');
           expect(location).to.be.equal('query');
           expect(messages).to.include('"perPage" must be a number');
         });
@@ -347,7 +347,7 @@ describe('Users API', async () => {
           const { field } = res.body.errors[0];
           const { location } = res.body.errors[0];
           const { messages } = res.body.errors[0];
-          expect(field).to.be.equal('email');
+          expect(field[0]).to.be.equal('email');
           expect(location).to.be.equal('body');
           expect(messages).to.include('"email" is required');
         });
@@ -366,7 +366,7 @@ describe('Users API', async () => {
           const { field } = res.body.errors[0];
           const { location } = res.body.errors[0];
           const { messages } = res.body.errors[0];
-          expect(field).to.be.equal('password');
+          expect(field[0]).to.be.equal('password');
           expect(location).to.be.equal('body');
           expect(messages).to.include('"password" length must be at least 6 characters long');
         });

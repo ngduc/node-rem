@@ -109,7 +109,7 @@ describe('Authentication API', () => {
           const { field } = res.body.errors[0];
           const { location } = res.body.errors[0];
           const { messages } = res.body.errors[0];
-          expect(field).to.be.equal('email');
+          expect(field[0]).to.be.equal('email');
           expect(location).to.be.equal('body');
           expect(messages).to.include('"email" must be a valid email');
         });
@@ -124,7 +124,7 @@ describe('Authentication API', () => {
           const { field } = res.body.errors[0];
           const { location } = res.body.errors[0];
           const { messages } = res.body.errors[0];
-          expect(field).to.be.equal('email');
+          expect(field[0]).to.be.equal('email');
           expect(location).to.be.equal('body');
           expect(messages).to.include('"email" is required');
         });
@@ -155,7 +155,7 @@ describe('Authentication API', () => {
           const { field } = res.body.errors[0];
           const { location } = res.body.errors[0];
           const { messages } = res.body.errors[0];
-          expect(field).to.be.equal('email');
+          expect(field[0]).to.be.equal('email');
           expect(location).to.be.equal('body');
           expect(messages).to.include('"email" is required');
         });
@@ -171,7 +171,7 @@ describe('Authentication API', () => {
           const { field } = res.body.errors[0];
           const { location } = res.body.errors[0];
           const { messages } = res.body.errors[0];
-          expect(field).to.be.equal('email');
+          expect(field[0]).to.be.equal('email');
           expect(location).to.be.equal('body');
           expect(messages).to.include('"email" must be a valid email');
         });
@@ -231,7 +231,7 @@ describe('Authentication API', () => {
           const { field } = res.body.errors[0];
           const { location } = res.body.errors[0];
           const { messages } = res.body.errors[0];
-          expect(field).to.be.equal('access_token');
+          expect(field[0]).to.be.equal('access_token');
           expect(location).to.be.equal('body');
           expect(messages).to.include('"access_token" is required');
         });
@@ -277,7 +277,7 @@ describe('Authentication API', () => {
           const { field } = res.body.errors[0];
           const { location } = res.body.errors[0];
           const { messages } = res.body.errors[0];
-          expect(field).to.be.equal('access_token');
+          expect(field[0]).to.be.equal('access_token');
           expect(location).to.be.equal('body');
           expect(messages).to.include('"access_token" is required');
         });
@@ -324,10 +324,10 @@ describe('Authentication API', () => {
           const field2 = res.body.errors[1].field;
           const location2 = res.body.errors[1].location;
           const messages2 = res.body.errors[1].messages;
-          expect(field1).to.be.equal('email');
+          expect(field1[0]).to.be.equal('email');
           expect(location1).to.be.equal('body');
           expect(messages1).to.include('"email" is required');
-          expect(field2).to.be.equal('refreshToken');
+          expect(field2[0]).to.be.equal('refreshToken');
           expect(location2).to.be.equal('body');
           expect(messages2).to.include('"refreshToken" is required');
         });

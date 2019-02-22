@@ -1,7 +1,8 @@
 ## [0.4.7] - 2019-02-21
 
 ### Changed
-- upgraded dependencies
+- upgraded mocha, joi to latest, removed pinned versions.
+- upgraded other dependencies
 
 ## [0.4.5] - 2018-10-05
 
