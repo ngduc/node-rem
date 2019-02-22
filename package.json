@@ -89,7 +89,7 @@
     "compression": "^1.7.3",
     "cors": "^2.8.3",
     "cross-env": "^5.0.1",
-    "dotenv-safe": "^6.0.0",
+    "dotenv-safe": "^6.1.0",
     "express": "^4.16.3",
     "express-validation": "^1.0.2",
     "helmet": "^3.13.0",
