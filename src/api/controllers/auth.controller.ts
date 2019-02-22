@@ -4,7 +4,7 @@ const httpStatus = require('http-status');
 import { User } from 'api/models';
 const RefreshToken = require('../models/refreshToken.model');
 const moment = require('moment-timezone');
-import { apiJson } from 'api/utils/Utils';
+import { apiJson, slackWebhook } from 'api/utils/Utils';
 const { jwtExpirationInterval } = require('../../config/vars');
 
 /**
@@ -34,6 +34,7 @@ exports.register = async (req: Request, res: Response, next: NextFunction) => {
     const token = generateTokenResponse(user, user.token());
     res.status(httpStatus.CREATED);
     const data = { token, user: userTransformed };
+    // slackWebhook(`New User: ${user.email}`) // notify when new user registered
     return apiJson({ req, res, data });
   } catch (error) {
     return next(User.checkDuplicateEmail(error));

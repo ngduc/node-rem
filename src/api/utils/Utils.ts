@@ -1,6 +1,11 @@
 const mstime = require('mstime');
 import { NextFunction, Request, Response, Router } from 'express';
 import { ITEMS_PER_PAGE } from 'api/utils/Const';
+const { slackWebhookUrl } = require('config/vars');
+
+const { IncomingWebhook } = require('@slack/client');
+const incomingWebhook = new IncomingWebhook(slackWebhookUrl);
+
 
 // Helper functions for Utils.uuid()
 const lut = Array(256)
@@ -154,4 +159,10 @@ export async function apiJson({ req, res, data, model, meta = {}, json = false }
     return output;
   }
   return res.json(output);
+}
+
+// send slack message using incoming webhook url
+// @example: slackWebhook('message')
+export function slackWebhook(message: string) {
+  incomingWebhook.send(message);
 }
