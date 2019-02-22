@@ -2,6 +2,7 @@
 
 NodeJS Rest Express MongoDB
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/5154948c159345e0a16ede62cb241795)](https://app.codacy.com/app/ducjava/node-rem?utm_source=github.com&utm_medium=referral&utm_content=ngduc/node-rem&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/ngduc/node-rem.svg?branch=master)](https://travis-ci.org/ngduc/node-rem)
 
 🌟 It rains ~~cats and dogs~~ features:
