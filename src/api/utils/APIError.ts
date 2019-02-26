@@ -20,6 +20,7 @@ class ExtendableError extends Error {
     this.isOperational = true; // This is required since bluebird 4 doesn't append it anymore.
     this.stack = stack;
     // Error.captureStackTrace(this, this.constructor.name);
+    console.error(stack)
   }
 }
 

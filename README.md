@@ -13,12 +13,12 @@ NodeJS Rest Express MongoDB
   Tests
             Mocha  Chai     Sinon    istanbul
   MORE:
-            HTTPS           HTTP2 (spdy)      Socketio 2.1    VSCode Debug
-            Dependabot      Codacy
+            HTTPS           HTTP2 (spdy)      Socketio 2.1       Slack message
+            VSCode Debug    Dependabot        Codacy
       API
             API response    (data, meta: limit, offset, sort)    transform res
-            apiJson         Page Query                  Stack trace in Response
-            mstime          API response time           Slack message
+            apiJson         Pagination query      Whitelist fields in response
+            mstime          API response time     Stack trace in Response
 ```
 
 If you don't want Typescript, use this branch: `node-rem-without-typescript`
@@ -54,8 +54,8 @@ Your simple `API Route Handler` will have a nice syntax like this: (packed with 
 ```js
 exports.list = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const data = (await User.list(req.query)).transform(); // query & run userSchema.transform() for response
-    apiJson({ req, res, data, model: User }); // API response
+    const data = (await User.list(req)).transform(req); // query & run userSchema.transform() for response
+    apiJson({ req, res, data, model: User }); // return standard API Response
   } catch (e) {
     next(e);
   }
@@ -65,7 +65,8 @@ exports.list = async (req: Request, res: Response, next: NextFunction) => {
 API Response is similar to [JSON API](http://jsonapi.org/examples/#pagination) standard:
 
 ```js
-GET https://localhost:3009/v1/users?role=admin&page=1&perPage=20
+GET https://localhost:3009/v1/users?fields=id,name (get id & name only in response)
+GET https://localhost:3009/v1/users?role=admin&page=1&perPage=20 (query & pagination)
 GET https://localhost:3009/v1/users?role=admin&limit=5&offset=0&sort=email:desc,createdAt
 {
     "meta": {

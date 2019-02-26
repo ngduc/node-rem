@@ -93,11 +93,17 @@ export function getSortQuery(sortStr: string, defaultKey = 'createdAt') {
 
 // from "req" (req.query) => transform to: query object, e.g. { limit: 5, sort: { name: 1 } }
 export function getPageQuery(reqQuery: any) {
+  if (!reqQuery) {
+    return null
+  }
   const output: any = {};
   if (reqQuery.page) {
     output.perPage = reqQuery.perPage || ITEMS_PER_PAGE; // if page is set => take (or set default) perPage
   }
-
+  if (reqQuery.fields) {
+    output.fields = reqQuery.fields.split(',').map((field: string) => field.trim()) // to array
+  }
+  // number (type) query params => parse them:
   const numParams = ['page', 'perPage', 'limit', 'offset'];
   numParams.forEach(field => {
     if (reqQuery[field]) {
@@ -108,6 +114,17 @@ export function getPageQuery(reqQuery: any) {
   return output;
 }
 
+// normalize req.query to get "safe" query fields => return "query" obj for mongoose (find, etc.)
+export function getQuery(reqQuery: any, fieldArray: string[]) {
+  const queryObj: any = {}
+  fieldArray.map(field => {
+    if (reqQuery[field] && typeof reqQuery[field] === 'string') {
+      queryObj[field] = reqQuery[field] // only accept string to be safe.
+    }
+  })
+  return queryObj
+}
+
 // function to decorate a promise with useful helpers like: .transform(), etc.
 // @example: return queryPromise( this.find({}) )
 export function queryPromise(mongoosePromise: any) {
@@ -115,7 +132,9 @@ export function queryPromise(mongoosePromise: any) {
     const items = await mongoosePromise;
 
     // decorate => transform() on the result
-    items.transform = () => items.map((item: any) => (item.transform ? item.transform() : item));
+    items.transform = (params: any) => {
+      return items.map((item: any) => (item.transform ? item.transform(params) : item));
+    }
     resolve(items);
   });
 }

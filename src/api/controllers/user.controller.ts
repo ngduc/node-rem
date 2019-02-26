@@ -91,7 +91,7 @@ exports.update = (req: Request, res: Response, next: NextFunction) => {
 exports.list = async (req: Request, res: Response, next: NextFunction) => {
   try {
     startTimer(req);
-    const data = (await User.list(req.query)).transform();
+    const data = (await User.list(req)).transform(req);
     apiJson({ req, res, data, model: User });
   } catch (e) {
     next(e);

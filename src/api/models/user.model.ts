@@ -8,7 +8,7 @@ const moment = require('moment-timezone');
 const jwt = require('jwt-simple');
 const uuidv4 = require('uuid/v4');
 const APIError = require('api/utils/APIError');
-import { getPageQuery, queryPromise } from 'api/utils/Utils';
+import { getQuery, getPageQuery, queryPromise } from 'api/utils/Utils';
 const { env, jwtSecret, jwtExpirationInterval } = require('config/vars');
 
 /**
@@ -60,6 +60,7 @@ const userSchema = new mongoose.Schema(
     timestamps: true
   }
 );
+const ALLOW_FIELDS = ['id', 'name', 'email', 'picture', 'role', 'createdAt'];
 
 /**
  * Add your
@@ -88,14 +89,16 @@ userSchema.pre('save', async function save(next: NextFunction) {
  * Methods
  */
 userSchema.method({
-  transform() {
+  // query is optional, e.g. to transform data for response but only include certain "fields"
+  transform({ query = {} }:{ query?: any } = {}) {
+    const queryParams = getPageQuery(query)
     const transformed: any = {};
-    const fields = ['id', 'name', 'email', 'picture', 'role', 'createdAt'];
-
-    fields.forEach(field => {
+    ALLOW_FIELDS.forEach(field => {
+      if (queryParams && queryParams.fields && queryParams.fields.indexOf(field) < 0) {
+        return // if "fields" is set, don't include this field if it's not in there.
+      }
       transformed[field] = this[field];
     });
-
     return transformed;
   },
 
@@ -182,18 +185,14 @@ userSchema.statics = {
   },
 
   /**
-   * List users in descending order of 'createdAt' timestamp.
-   *
-   * @param {number} skip - Number of users to be skipped.
-   * @param {number} limit - Limit number of users to be returned.
+   * List users.
    * @returns {Promise<User[]>}
    */
-  list(query: any) {
-    const { name, email, role } = query;
-    const options = omitBy({ name, email, role }, isNil); // allowed filter fields
+  list({ query }:{ query: any }) {
+    const queryObj = getQuery(query, ['name', 'email', 'role']) // allowed filter fields
     const { page = 1, perPage = 30, limit, offset, sort } = getPageQuery(query);
 
-    const result = this.find(options)
+    const result = this.find(queryObj)
       .sort(sort)
       .skip(typeof offset !== 'undefined' ? offset : perPage * (page - 1))
       .limit(typeof limit !== 'undefined' ? limit : perPage)
