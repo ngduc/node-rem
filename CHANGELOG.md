@@ -4,6 +4,7 @@
 - support for "&fields" param in Model.transform(req) to include certain fields in API response.
 - added Utils.getQuery to get safe query fields from req.query
 - added ModelUtils transformData and listData
+- added Utils.sendEmail (using nodemailer & mailgun)
 
 ## [0.4.7] - 2019-02-21
 

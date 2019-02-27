@@ -1,11 +1,23 @@
 const mstime = require('mstime');
 import { NextFunction, Request, Response, Router } from 'express';
 import { ITEMS_PER_PAGE } from 'api/utils/Const';
-const { slackWebhookUrl } = require('config/vars');
+const { SLACK_WEBHOOK_URL, EMAIL_MAILGUN_API_KEY, EMAIL_FROM_SUPPORT, EMAIL_MAILGUN_DOMAIN } = require('config/vars');
 
 const { IncomingWebhook } = require('@slack/client');
-const incomingWebhook = new IncomingWebhook(slackWebhookUrl);
+const incomingWebhook = new IncomingWebhook(SLACK_WEBHOOK_URL);
 
+// EmailService.js
+const nodemailer = require('nodemailer');
+const mailgunTransport = require('nodemailer-mailgun-transport');
+// Configure transport options
+const mailgunOptions = {
+  auth: {
+    api_key: EMAIL_MAILGUN_API_KEY, // process.env.MAILGUN_ACTIVE_API_KEY,
+    domain: EMAIL_MAILGUN_DOMAIN // process.env.MAILGUN_DOMAIN,
+  }
+};
+const transport = mailgunTransport(mailgunOptions);
+const emailClient = nodemailer.createTransport(transport);
 
 // Helper functions for Utils.uuid()
 const lut = Array(256)
@@ -94,14 +106,14 @@ export function getSortQuery(sortStr: string, defaultKey = 'createdAt') {
 // from "req" (req.query) => transform to: query object, e.g. { limit: 5, sort: { name: 1 } }
 export function getPageQuery(reqQuery: any) {
   if (!reqQuery) {
-    return null
+    return null;
   }
   const output: any = {};
   if (reqQuery.page) {
     output.perPage = reqQuery.perPage || ITEMS_PER_PAGE; // if page is set => take (or set default) perPage
   }
   if (reqQuery.fields) {
-    output.fields = reqQuery.fields.split(',').map((field: string) => field.trim()) // to array
+    output.fields = reqQuery.fields.split(',').map((field: string) => field.trim()); // to array
   }
   // number (type) query params => parse them:
   const numParams = ['page', 'perPage', 'limit', 'offset'];
@@ -116,13 +128,13 @@ export function getPageQuery(reqQuery: any) {
 
 // normalize req.query to get "safe" query fields => return "query" obj for mongoose (find, etc.)
 export function getQuery(reqQuery: any, fieldArray: string[]) {
-  const queryObj: any = {}
+  const queryObj: any = {};
   fieldArray.map(field => {
     if (reqQuery[field] && typeof reqQuery[field] === 'string') {
-      queryObj[field] = reqQuery[field] // only accept string to be safe.
+      queryObj[field] = reqQuery[field]; // only accept string to be safe.
     }
-  })
-  return queryObj
+  });
+  return queryObj;
 }
 
 // function to decorate a promise with useful helpers like: .transform(), etc.
@@ -134,7 +146,7 @@ export function queryPromise(mongoosePromise: any) {
     // decorate => transform() on the result
     items.transform = (params: any) => {
       return items.map((item: any) => (item.transform ? item.transform(params) : item));
-    }
+    };
     resolve(items);
   });
 }
@@ -184,4 +196,25 @@ export async function apiJson({ req, res, data, model, meta = {}, json = false }
 // @example: slackWebhook('message')
 export function slackWebhook(message: string) {
   incomingWebhook.send(message);
+}
+
+export function sendEmail({ to, subject, text, html }: { to: string; subject: string; text?: string; html?: string }) {
+  return new Promise((resolve, reject) => {
+    emailClient.sendMail(
+      {
+        from: EMAIL_FROM_SUPPORT,
+        to,
+        subject,
+        text,
+        html
+      },
+      (err: any, info: any) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(info);
+        }
+      }
+    );
+  });
 }

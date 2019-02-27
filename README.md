@@ -13,7 +13,7 @@ NodeJS Rest Express MongoDB
   Tests
             Mocha  Chai     Sinon    istanbul
   MORE:
-            HTTPS           HTTP2 (spdy)      Socketio 2.1       Slack message
+            HTTPS           HTTP2 (spdy)      Socketio 2.1       Slack message      nodemailer
             VSCode Debug    Dependabot        Codacy
       API
             API response    (data, meta: limit, offset, sort)    transform res

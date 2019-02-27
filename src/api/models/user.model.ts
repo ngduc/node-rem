@@ -8,7 +8,7 @@ const jwt = require('jwt-simple');
 const uuidv4 = require('uuid/v4');
 const APIError = require('api/utils/APIError');
 import { transformData, listData } from 'api/utils/ModelUtils'
-const { env, jwtSecret, jwtExpirationInterval } = require('config/vars');
+const { env, JWT_SECRET, JWT_EXPIRATION_MINUTES } = require('config/vars');
 
 /**
  * User Roles
@@ -95,12 +95,12 @@ userSchema.method({
   token() {
     const playload = {
       exp: moment()
-        .add(jwtExpirationInterval, 'minutes')
+        .add(JWT_EXPIRATION_MINUTES, 'minutes')
         .unix(),
       iat: moment().unix(),
       sub: this._id
     };
-    return jwt.encode(playload, jwtSecret);
+    return jwt.encode(playload, JWT_SECRET);
   },
 
   async passwordMatches(password: string) {

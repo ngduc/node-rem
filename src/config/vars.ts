@@ -11,9 +11,12 @@ module.exports = {
   env: process.env.NODE_ENV,
   port: process.env.PORT,
   socketEnabled: ['1', 'true', 'yes'].indexOf(process.env.SOCKET_ENABLED || '') >= 0,
-  slackWebhookUrl: process.env.SLACK_WEBHOOK_URL,
-  jwtSecret: process.env.JWT_SECRET,
-  jwtExpirationInterval: process.env.JWT_EXPIRATION_MINUTES,
+  JWT_SECRET: process.env.JWT_SECRET,
+  JWT_EXPIRATION_MINUTES: process.env.JWT_EXPIRATION_MINUTES,
+  SLACK_WEBHOOK_URL: process.env.SLACK_WEBHOOK_URL,
+  EMAIL_FROM_SUPPORT: process.env.EMAIL_FROM_SUPPORT,
+  EMAIL_MAILGUN_API_KEY: process.env.EMAIL_MAILGUN_API_KEY,
+  EMAIL_MAILGUN_DOMAIN: process.env.EMAIL_MAILGUN_DOMAIN,
   mongo: {
     uri: process.env.NODE_ENV === 'test' ? process.env.MONGO_URI_TESTS : process.env.MONGO_URI
   },

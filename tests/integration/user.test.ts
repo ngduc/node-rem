@@ -9,7 +9,7 @@ const bcrypt = require('bcryptjs');
 const { some, omitBy, isNil } = require('lodash');
 const app = require('../../src/index');
 import { User } from 'api/models';
-const JWT_EXPIRATION = require('config/vars').jwtExpirationInterval;
+const JWT_EXPIRATION_MINUTES = require('config/vars').JWT_EXPIRATION_MINUTES;
 
 /**
  * root level hooks
@@ -540,7 +540,7 @@ describe('Users API', async () => {
       const expiredAccessToken = (await User.findAndGenerateToken(dbUsers.branStark)).accessToken;
 
       // move clock forward by minutes set in config + 1 minute
-      clock.tick(JWT_EXPIRATION * 60000 + 60000);
+      clock.tick(JWT_EXPIRATION_MINUTES * 60000 + 60000);
 
       return request(app)
         .get('/v1/users/profile')
