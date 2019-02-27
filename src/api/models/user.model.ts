@@ -2,13 +2,12 @@ export {};
 import { NextFunction, Request, Response, Router } from 'express';
 const mongoose = require('mongoose');
 const httpStatus = require('http-status');
-const { omitBy, isNil } = require('lodash');
 const bcrypt = require('bcryptjs');
 const moment = require('moment-timezone');
 const jwt = require('jwt-simple');
 const uuidv4 = require('uuid/v4');
 const APIError = require('api/utils/APIError');
-import { getQuery, getPageQuery, queryPromise } from 'api/utils/Utils';
+import { transformData, listData } from 'api/utils/ModelUtils'
 const { env, jwtSecret, jwtExpirationInterval } = require('config/vars');
 
 /**
@@ -73,9 +72,7 @@ userSchema.pre('save', async function save(next: NextFunction) {
     if (!this.isModified('password')) {
       return next();
     }
-
     const rounds = env === 'test' ? 1 : 10;
-
     const hash = await bcrypt.hash(this.password, rounds);
     this.password = hash;
 
@@ -91,15 +88,8 @@ userSchema.pre('save', async function save(next: NextFunction) {
 userSchema.method({
   // query is optional, e.g. to transform data for response but only include certain "fields"
   transform({ query = {} }:{ query?: any } = {}) {
-    const queryParams = getPageQuery(query)
-    const transformed: any = {};
-    ALLOW_FIELDS.forEach(field => {
-      if (queryParams && queryParams.fields && queryParams.fields.indexOf(field) < 0) {
-        return // if "fields" is set, don't include this field if it's not in there.
-      }
-      transformed[field] = this[field];
-    });
-    return transformed;
+    // transform every record (only respond allowed fields and "&fields=" in query)
+    return transformData(this, query, ALLOW_FIELDS);
   },
 
   token() {
@@ -189,15 +179,7 @@ userSchema.statics = {
    * @returns {Promise<User[]>}
    */
   list({ query }:{ query: any }) {
-    const queryObj = getQuery(query, ['name', 'email', 'role']) // allowed filter fields
-    const { page = 1, perPage = 30, limit, offset, sort } = getPageQuery(query);
-
-    const result = this.find(queryObj)
-      .sort(sort)
-      .skip(typeof offset !== 'undefined' ? offset : perPage * (page - 1))
-      .limit(typeof limit !== 'undefined' ? limit : perPage)
-      .exec();
-    return queryPromise(result);
+    return listData(this, query, ALLOW_FIELDS)
   },
 
   /**

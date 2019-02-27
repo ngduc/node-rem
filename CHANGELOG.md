@@ -1,8 +1,9 @@
-## [0.5.5] - 2019-02-25
+## [0.5.6] - 2019-02-25
 
 ### Added
 - support for "&fields" param in Model.transform(req) to include certain fields in API response.
 - added Utils.getQuery to get safe query fields from req.query
+- added ModelUtils transformData and listData
 
 ## [0.4.7] - 2019-02-21
 
