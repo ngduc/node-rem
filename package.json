@@ -1,6 +1,6 @@
 {
   "name": "node-rem",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Node REM - NodeJS Rest Express MongoDB and more: typescript, passport, JWT, socket.io, HTTPS, HTTP2, async/await, etc.",
   "author": "Duc Nguyen",
   "main": "src/index.js",
@@ -18,7 +18,7 @@
     "stop": "cross-env NODE_ENV=production forever stop 'node-rem'",
     "logs": "forever logs",
     "dev": "yarn postinstall && nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/index.ts",
-    "lint": "tslint --project tsconfig.json src/**/*.ts",
+    "lint": "tslint --project tslint.json src/**/*.ts",
     "lint:fix": "yarn lint --fix",
     "lint:watch": "yarn lint --watch",
     "test": "cross-env NODE_ENV=test nyc --reporter=html --reporter=text --reporter=lcov mocha --require ts-node/register --full-trace --bail --timeout 20000 --exit tests/**/*.ts",

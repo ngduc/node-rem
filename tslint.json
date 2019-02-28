@@ -1,6 +1,6 @@
 {
   "defaultSeverity": "warning",
-  "extends": ["tslint-config-airbnb", "tslint-config-prettier"],
+  "extends": "tslint-config-airbnb",
   "linterOptions": {
     "exclude": ["node_modules/**", "build/**", "e2e/**"]
   },
@@ -12,7 +12,8 @@
     "no-console": false,
     "member-access": false,
     "import-name": false,
-    "object-shorthand-properties-first": false
+    "object-shorthand-properties-first": false,
+    "trailing-comma": false
   },
   "rulesDirectory": []
 }

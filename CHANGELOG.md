@@ -1,4 +1,4 @@
-## [0.6.0] - 2019-02-27
+## [0.6.1] - 2019-02-27
 
 ### Added
 - support for "&fields" param in Model.transform(req) to include certain fields in API response
@@ -9,6 +9,8 @@
 - added MsgUtils email template function, e.g. sendEmail(welcomeEmail({ name, email }))
 - added multer to handle file upload
 - added "features.md" to explain features in details.
+### Fixed
+- fixed yarn lint
 
 ## [0.4.7] - 2019-02-21
 
