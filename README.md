@@ -97,6 +97,7 @@ Example of generated API Docs (using `apidoc`) - https://node-rem.netlify.com
 
 ### 📖 Documentation
 
+- [Feature Documentation](src_docs/features.md)
 - [Build System](src_docs/build.md)
 - [Dependencies Notes](src_docs/dependencies.md)
 - [Change Log](CHANGELOG.md)

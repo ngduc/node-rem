@@ -1,4 +1,14 @@
-## Features
+## DOCUMENTATION
+
+## DEV
+
+### Docker
+- Built on lightweight docker image "node:8-alpine" (see Dockerfile)
+- Command lines to launch docker images:
+  - `yarn docker:dev` launch project in DEV mode
+  - more... (see package.json)
+
+## FEATURES
 
 ### Add a new API Route:
 - src/api/routes/v1/index.ts
@@ -27,4 +37,4 @@
 
 ### Slack
 - Obtain your Slack Incoming Webhook (tie to a channel) from your Slack account & put it in .env file
-- Example: (../src/api/controllers/auth.controller.ts)[../src/api/controllers/auth.controller.ts] (send slack a message after user registered (POST v1/auth/register))
+- Example: [../src/api/controllers/auth.controller.ts](../src/api/controllers/auth.controller.ts) (send slack a message after user registered (POST v1/auth/register))

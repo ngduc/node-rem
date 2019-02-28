@@ -3,11 +3,11 @@ services:
   boilerplate-api:
     build: .
     environment:
-      - MONGO_URI=mongodb://mongodb:27017/express-rest-es2017-boilerplate
+      - MONGO_URI=mongodb://mongodb:27017/node-rem
     volumes:
       - .:/app
     ports:
-      - "3000:3000"
+      - "3009:3009"
     depends_on:
       - mongodb
 
