@@ -33,7 +33,7 @@
 
 ### Send Email
 - Obtain your Mailgun API Key & Email Domain (use sandbox domain name for testing) & put it in .env file
-- Using nodemailer welcomeEmail({ name: 'Duc', email: 'emailexample@gmail.com' })
+- Using nodemailer welcomeEmail({ name: 'John Doe', email: 'emailexample@gmail.com' })
 - Example: [../src/api/controllers/auth.controller.ts](../src/api/controllers/auth.controller.ts) (send email after user registered (POST v1/auth/register))
 
 ### Slack
