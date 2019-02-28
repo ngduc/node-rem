@@ -21,8 +21,8 @@ NodeJS Rest Express MongoDB
             apiJson         Pagination query      Whitelist fields in response
             mstime          API response time     Stack trace in Response
 ```
-
-If you don't want Typescript, use this branch: `node-rem-without-typescript`
+  - More details in [Feature Documentation](src_docs/features.md)
+  - If you don't want Typescript, use this branch: `node-rem-without-typescript`
 
 ### 📦 Installation
 
