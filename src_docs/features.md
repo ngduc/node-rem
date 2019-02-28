@@ -11,9 +11,10 @@
 ## FEATURES
 
 ### Add a new API Route:
-- src/api/routes/v1/index.ts
-- src/api/routes/your-new-route.route.ts
-- src/api/controllers/route-controller.ts
+- Steps to create a new route:
+  - src/api/routes/your-new-route.route.ts
+  - src/api/controllers/route-controller.ts
+  - src/api/routes/v1/index.ts - add your route
 - Example: [../src/api/routes/v1/user.route.ts](../src/api/routes/v1/user.route.ts) (CRUD routes for user endpoints)
 
 ### API Controller

@@ -33,9 +33,9 @@ cd your-app
 rm -rf .git
 yarn
 ```
-
-- create a Mongo Database and name it "node-rem".
 - Update `package.json` and `.env` file with your information.
+- Run `yarn dev`, it will create a new Mongo DB "node-rem"
+- Verify: use Postman to POST https://localhost:3009/v1/auth/register to create a new user. (set payload to have email, password)
 
 ### 🔧 Commands
 

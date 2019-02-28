@@ -3,7 +3,7 @@
 //
 // - "$ yarn" command will run this automatically. (package.json - postinstall)
 // - This script creates symlinks (e.g. "src/api" to "node_modules/api")
-//   so we can do this from anywhere: require("api/utils/Utils") without using ".." paths.
+//   so we can do like this from anywhere: require("api/utils/Utils") without using "../.." paths.
 // ***
 
 /* eslint-disable */
