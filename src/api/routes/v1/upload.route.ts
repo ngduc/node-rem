@@ -13,11 +13,10 @@ const storage = multer.diskStorage({
   },
   filename: function (req: any, file: any, cb: any) {
     // fieldname, originalname, mimetype
-    cb(null, file.fieldname + '-' + Date.now() + '.png')
+    cb(null, `${file.fieldname}-${Date.now()}.png`)
   }
 })
-// const upload = multer({ dest: 'uploads/', limits: { fieldSize: UPLOAD_LIMIT + 'MB' } });
-const upload = multer({ storage, limits: { fieldSize: UPLOAD_LIMIT + 'MB' } });
+const upload = multer({ storage, limits: { fieldSize: `${UPLOAD_LIMIT}MB` } });
 
 router.route('/file').post(authorize(), upload.single('file'), controller.upload);
 

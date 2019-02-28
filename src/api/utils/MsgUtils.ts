@@ -10,12 +10,12 @@ if (SLACK_WEBHOOK_URL) {
 
 // configure for emailing
 const { EMAIL_MAILGUN_API_KEY, EMAIL_FROM_SUPPORT, EMAIL_MAILGUN_DOMAIN, EMAIL_TEMPLATE_BASE } = require('config/vars');
-const Handlebars = require('handlebars');
+const handlebars = require('handlebars');
 
 // load template file & inject data => return content with injected data.
 const template = (fileName: string, data: any) => {
-  const content = fs.readFileSync(EMAIL_TEMPLATE_BASE + '' + fileName).toString();
-  var inject = Handlebars.compile(content);
+  const content = fs.readFileSync(EMAIL_TEMPLATE_BASE + fileName).toString();
+  const inject = handlebars.compile(content);
   return inject(data);
 }
 

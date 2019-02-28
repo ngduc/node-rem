@@ -11,7 +11,8 @@
     "curly": true,
     "no-console": false,
     "member-access": false,
-    "import-name": false
+    "import-name": false,
+    "object-shorthand-properties-first": false
   },
   "rulesDirectory": []
 }
