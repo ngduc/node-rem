@@ -8,7 +8,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const passport = require('passport');
 const routes = require('../api/routes/v1');
-const { logs } = require('./vars');
+const { logs, UPLOAD_LIMIT } = require('./vars');
 const strategies = require('./passport');
 const error = require('../api/middlewares/error');
 
@@ -22,8 +22,8 @@ const app = express();
 app.use(morgan(logs));
 
 // parse body params and attache them to req.body
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ limit: UPLOAD_LIMIT + 'mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: UPLOAD_LIMIT + 'mb' }));
 
 // gzip compression
 app.use(compress());

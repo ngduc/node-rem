@@ -1,10 +1,14 @@
-## [0.5.6] - 2019-02-25
+## [0.6.0] - 2019-02-27
 
 ### Added
-- support for "&fields" param in Model.transform(req) to include certain fields in API response.
+- support for "&fields" param in Model.transform(req) to include certain fields in API response
 - added Utils.getQuery to get safe query fields from req.query
 - added ModelUtils transformData and listData
-- added Utils.sendEmail (using nodemailer & mailgun)
+- added MsgUtils slackWebhook to send message using Slack Incoming Webhook
+- added MsgUtils sendEmail (using nodemailer & mailgun)
+- added MsgUtils email template function, e.g. sendEmail(welcomeEmail({ name, email }))
+- added multer to handle file upload
+- added "features.md" to explain features in details.
 
 ## [0.4.7] - 2019-02-21
 

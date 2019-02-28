@@ -4,8 +4,9 @@ const httpStatus = require('http-status');
 import { User } from 'api/models';
 const RefreshToken = require('../models/refreshToken.model');
 const moment = require('moment-timezone');
-import { apiJson, slackWebhook, sendEmail } from 'api/utils/Utils';
-const { JWT_EXPIRATION_MINUTES } = require('../../config/vars');
+import { apiJson } from 'api/utils/Utils';
+import { sendEmail, welcomeEmail, slackWebhook } from 'api/utils/MsgUtils';
+const { JWT_EXPIRATION_MINUTES, EMAIL_MAILGUN_API_KEY } = require('../../config/vars');
 
 /**
  * Returns a formated object with tokens
@@ -34,12 +35,11 @@ exports.register = async (req: Request, res: Response, next: NextFunction) => {
     const token = generateTokenResponse(user, user.token());
     res.status(httpStatus.CREATED);
     const data = { token, user: userTransformed };
-    // slackWebhook(`New User: ${user.email}`) // notify when new user registered
-    // sendEmail({
-    //   to: userTransformed.email, // for testing: only use authorized recipients in Mailgun Account Settings.
-    //   subject: 'Welcome!',
-    //   html: 'Welcome!'
-    // })
+    slackWebhook(`New User: ${user.email}`) // notify when new user registered
+    if (EMAIL_MAILGUN_API_KEY) {
+      // for testing: it can only email to "authorized recipients" in Mailgun Account Settings.
+      // sendEmail(welcomeEmail({ name: user.email, email: user.email }));
+    }
     return apiJson({ req, res, data });
   } catch (error) {
     return next(User.checkDuplicateEmail(error));

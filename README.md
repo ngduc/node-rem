@@ -13,10 +13,11 @@ NodeJS Rest Express MongoDB
   Tests
             Mocha  Chai     Sinon    istanbul
   MORE:
-            HTTPS           HTTP2 (spdy)      Socketio 2.1       Slack message      nodemailer
+            HTTPS           HTTP2 (spdy)      Socketio 2.1       Slack message
+            Nodemailer      Mailgun           Email Templates    File upload (multer)
             VSCode Debug    Dependabot        Codacy
       API
-            API response    (data, meta: limit, offset, sort)    transform res
+            API response    (data, meta: limit, offset, sort)    Transform res
             apiJson         Pagination query      Whitelist fields in response
             mstime          API response time     Stack trace in Response
 ```

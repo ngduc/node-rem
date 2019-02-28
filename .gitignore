@@ -49,3 +49,5 @@ jspm_packages
 # Others
 .python-version
 .netlify
+
+uploads/

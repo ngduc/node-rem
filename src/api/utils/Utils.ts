@@ -1,23 +1,6 @@
 const mstime = require('mstime');
 import { NextFunction, Request, Response, Router } from 'express';
 import { ITEMS_PER_PAGE } from 'api/utils/Const';
-const { SLACK_WEBHOOK_URL, EMAIL_MAILGUN_API_KEY, EMAIL_FROM_SUPPORT, EMAIL_MAILGUN_DOMAIN } = require('config/vars');
-
-const { IncomingWebhook } = require('@slack/client');
-const incomingWebhook = new IncomingWebhook(SLACK_WEBHOOK_URL);
-
-// EmailService.js
-const nodemailer = require('nodemailer');
-const mailgunTransport = require('nodemailer-mailgun-transport');
-// Configure transport options
-const mailgunOptions = {
-  auth: {
-    api_key: EMAIL_MAILGUN_API_KEY, // process.env.MAILGUN_ACTIVE_API_KEY,
-    domain: EMAIL_MAILGUN_DOMAIN // process.env.MAILGUN_DOMAIN,
-  }
-};
-const transport = mailgunTransport(mailgunOptions);
-const emailClient = nodemailer.createTransport(transport);
 
 // Helper functions for Utils.uuid()
 const lut = Array(256)
@@ -190,31 +173,4 @@ export async function apiJson({ req, res, data, model, meta = {}, json = false }
     return output;
   }
   return res.json(output);
-}
-
-// send slack message using incoming webhook url
-// @example: slackWebhook('message')
-export function slackWebhook(message: string) {
-  incomingWebhook.send(message);
-}
-
-export function sendEmail({ to, subject, text, html }: { to: string; subject: string; text?: string; html?: string }) {
-  return new Promise((resolve, reject) => {
-    emailClient.sendMail(
-      {
-        from: EMAIL_FROM_SUPPORT,
-        to,
-        subject,
-        text,
-        html
-      },
-      (err: any, info: any) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(info);
-        }
-      }
-    );
-  });
 }

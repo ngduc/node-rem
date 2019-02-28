@@ -2,6 +2,7 @@ export {};
 import * as express from 'express';
 const userRoutes = require('./user.route');
 const authRoutes = require('./auth.route');
+const uploadRoutes = require('./upload.route');
 
 const router = express.Router();
 
@@ -17,5 +18,6 @@ router.use('/docs', express.static('docs'));
 
 router.use('/users', userRoutes);
 router.use('/auth', authRoutes);
+router.use('/upload', uploadRoutes);
 
 module.exports = router;
