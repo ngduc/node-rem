@@ -8,6 +8,9 @@
   - `yarn docker:dev` launch project in DEV mode
   - more... (see package.json)
 
+### Windows
+- Tested on Windows 10 (Powershell) with MongoDB
+
 ## FEATURES
 
 ### Add a new API Route:

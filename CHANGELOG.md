@@ -1,4 +1,4 @@
-## [0.6.5] - 2019-02-28
+## [0.6.6] - 2019-02-28
 
 ### Added
 - support for "&fields" param in Model.transform(req) to include certain fields in API response
@@ -13,6 +13,7 @@
 ### Fixed
 - fixed yarn lint
 - fixed lint errors
+- fixed to run on Windows 10 (Powershell)
 
 ## [0.4.7] - 2019-02-21
 

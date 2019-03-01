@@ -9,7 +9,7 @@ NodeJS Rest Express MongoDB
 ```
   Typescript      Express 4.15       CORS     Helmet    DotEnv   joi (validation)   forever
   Mongoose 4.9    Passport  JWT      Await
-  Tslint          Apidoc    Docker   Husky    Morgan    Travis
+  Tslint          Apidoc    Docker   Husky    Morgan    Travis   Windows (Powershell)
   Tests
             Mocha  Chai     Sinon    istanbul
   MORE:
