@@ -23,7 +23,7 @@
   - [../src/api/controllers/user.controller.ts](../src/api/controllers/user.controller.ts)
   - [../src/api/models/user.model.ts](../src/api/models/user.model.ts) (see "transform" and "list" functions)
 
-### Upload File
+### API - Upload File /upload/file
 - Using "multer" to parse form (file) data & store files to "/uploads"
 - Example: POST https://localhost:3009/v1/upload/file
   - set Authorization: Bearer TOKEN, Content-Type: application/x-www-form-urlencoded
@@ -31,11 +31,15 @@
   - uploaded file will be stored in "/uploads" directory
 - Example: [../src/api/routes/v1/upload.route.ts](../src/api/routes/v1/upload.route.ts)
 
-### Send Email
-- Obtain your Mailgun API Key & Email Domain (use sandbox domain name for testing) & put it in .env file
-- Using nodemailer welcomeEmail({ name: 'John Doe', email: 'emailexample@gmail.com' })
-- Example: [../src/api/controllers/auth.controller.ts](../src/api/controllers/auth.controller.ts) (send email after user registered (POST v1/auth/register))
+### API - Forgot Password /forgot-password
+- a POST handler to generate a one-time temporary password, then email it to an existing user.
+- Example: [../src/api/controllers/auth.controller.ts](../src/api/controllers/auth.controller.ts)
 
 ### Slack
 - Obtain your Slack Incoming Webhook (tie to a channel) from your Slack account & put it in .env file
 - Example: [../src/api/controllers/auth.controller.ts](../src/api/controllers/auth.controller.ts) (send slack a message after user registered (POST v1/auth/register))
+
+### Send Email
+- Obtain your Mailgun API Key & Email Domain (use sandbox domain name for testing) & put it in .env file
+- Using nodemailer welcomeEmail({ name: 'John Doe', email: 'emailexample@gmail.com' })
+- Example: [../src/api/controllers/auth.controller.ts](../src/api/controllers/auth.controller.ts) (send email after user registered (POST v1/auth/register))

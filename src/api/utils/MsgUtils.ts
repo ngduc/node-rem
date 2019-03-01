@@ -3,7 +3,7 @@ const fs = require('fs');
 // configure for Slack
 const { SLACK_WEBHOOK_URL } = require('config/vars');
 const { IncomingWebhook } = require('@slack/client');
-let incomingWebhook: any = null
+let incomingWebhook: any = null;
 if (SLACK_WEBHOOK_URL) {
   incomingWebhook = new IncomingWebhook(SLACK_WEBHOOK_URL);
 }
@@ -17,18 +17,28 @@ const template = (fileName: string, data: any) => {
   const content = fs.readFileSync(EMAIL_TEMPLATE_BASE + fileName).toString();
   const inject = handlebars.compile(content);
   return inject(data);
-}
+};
 
 // --------- Email Templates --------- //
 
-export function welcomeEmail ({ name, email }:{ name: string, email: string }) {
+export function welcomeEmail({ name, email }: { name: string; email: string }) {
   return {
     from: EMAIL_FROM_SUPPORT,
     to: `${name} <${email}>`,
     subject: `Welcome!`,
-    text: template('welcome.txt', arguments[0]),
-    html: template('welcome.html', arguments[0]),
-  }
+    text: template('welcome.txt', { name, email }),
+    html: template('welcome.html', { name, email })
+  };
+}
+
+export function forgotPasswordEmail({ name, email, tempPass }: { name: string; email: string; tempPass: string }) {
+  return {
+    from: EMAIL_FROM_SUPPORT,
+    to: `${name} <${email}>`,
+    subject: `Your one-time temporary password`,
+    text: template('forgot-password.txt', { name, email, tempPass }),
+    html: template('forgot-password.html', { name, email, tempPass })
+  };
 }
 
 // resetPswEmail, forgotPswEmail, etc.
@@ -36,7 +46,7 @@ export function welcomeEmail ({ name, email }:{ name: string, email: string }) {
 // --------- Nodemailer and Mailgun setup --------- //
 const nodemailer = require('nodemailer');
 const mailgunTransport = require('nodemailer-mailgun-transport');
-let emailClient: any = null
+let emailClient: any = null;
 if (EMAIL_MAILGUN_API_KEY) {
   // Configure transport options
   const mailgunOptions = {
@@ -50,17 +60,19 @@ if (EMAIL_MAILGUN_API_KEY) {
 }
 
 export function sendEmail(data: any) {
+  if (!emailClient) {
+    return;
+  }
   return new Promise((resolve, reject) => {
-    emailClient ? emailClient.sendMail(
-      data,
-      (err: any, info: any) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(info);
-        }
-      }
-    ) : '';
+    emailClient
+      ? emailClient.sendMail(data, (err: any, info: any) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(info);
+          }
+        })
+      : '';
   });
 }
 

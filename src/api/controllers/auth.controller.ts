@@ -4,9 +4,9 @@ const httpStatus = require('http-status');
 import { User } from 'api/models';
 const RefreshToken = require('../models/refreshToken.model');
 const moment = require('moment-timezone');
-import { apiJson } from 'api/utils/Utils';
-import { sendEmail, welcomeEmail, slackWebhook } from 'api/utils/MsgUtils';
-const { JWT_EXPIRATION_MINUTES, EMAIL_MAILGUN_API_KEY } = require('../../config/vars');
+import { apiJson, randomString } from 'api/utils/Utils';
+import { sendEmail, welcomeEmail, forgotPasswordEmail, slackWebhook } from 'api/utils/MsgUtils';
+const { JWT_EXPIRATION_MINUTES, slackEnabled, emailEnabled } = require('../../config/vars');
 
 /**
  * Returns a formated object with tokens
@@ -35,10 +35,12 @@ exports.register = async (req: Request, res: Response, next: NextFunction) => {
     const token = generateTokenResponse(user, user.token());
     res.status(httpStatus.CREATED);
     const data = { token, user: userTransformed };
-    slackWebhook(`New User: ${user.email}`) // notify when new user registered
-    if (EMAIL_MAILGUN_API_KEY) {
+    if (slackEnabled) {
+      slackWebhook(`New User: ${user.email}`); // notify when new user registered
+    }
+    if (emailEnabled) {
       // for testing: it can only email to "authorized recipients" in Mailgun Account Settings.
-      // sendEmail(welcomeEmail({ name: user.email, email: user.email }));
+      // sendEmail(welcomeEmail({ name: user.name, email: user.email }));
     }
     return apiJson({ req, res, data });
   } catch (error) {
@@ -93,6 +95,31 @@ exports.refresh = async (req: Request, res: Response, next: NextFunction) => {
     const { user, accessToken } = await User.findAndGenerateToken({ email, refreshObject });
     const response = generateTokenResponse(user, accessToken);
     return res.json(response);
+  } catch (error) {
+    return next(error);
+  }
+};
+
+/**
+ * Send email to a registered user's email with a one-time temporary password
+ * @public
+ */
+exports.forgotPassword = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) {
+      // RETURN A GENERIC ERROR - DON'T EXPOSE the real reason (user not found) for security.
+      return next({ message: 'Invalid request' });
+    } else {
+      // user found => generate temp password, then email it to user:
+      const { name, email } = user;
+      const tempPass = randomString(10, 'abcdefghijklmnopqrstuvwxyz0123456789');
+      user.tempPassword = tempPass;
+      await user.save();
+      sendEmail(forgotPasswordEmail({ name, email, tempPass }));
+    }
+    return apiJson({ req, res, data: { status: 'OK' } });
   } catch (error) {
     return next(error);
   }

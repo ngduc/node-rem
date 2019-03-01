@@ -15,8 +15,7 @@
     "object-shorthand-properties-first": false,
     "trailing-comma": false,
     "no-boolean-literal-compare": false,
-    "max-line-length": [true, 120],
-    "semicolon": [true, "always", "ignore-interfaces"]
+    "variable-name": [true, "ban-keywords", "check-format", "allow-pascal-case"]
   },
   "rulesDirectory": []
 }

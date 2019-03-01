@@ -12,6 +12,8 @@ module.exports = {
   env: process.env.NODE_ENV,
   port: process.env.PORT,
   socketEnabled: ['1', 'true', 'yes'].indexOf(process.env.SOCKET_ENABLED || '') >= 0,
+  slackEnabled: process.env.SLACK_WEBHOOK_URL ? true : false,
+  emailEnabled: process.env.EMAIL_MAILGUN_API_KEY ? true : false,
   JWT_SECRET: process.env.JWT_SECRET,
   JWT_EXPIRATION_MINUTES: process.env.JWT_EXPIRATION_MINUTES,
   UPLOAD_LIMIT: 5, // MB

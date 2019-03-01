@@ -7,7 +7,7 @@ const moment = require('moment-timezone');
 const jwt = require('jwt-simple');
 const uuidv4 = require('uuid/v4');
 const APIError = require('api/utils/APIError');
-import { transformData, listData } from 'api/utils/ModelUtils'
+import { transformData, listData } from 'api/utils/ModelUtils';
 const { env, JWT_SECRET, JWT_EXPIRATION_MINUTES } = require('config/vars');
 
 /**
@@ -32,6 +32,12 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
+      minlength: 6,
+      maxlength: 128
+    },
+    tempPassword: {
+      type: String, // one-time temporary password (must delete after user logged in)
+      required: false,
       minlength: 6,
       maxlength: 128
     },
@@ -69,14 +75,16 @@ const ALLOW_FIELDS = ['id', 'name', 'email', 'picture', 'role', 'createdAt'];
  */
 userSchema.pre('save', async function save(next: NextFunction) {
   try {
-    if (!this.isModified('password')) {
-      return next();
-    }
+    // modifying password => encrypt it:
     const rounds = env === 'test' ? 1 : 10;
-    const hash = await bcrypt.hash(this.password, rounds);
-    this.password = hash;
-
-    return next();
+    if (this.isModified('password')) {
+      const hash = await bcrypt.hash(this.password, rounds);
+      this.password = hash;
+    } else if (this.isModified('tempPassword')) {
+      const hash = await bcrypt.hash(this.tempPassword, rounds);
+      this.tempPassword = hash;
+    }
+    return next(); // normal save
   } catch (error) {
     return next(error);
   }
@@ -87,7 +95,7 @@ userSchema.pre('save', async function save(next: NextFunction) {
  */
 userSchema.method({
   // query is optional, e.g. to transform data for response but only include certain "fields"
-  transform({ query = {} }:{ query?: any } = {}) {
+  transform({ query = {} }: { query?: any } = {}) {
     // transform every record (only respond allowed fields and "&fields=" in query)
     return transformData(this, query, ALLOW_FIELDS);
   },
@@ -178,8 +186,8 @@ userSchema.statics = {
    * List users.
    * @returns {Promise<User[]>}
    */
-  list({ query }:{ query: any }) {
-    return listData(this, query, ALLOW_FIELDS)
+  list({ query }: { query: any }) {
+    return listData(this, query, ALLOW_FIELDS);
   },
 
   /**
