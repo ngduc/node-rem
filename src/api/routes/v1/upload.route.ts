@@ -8,10 +8,10 @@ const controller = require('../../controllers/upload.controller');
 
 const multer = require('multer');
 const storage = multer.diskStorage({
-  destination: function(req: any, file: any, cb: any) {
+  destination(req: any, file: any, cb: any) {
     cb(null, 'uploads/');
   },
-  filename: function(req: any, file: any, cb: any) {
+  filename(req: any, file: any, cb: any) {
     // fieldname, originalname, mimetype
     cb(null, `${file.fieldname}-${Date.now()}.png`);
   }
