@@ -50,4 +50,5 @@ jspm_packages
 .python-version
 .netlify
 
-uploads/
+uploads/*
+!uploads/README.md
