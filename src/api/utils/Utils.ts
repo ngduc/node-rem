@@ -176,6 +176,6 @@ export async function apiJson({ req, res, data, model, meta = {}, json = false }
 }
 
 export function randomString(len = 10, charStr = 'abcdefghijklmnopqrstuvwxyz0123456789') {
-  const chars = [...(charStr + '')];
+  const chars = [...`${charStr}`];
   return [...Array(len)].map(i => chars[(Math.random() * chars.length) | 0]).join('');
 }

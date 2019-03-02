@@ -1,6 +1,6 @@
 ## DOCUMENTATION
 
-## DEV
+## DEVELOPMENT
 
 ### Docker
 - Built on lightweight docker image "node:8-alpine" (see Dockerfile)
@@ -8,8 +8,13 @@
   - `yarn docker:dev` launch project in DEV mode
   - more... (see package.json)
 
-### Windows
-- Tested on Windows 10 (Powershell) with MongoDB
+### Platforms
+- Mainly tested on MacOS High Sierra, node 8.10.x, yarn
+- Also tested on Windows 10 (Powershell) with MongoDB, latest nodejs, yarn
+
+### Other Tools
+- Use Postman to try out APIs
+  - By default, APIs run on HTTPS localhost, so turn off "SSL Certificate Verification" in Postman Settings.
 
 ## FEATURES
 
@@ -43,6 +48,7 @@
 - Example: [../src/api/controllers/auth.controller.ts](../src/api/controllers/auth.controller.ts) (send slack a message after user registered (POST v1/auth/register))
 
 ### Send Email
+- Using "nodemailer" to send email
+- Using "handlebars" to get email templates: welcomeEmail({ name: 'John Doe', email: 'emailexample@gmail.com' })
 - Obtain your Mailgun API Key & Email Domain (use sandbox domain name for testing) & put it in .env file
-- Using nodemailer welcomeEmail({ name: 'John Doe', email: 'emailexample@gmail.com' })
 - Example: [../src/api/controllers/auth.controller.ts](../src/api/controllers/auth.controller.ts) (send email after user registered (POST v1/auth/register))
