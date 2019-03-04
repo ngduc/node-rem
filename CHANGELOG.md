@@ -1,3 +1,12 @@
+## [0.7.0] - 2019-03-04
+
+### Added
+- initData.ts - initialize dev data (admin user & some data)
+- userNote model - a simple example of model
+- listUserNotes - a simple example to query & return data
+### Changed
+- BREAKING: renamed ALLOW_FIELDS to ALLOWED_FIELDS
+
 ## [0.6.6] - 2019-02-28
 
 ### Added

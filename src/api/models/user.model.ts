@@ -65,7 +65,7 @@ const userSchema = new mongoose.Schema(
     timestamps: true
   }
 );
-const ALLOW_FIELDS = ['id', 'name', 'email', 'picture', 'role', 'createdAt'];
+const ALLOWED_FIELDS = ['id', 'name', 'email', 'picture', 'role', 'createdAt'];
 
 /**
  * Add your
@@ -97,7 +97,7 @@ userSchema.method({
   // query is optional, e.g. to transform data for response but only include certain "fields"
   transform({ query = {} }: { query?: any } = {}) {
     // transform every record (only respond allowed fields and "&fields=" in query)
-    return transformData(this, query, ALLOW_FIELDS);
+    return transformData(this, query, ALLOWED_FIELDS);
   },
 
   token() {
@@ -187,7 +187,7 @@ userSchema.statics = {
    * @returns {Promise<User[]>}
    */
   list({ query }: { query: any }) {
-    return listData(this, query, ALLOW_FIELDS);
+    return listData(this, query, ALLOWED_FIELDS);
   },
 
   /**
@@ -246,4 +246,6 @@ userSchema.statics = {
 /**
  * @typedef User
  */
-module.exports = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
+User.ALLOWED_FIELDS = ALLOWED_FIELDS;
+module.exports = User;

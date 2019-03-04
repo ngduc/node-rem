@@ -13,8 +13,8 @@ NodeJS Rest Express MongoDB (REM) - a production-ready lightweight backend setup
   Tests
             Mocha  Chai     Sinon    istanbul
   MORE:
-            HTTPS           HTTP2 (spdy)      Socketio 2.1       Slack message
-            Nodemailer      Mailgun           Email Templates    Forgot Password
+            HTTPS           HTTP2 (spdy)      Socketio 2.1       Init DB Data
+            Slack message   Nodemailer        Mailgun            Email Templates    Forgot Password
             VSCode Debug    Dependabot        Codacy             File upload (multer)
       API
             API response    (data, meta: limit, offset, sort)    Transform res

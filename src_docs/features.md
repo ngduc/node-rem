@@ -16,7 +16,18 @@
 - Use Postman to try out APIs
   - By default, APIs run on HTTPS localhost, so turn off "SSL Certificate Verification" in Postman Settings.
 
+### Initialize DB Data
+- When launching in development mode, it will check if admin user not existed (New DB) & generate it & some dev data.
+- Example: [../src/api/utils/InitData.ts](../src/api/utils/InitData.ts)
+
 ## FEATURES
+
+### Add a new Model:
+- Model has mongoose schema & default functions like: transform, list.
+  - "transform" method: to sanitize mongoose results with ALLOWED_FIELDS (so we don't expose unneeded fields)
+  - "list" function: to list data with pagination support (URL parameters).
+- Always export Model with Model.ALLOWED_FIELDS
+- Example: [...src/api/models/userNote.model.ts](../src/api/models/userNote.model.ts)
 
 ### Add a new API Route:
 - Steps to create a new route:
@@ -32,7 +43,7 @@
   - [../src/api/models/user.model.ts](../src/api/models/user.model.ts) (see "transform" and "list" functions)
 
 ### API - URL Parameters
-- a Model has "ALLOW_FIELDS" array to allow those fields in API response.
+- a Model has "ALLOWED_FIELDS" array to allow those fields in API response.
   - Additionally, you can add "&fields=" as an URL param to include just a few fields. (to reduce response size)
 - API list endpoints also support URL params for pagination
   - Example 1: GET https://localhost:3009/v1/users?limit=5&offset=0&sort=email:desc,createdAt

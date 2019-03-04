@@ -182,4 +182,6 @@ router
    */
   .delete(authorize(LOGGED_USER), controller.remove);
 
+router.route('/:userId/notes').get(authorize(LOGGED_USER), controller.listUserNotes);
+
 module.exports = router;

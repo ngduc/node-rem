@@ -2,6 +2,10 @@ const mstime = require('mstime');
 import { NextFunction, Request, Response, Router } from 'express';
 import { ITEMS_PER_PAGE } from 'api/utils/Const';
 
+export function jsonClone(obj: any) {
+  return JSON.parse(JSON.stringify(obj));
+}
+
 // Helper functions for Utils.uuid()
 const lut = Array(256)
   .fill('')
@@ -113,7 +117,9 @@ export function getPageQuery(reqQuery: any) {
 export function getQuery(reqQuery: any, fieldArray: string[]) {
   const queryObj: any = {};
   fieldArray.map(field => {
-    if (reqQuery[field] && typeof reqQuery[field] === 'string') {
+    // get query fields excluding pagination fields:
+    if (['page', 'perPage', 'limit', 'offset'].indexOf(field) < 0 && reqQuery[field]) {
+      // TODO: do more checks of query parameters for better security...
       queryObj[field] = reqQuery[field]; // only accept string to be safe.
     }
   });
@@ -154,11 +160,14 @@ export async function apiJson({ req, res, data, model, meta = {}, json = false }
     // if pass in "model" => query for totalCount & put in "meta"
     const isPagination = req.query.limit || req.query.page;
     if (isPagination && model.countDocuments) {
-      const totalCount = await model.countDocuments();
+      const query = getQuery(req.query, model.ALLOWED_FIELDS);
+      const countQuery = jsonClone(query);
+      const totalCount = await model.countDocuments(countQuery);
       metaData.totalCount = totalCount;
       if (queryObj.perPage) {
         metaData.pageCount = Math.ceil(totalCount / queryObj.perPage);
       }
+      metaData.count = data && data.length ? data.length : 0;
     }
   }
   // add Timer data
