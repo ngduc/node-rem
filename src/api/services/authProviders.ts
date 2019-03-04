@@ -1,4 +1,4 @@
-/* eslint-disable camelcase */
+/* tslint:disable */
 export {};
 const axios = require('axios');
 

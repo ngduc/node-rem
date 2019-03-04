@@ -31,6 +31,13 @@
   - [../src/api/controllers/user.controller.ts](../src/api/controllers/user.controller.ts)
   - [../src/api/models/user.model.ts](../src/api/models/user.model.ts) (see "transform" and "list" functions)
 
+### API - URL Parameters
+- a Model has "ALLOW_FIELDS" array to allow those fields in API response.
+  - Additionally, you can add "&fields=" as an URL param to include just a few fields. (to reduce response size)
+- API list endpoints also support URL params for pagination
+  - Example 1: GET https://localhost:3009/v1/users?limit=5&offset=0&sort=email:desc,createdAt
+  - Example 2: GET https://localhost:3009/v1/users?page=1&perPage=20
+
 ### API - Upload File /upload/file
 - Using "multer" to parse form (file) data & store files to "/uploads"
 - Example: POST https://localhost:3009/v1/upload/file

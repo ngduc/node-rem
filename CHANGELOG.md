@@ -1,7 +1,7 @@
 ## [0.6.6] - 2019-02-28
 
 ### Added
-- support for "&fields" param in Model.transform(req) to include certain fields in API response
+- support for "&fields" param in Model.transform(req) to include specific fields in API response
 - added Utils.getQuery to get safe query fields from req.query
 - added ModelUtils transformData and listData
 - added MsgUtils slackWebhook to send message using Slack Incoming Webhook
