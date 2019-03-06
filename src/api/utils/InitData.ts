@@ -12,7 +12,7 @@ async function setup() {
   await adminUser.save();
 
   for (let i = 0; i < 100; i += 1) {
-    const note = new UserNote({ user: adminUser, note: 'note ' + i });
+    const note = new UserNote({ user: adminUser, note: `note ${i}` });
     await note.save();
   }
 }
