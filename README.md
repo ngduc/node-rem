@@ -18,7 +18,7 @@ NodeJS Rest Express MongoDB (REM) - a production-ready lightweight backend setup
             VSCode Debug    Dependabot        Codacy             File upload (multer)
       API
             API response    (data, meta: limit, offset, sort)    Transform res
-            apiJson         Pagination query      Whitelist fields in response
+            apiJson         Pagination query      Regex query    Whitelist fields in response
             mstime          API response time     Stack trace in Response
 ```
   - More details in [Feature Documentation](src_docs/features.md)

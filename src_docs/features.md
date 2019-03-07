@@ -48,6 +48,7 @@
 - API list endpoints also support URL params for pagination
   - Example 1: GET https://localhost:3009/v1/users?limit=5&offset=0&sort=email:desc,createdAt
   - Example 2: GET https://localhost:3009/v1/users?page=1&perPage=20
+  - Example 3: GET https://localhost:3009/v1/users/5c7f85009d65d4210efffa42/notes?note=*partialtext*
 
 ### API - Upload File /upload/file
 - Using "multer" to parse form (file) data & store files to "/uploads"

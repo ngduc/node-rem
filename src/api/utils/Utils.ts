@@ -120,9 +120,16 @@ export function getQuery(reqQuery: any, fieldArray: string[]) {
     // get query fields excluding pagination fields:
     if (['page', 'perPage', 'limit', 'offset'].indexOf(field) < 0 && reqQuery[field]) {
       // TODO: do more checks of query parameters for better security...
-      queryObj[field] = reqQuery[field]; // only accept string to be safe.
+      let val = reqQuery[field];
+      if (typeof val === 'string' && val.length >= 2 && (val[0] === '*' || val[val.length - 1] === '*')) {
+        val = val.replace(/\*/gi, '');
+        queryObj[field] = { $regex: val, $options: 'i' }; // partial text search
+      } else {
+        queryObj[field] = reqQuery[field]; // exact search
+      }
     }
   });
+  console.log('- queryObj: ', JSON.stringify(queryObj));
   return queryObj;
 }
 

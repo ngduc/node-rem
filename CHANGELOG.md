@@ -1,9 +1,10 @@
-## [0.7.1] - 2019-03-05
+## [0.7.2] - 2019-03-06
 
 ### Added
 - initData.ts - initialize dev data (admin user & some data)
 - userNote model - a simple example of model
 - listUserNotes - a simple example to query & return data
+- Utils.getQuery - support partial text search (e.g. &note=*sometext*)
 ### Fixed
 - socket on connect
 ### Changed
