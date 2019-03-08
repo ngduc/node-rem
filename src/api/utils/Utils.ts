@@ -57,11 +57,11 @@ export function uuid() {
   return formatUuid(getRandomValuesFunc());
 }
 
-export function startTimer(req: any) {
+export function startTimer(req: Request) {
   mstime.start(req.originalUrl, { uuid: uuid() });
 }
 
-export function endTimer(req: any) {
+export function endTimer(req: Request) {
   const end = mstime.end(req.originalUrl);
   if (end) {
     console.log(`avg time - ${end.avg} (ms)`);

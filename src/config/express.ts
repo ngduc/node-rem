@@ -38,7 +38,7 @@ app.use(helmet());
 // enable CORS - Cross Origin Resource Sharing
 app.use(cors());
 
-app.use((req: any, res: any, next: any) => {
+app.use((req: any, res: express.Response, next: express.NextFunction) => {
   req.uuid = `uuid_${Math.random()}`; // use "uuid" lib
   next();
 });
