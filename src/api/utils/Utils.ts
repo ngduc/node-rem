@@ -122,8 +122,10 @@ export function getQuery(reqQuery: any, fieldArray: string[]) {
       // TODO: do more checks of query parameters for better security...
       let val = reqQuery[field];
       if (typeof val === 'string' && val.length >= 2 && (val[0] === '*' || val[val.length - 1] === '*')) {
-        val = val.replace(/\*/gi, '');
-        queryObj[field] = { $regex: val, $options: 'i' }; // partial text search
+        // field value has "*text*" => use MongoDB Regex query: (partial text search)
+        val = val.replace(/\*/g, ''); // remove "*"
+        val = val.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // escape other special chars - https://goo.gl/eWCVDH
+        queryObj[field] = { $regex: val, $options: 'i' };
       } else {
         queryObj[field] = reqQuery[field]; // exact search
       }

@@ -22,7 +22,6 @@ NodeJS Rest Express MongoDB (REM) - a production-ready lightweight backend setup
             mstime          API response time     Stack trace in Response
 ```
   - More details in [Feature Documentation](src_docs/features.md)
-  - If you don't want Typescript, use this branch: `node-rem-without-typescript`
 
 ### 📦 Installation
 
@@ -66,7 +65,7 @@ exports.list = async (req: Request, res: Response, next: NextFunction) => {
 API Response is similar to [JSON API](http://jsonapi.org/examples/#pagination) standard:
 
 ```js
-GET https://localhost:3009/v1/users?fields=id,name (get id & name only in response)
+GET https://localhost:3009/v1/users?fields=id,name&name=*john* (get id & name only in response)
 GET https://localhost:3009/v1/users?role=admin&page=1&perPage=20 (query & pagination)
 GET https://localhost:3009/v1/users?role=admin&limit=5&offset=0&sort=email:desc,createdAt
 {
