@@ -22,6 +22,7 @@ NodeJS Rest Express MongoDB (REM) - a production-ready lightweight backend setup
             mstime          API response time     Stack trace in Response
 ```
   - More details in [Feature Documentation](src_docs/features.md)
+  - [Live Demo](https://node-rem-demo.now.sh/) (login & inspect API calls to learn more)
 
 ### 📦 Installation
 
