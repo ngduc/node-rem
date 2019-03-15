@@ -119,12 +119,29 @@ exports.listUserNotes = async (req: Request, res: Response, next: NextFunction) 
 };
 
 /**
+ * Delete user note
+ * @public
+ */
+exports.deleteUserNote = async (req: Request, res: Response, next: NextFunction) => {
+  const { userId, noteId } = req.params;
+  const { _id: currentUserId } = req.route.meta.user;
+  if (userId !== currentUserId) {
+    return next(); // only logged in user can delete her own notes
+  }
+  try {
+    await UserNote.remove({ user: new ObjectId(userId), _id: new ObjectId(noteId) });
+    apiJson({ req, res, data: {} });
+  } catch (e) {
+    next(e);
+  }
+};
+
+/**
  * Delete user
  * @public
  */
 exports.remove = (req: Request, res: Response, next: NextFunction) => {
   const { user } = req.route.meta;
-
   user
     .remove()
     .then(() => res.status(httpStatus.NO_CONTENT).end())

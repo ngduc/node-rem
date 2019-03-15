@@ -9,7 +9,7 @@ const userNoteSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-const ALLOWED_FIELDS = ['user', 'note', 'createdAt'];
+const ALLOWED_FIELDS = ['id', 'user', 'note', 'createdAt'];
 
 userNoteSchema.method({
   // query is optional, e.g. to transform data for response but only include certain "fields"
