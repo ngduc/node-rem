@@ -124,7 +124,8 @@ exports.listUserNotes = async (req: Request, res: Response, next: NextFunction) 
  */
 exports.deleteUserNote = async (req: Request, res: Response, next: NextFunction) => {
   const { userId, noteId } = req.params;
-  const { _id: currentUserId } = req.route.meta.user;
+  const { _id } = req.route.meta.user;
+  const currentUserId = _id.toString();
   if (userId !== currentUserId) {
     return next(); // only logged in user can delete her own notes
   }

@@ -1,4 +1,4 @@
-## [0.7.5] - 2019-03-14
+## [0.7.6] - 2019-03-14
 
 ### Added
 - route & controller to delete user note /:userId/notes/:noteId
