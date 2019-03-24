@@ -20,8 +20,8 @@ mongoose.connect();
 
 // HTTPS options
 const options = {
-  key: fs.readFileSync('./src/config/https/key.pem'),
-  cert: fs.readFileSync('./src/config/https/cert.pem')
+  key: fs.readFileSync('./src/config/https/localhost.key'),
+  cert: fs.readFileSync('./src/config/https/localhost.crt')
 };
 const server = spdy.createServer(options, app);
 

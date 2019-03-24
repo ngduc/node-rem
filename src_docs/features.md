@@ -20,6 +20,16 @@
 - Env vars are declared in ".env" file (npm: dotenv-safe)
 - They are loaded into "config/vars" and exported to use across the app
 
+### SSL Self-signed Cert (for HTTPS localhost)
+- source: https://goo.gl/Ztv8tt
+- use crt & key files in "index.ts"
+```
+openssl req -x509 -out localhost.crt -keyout localhost.key \
+  -newkey rsa:2048 -nodes -sha256 \
+  -subj '/CN=localhost' -extensions EXT -config <( \
+   printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
+```
+
 ### Other Tools
 - Use Postman to try out APIs
   - By default, APIs run on HTTPS localhost, so turn off "SSL Certificate Verification" in Postman Settings.
