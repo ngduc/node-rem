@@ -1,7 +1,9 @@
-## [0.7.6] - 2019-03-14
+## [0.7.7] - 2019-03-23
 
 ### Added
 - route & controller to delete user note /:userId/notes/:noteId
+### Changed
+- /status returns a json now
 
 ## [0.7.2] - 2019-03-06
 

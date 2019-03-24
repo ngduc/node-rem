@@ -12,13 +12,17 @@
 - Mainly tested on MacOS High Sierra, node 8.10.x, yarn
 - Also tested on Windows 10 (Powershell) with MongoDB, latest nodejs, yarn
 
-### Other Tools
-- Use Postman to try out APIs
-  - By default, APIs run on HTTPS localhost, so turn off "SSL Certificate Verification" in Postman Settings.
-
 ### Initialize DB Data
 - When launching in development mode, it will check if admin user not existed (New DB) & generate it & some dev data.
 - Example: [../src/api/utils/InitData.ts](../src/api/utils/InitData.ts)
+
+### Environments
+- Env vars are declared in ".env" file (npm: dotenv-safe)
+- They are loaded into "config/vars" and exported to use across the app
+
+### Other Tools
+- Use Postman to try out APIs
+  - By default, APIs run on HTTPS localhost, so turn off "SSL Certificate Verification" in Postman Settings.
 
 ## FEATURES
 

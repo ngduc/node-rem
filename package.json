@@ -1,6 +1,6 @@
 {
   "name": "node-rem",
-  "version": "0.7.6",
+  "version": "0.7.7",
   "description": "Node REM - NodeJS Rest Express MongoDB and more: typescript, passport, JWT, socket.io, HTTPS, HTTP2, async/await, nodemailer, templates, pagination, docker, etc.",
   "author": "Duc Nguyen",
   "main": "src/index.js",
@@ -110,7 +110,6 @@
     "passport": "^0.4.0",
     "passport-http-bearer": "^1.0.1",
     "passport-jwt": "4.0.0",
-    "pm2": "^3.3.1",
     "socket.io": "^2.2.0",
     "spdy": "^4.0.0",
     "uuid": "^3.3.2"
