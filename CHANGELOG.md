@@ -1,7 +1,10 @@
-## [0.7.6] - 2019-03-14
+## [0.7.8] - 2019-03-23
 
 ### Added
+- new self-signed cert (localhost.key, localhost.crt)
 - route & controller to delete user note /:userId/notes/:noteId
+### Changed
+- /status returns a json now
 
 ## [0.7.2] - 2019-03-06
 
