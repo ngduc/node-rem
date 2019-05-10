@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 const httpStatus = require('http-status');
 const { omit } = require('lodash');
-import { User, UserNote } from 'api/models';
+import { User, UserNote, Post } from 'api/models';
 import { startTimer, apiJson } from 'api/utils/Utils';
 const { handler: errorHandler } = require('../middlewares/error');
 
@@ -109,8 +109,8 @@ exports.list = async (req: Request, res: Response, next: NextFunction) => {
 exports.listUserNotes = async (req: Request, res: Response, next: NextFunction) => {
   try {
     startTimer(req);
-    const userId = req.params.userId;
-    req.query = { ...req.query, user: new ObjectId(userId) }; // append to query (by userId) to final query
+    const userId = req.params.userId; // , user: new ObjectId(userId)
+    req.query = { ...req.query }; // append to query (by userId) to final query
     const data = (await UserNote.list({ query: req.query })).transform(req);
     apiJson({ req, res, data, model: UserNote });
   } catch (e) {
@@ -147,4 +147,16 @@ exports.remove = (req: Request, res: Response, next: NextFunction) => {
     .remove()
     .then(() => res.status(httpStatus.NO_CONTENT).end())
     .catch((e: any) => next(e));
+};
+
+exports.listPosts = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    startTimer(req);
+    // const userId = req.params.userId; // , user: new ObjectId(userId)
+    req.query = { ...req.query }; // append to query (by userId) to final query
+    const data = (await Post.list({ query: req.query })).transform(req);
+    apiJson({ req, res, data, model: Post });
+  } catch (e) {
+    next(e);
+  }
 };
