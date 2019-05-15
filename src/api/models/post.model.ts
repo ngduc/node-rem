@@ -5,6 +5,8 @@ import { transformData, listData } from 'api/utils/ModelUtils';
 const schema = new mongoose.Schema(
   {
     author: { type: mongoose.Schema.Types.ObjectId, ref: 'Person' },
+    authorFullName: String,
+    authorCategory: String,
     type: String, // twitter, facebook, etc.
     extPostId: { type: String, index: { unique: true } },
     extAuthorId: String,
@@ -19,7 +21,22 @@ const schema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-const ALLOWED_FIELDS = ['id', 'author', 'type', 'title', 'likes', 'postedAt', 'createdAt'];
+const ALLOWED_FIELDS = [
+  'id',
+  'author',
+  'authorFullName',
+  'authorCategory',
+  'type',
+  'title',
+  'likes',
+  'postedAt',
+  'createdAt'
+];
+
+// schema.pre('find', function(next: any) {
+//   this.populate('author');
+//   next();
+// });
 
 schema.method({
   // query is optional, e.g. to transform data for response but only include certain "fields"

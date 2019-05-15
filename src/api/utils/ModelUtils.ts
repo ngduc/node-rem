@@ -22,7 +22,7 @@ export function listData(context: any, query: any, allowedFields: string[]) {
   const populate = [
     {
       path: 'author',
-      select: ['firstName', 'lastName', 'category', 'avatarUrl']
+      select: ['id', 'firstName', 'lastName', 'category', 'avatarUrl']
     }
   ];
 
