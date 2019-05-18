@@ -6,6 +6,7 @@ const userRoutes = require('./user.route');
 const authRoutes = require('./auth.route');
 const uploadRoutes = require('./upload.route');
 const readRoutes = require('./read.route');
+const personRoutes = require('./person.route');
 
 const router = express.Router();
 
@@ -26,5 +27,6 @@ router.use('/users', userRoutes);
 router.use('/auth', authRoutes);
 router.use('/upload', uploadRoutes);
 router.use('/content', readRoutes);
+router.use('/person', personRoutes);
 
 module.exports = router;
