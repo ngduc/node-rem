@@ -17,7 +17,7 @@
     "start": "cross-env NODE_ENV=production forever start -a --uid 'node-rem' -v -c ts-node src/index.ts",
     "stop": "cross-env NODE_ENV=production forever stop 'node-rem'",
     "logs": "forever logs",
-    "dev": "yarn postinstall && nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec ts-node src/index.ts",
+    "dev": "yarn postinstall && nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec ts-node --files src/index.ts",
     "lint": "tslint src/**/*.ts",
     "lint:fix": "yarn lint --fix",
     "lint:watch": "yarn lint --watch",

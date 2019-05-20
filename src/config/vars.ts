@@ -23,6 +23,8 @@ module.exports = {
   EMAIL_MAILGUN_API_KEY: process.env.EMAIL_MAILGUN_API_KEY,
   EMAIL_MAILGUN_DOMAIN: process.env.EMAIL_MAILGUN_DOMAIN,
   EMBED_ROCKS_API_KEY: process.env.EMBED_ROCKS_API_KEY,
+  TWITTER_API_KEY: process.env.TWITTER_API_KEY,
+  TWITTER_API_SECRET: process.env.TWITTER_API_SECRET,
   mongo: {
     uri: process.env.NODE_ENV === 'test' ? process.env.MONGO_URI_TESTS : process.env.MONGO_URI
   },
