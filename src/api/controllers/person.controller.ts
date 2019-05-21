@@ -1,7 +1,7 @@
 export {};
 import { NextFunction, Request, Response } from 'express';
 import { startTimer, apiJson } from 'api/utils/Utils';
-import { fetchTwitterUserDetails } from 'api/utils/TwitterUtils';
+import { fetchTwitterUserDetails, fetchAndSavePosts } from 'api/utils/TwitterUtils';
 
 import { Person } from 'api/models';
 
@@ -30,7 +30,7 @@ exports.addPerson = async (req: Request, res: Response, next: NextFunction) => {
     if (error) {
       return next({ message: error[0] && error[0].message ? error[0].message : JSON.stringify(error) });
     }
-    console.log('> fetchTwitterUserDetails', data);
+    console.log('> fetchTwitterUserDetails', data.name);
 
     const person = new Person({
       twitterId,
@@ -40,6 +40,8 @@ exports.addPerson = async (req: Request, res: Response, next: NextFunction) => {
       avatarUrl: data.profile_image_url || ''
     });
     const savedPerson = await person.save();
+
+    fetchAndSavePosts(savedPerson); // no need to wait for this (await)
 
     return apiJson({ req, res, data: savedPerson });
   } catch (error) {

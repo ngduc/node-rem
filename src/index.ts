@@ -40,8 +40,10 @@ if (env === 'development') {
 }
 
 console.log('- TwitterUtils');
-const { authTwitter } = require('./api/utils/TwitterUtils');
+const { authTwitter, repeatPostFetching } = require('./api/utils/TwitterUtils');
 authTwitter();
+
+repeatPostFetching();
 
 /**
  * Exports express
