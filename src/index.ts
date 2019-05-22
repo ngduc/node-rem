@@ -39,11 +39,13 @@ if (env === 'development') {
   require('./api/utils/InitData');
 }
 
-console.log('- TwitterUtils');
-const { authTwitter, repeatPostFetching } = require('./api/utils/TwitterUtils');
-authTwitter();
-
-repeatPostFetching();
+// - For PROD only - needs Internet for Twitter APIs
+if (env !== 'development') {
+  console.log('- TwitterUtils');
+  const { authTwitter, repeatPostFetching } = require('./api/utils/TwitterUtils');
+  authTwitter();
+  repeatPostFetching();
+}
 
 /**
  * Exports express
