@@ -40,7 +40,9 @@ if (env === 'development') {
 }
 
 // - For PROD only - needs Internet for Twitter APIs
-if (env !== 'development') {
+const FETCH_TWITTER = true;
+
+if (FETCH_TWITTER) {
   console.log('- TwitterUtils');
   const { authTwitter, repeatPostFetching } = require('./api/utils/TwitterUtils');
   authTwitter();
