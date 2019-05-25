@@ -45,7 +45,11 @@ exports.read = async (req: Request, res: Response, next: NextFunction) => {
       const str = `https://api.embed.rocks/api?url=${url}`;
       const response = await axios.get(str, { headers: { 'x-api-key': EMBED_ROCKS_API_KEY } });
       data = response.data;
-      cacheData({ userId, url, data });
+
+      // if (data && data.article && data.article.length > 0 && data.article.indexOf('Twitter may be over capacity') < 0) {
+      if (data && (data.article || data.description)) {
+        cacheData({ userId, url, data });
+      }
     }
     return apiJson({ req, res, data });
   } catch (error) {

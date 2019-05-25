@@ -91,19 +91,20 @@ const fetchTwitterTimeline = (twitterId: string, optionalPerson?: any) => {
 
     const params = { screen_name: twitterId, tweet_mode: 'extended', exclude_replies: true, count: 100 };
     console.log('--- fetchTwitterTimeline... ' + twitterId);
-    twitterClient.get('statuses/user_timeline', params, async (error: any, tweets: any, response: any) => {
-      if (error) {
-        console.log('ERROR: ', error);
-        // reject(error) // will cause UI promise exception
-        resolve([]);
-      } else {
-        // console.log(tweets)
-        // DBCache.cache('twitter_user_timeline', params, tweets) // cache raw tweets
-        console.log('> fetchTwitterTimeline - tweets: ' + tweets.length);
-        updatePersonFromTweets(optionalPerson, tweets); // asynchronously (don't wait for this)
-        resolve(tweets);
-      }
-    });
+    twitterClient &&
+      twitterClient.get('statuses/user_timeline', params, async (error: any, tweets: any, response: any) => {
+        if (error) {
+          console.log('ERROR: ', error);
+          // reject(error) // will cause UI promise exception
+          resolve([]);
+        } else {
+          // console.log(tweets)
+          // DBCache.cache('twitter_user_timeline', params, tweets) // cache raw tweets
+          console.log('> fetchTwitterTimeline - tweets: ' + tweets.length);
+          updatePersonFromTweets(optionalPerson, tweets); // asynchronously (don't wait for this)
+          resolve(tweets);
+        }
+      });
   });
 };
 
@@ -180,7 +181,7 @@ const _fetchAllPeoplePosts = async () => {
 };
 
 export const repeatPostFetching = () => {
-  setInterval(_fetchAllPeoplePosts, 5 * 60 * 1000); // every 10 mins (10 * 60 * 1000)
+  setInterval(_fetchAllPeoplePosts, 10 * 60 * 1000); // every 10 mins (10 * 60 * 1000)
   setTimeout(() => {
     _fetchAllPeoplePosts();
   }, 3000); // wait for Twitter Authentication

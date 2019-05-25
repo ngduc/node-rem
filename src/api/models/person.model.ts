@@ -30,7 +30,7 @@ const schema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-const ALLOWED_FIELDS = ['id', 'category', 'firstName', 'lastName', 'avatarUrl'];
+const ALLOWED_FIELDS = ['id', 'category', 'firstName', 'lastName', 'avatarUrl', 'bio', 'twitterId'];
 
 schema.method({
   // query is optional, e.g. to transform data for response but only include certain "fields"

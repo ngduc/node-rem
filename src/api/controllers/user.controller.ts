@@ -153,7 +153,16 @@ exports.listPosts = async (req: Request, res: Response, next: NextFunction) => {
   try {
     startTimer(req);
     // const userId = req.params.userId; // , user: new ObjectId(userId)
-    req.query = { ...req.query }; // append to query (by userId) to final query
+    const { _id } = req.route.meta.user;
+    const currentUser = await User.findById(_id);
+
+    // append to filter - only list Posts with "author" matched with currentUser.stars array:
+    const { query } = req;
+    query['author'] = {
+      $in: currentUser.stars
+    };
+
+    req.query = { ...query }; // append to query (by userId) to final query
     const data = (await Post.list({ query: req.query })).transform(req);
     apiJson({ req, res, data, model: Post });
   } catch (e) {

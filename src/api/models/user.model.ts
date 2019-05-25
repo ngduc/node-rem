@@ -59,13 +59,14 @@ const userSchema = new mongoose.Schema(
     picture: {
       type: String,
       trim: true
-    }
+    },
+    stars: { type: [String], default: [] }
   },
   {
     timestamps: true
   }
 );
-const ALLOWED_FIELDS = ['id', 'name', 'email', 'picture', 'role', 'createdAt'];
+const ALLOWED_FIELDS = ['id', 'name', 'email', 'picture', 'role', 'stars', 'createdAt'];
 
 /**
  * Add your

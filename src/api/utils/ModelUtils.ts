@@ -19,7 +19,8 @@ export function listData(context: any, query: any, allowedFields: string[]) {
   const queryObj = getQuery(query, allowedFields); // allowed filter fields
   const { page = 1, perPage = 30, limit, offset, sort } = getPageQuery(query);
 
-  const populate = [
+  // TODO: support "&populate=author:id,firstName,lastName&populate=more..."
+  const populateArr = [
     {
       path: 'author',
       select: ['id', 'firstName', 'lastName', 'category', 'avatarUrl']
@@ -32,7 +33,7 @@ export function listData(context: any, query: any, allowedFields: string[]) {
     .skip(typeof offset !== 'undefined' ? offset : perPage * (page - 1))
     .limit(typeof limit !== 'undefined' ? limit : perPage);
 
-  populate.forEach(item => {
+  populateArr.forEach(item => {
     result = result.populate(item);
   });
 

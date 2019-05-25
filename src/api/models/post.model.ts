@@ -2,6 +2,8 @@ export {};
 const mongoose = require('mongoose');
 import { transformData, listData } from 'api/utils/ModelUtils';
 
+// import { getQuery, getPageQuery, queryPromise } from 'api/utils/Utils';
+
 const schema = new mongoose.Schema(
   {
     author: { type: mongoose.Schema.Types.ObjectId, ref: 'Person' },
@@ -49,6 +51,29 @@ schema.method({
 schema.statics = {
   list({ query }: { query: any }) {
     return listData(this, query, ALLOWED_FIELDS);
+
+    // const queryObj = getQuery(query, ALLOWED_FIELDS); // allowed filter fields
+    // const { page = 1, perPage = 30, limit, offset, sort } = getPageQuery(query);
+
+    // // TODO: support "&populate=author:id,firstName,lastName&populate=more..."
+    // const populateArr = [
+    //   {
+    //     path: 'author',
+    //     select: ['id', 'firstName', 'lastName', 'category', 'avatarUrl']
+    //   }
+    // ];
+
+    // let result = this.find(queryObj)
+    //   .sort(sort)
+    //   .skip(typeof offset !== 'undefined' ? offset : perPage * (page - 1))
+    //   .limit(typeof limit !== 'undefined' ? limit : perPage);
+
+    // populateArr.forEach(item => {
+    //   result = result.populate(item);
+    // });
+
+    // const execRes = result.exec();
+    // return queryPromise(execRes);
   }
 };
 
