@@ -46,6 +46,7 @@ exports.addPerson = async (req: Request, res: Response, next: NextFunction) => {
       return next({ message: 'Please enter all required fields.' });
     }
     let existingPerson = await Person.findOne({ twitterId });
+    console.log('existingPerson: ', typeof existingPerson);
 
     if (!existingPerson) {
       // TODO: from req.body.twitterId => find out First & Last Name & other info => Save them
@@ -60,7 +61,7 @@ exports.addPerson = async (req: Request, res: Response, next: NextFunction) => {
         category,
         firstName: data.name.indexOf(' ') >= 0 ? data.name.split(' ')[0] : data.name,
         lastName: data.name.indexOf(' ') >= 0 ? data.name.split(' ')[1] : '',
-        avatarUrl: data.profile_image_url || ''
+        avatarUrl: data.profile_image_url_https || ''
       });
       existingPerson = await person.save();
     }
