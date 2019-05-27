@@ -6,6 +6,7 @@ const httpStatus = require('http-status');
 const { omit } = require('lodash');
 import { User, UserNote, Post } from 'api/models';
 import { startTimer, apiJson } from 'api/utils/Utils';
+import { slackWebhook } from 'api/utils/MsgUtils';
 const { handler: errorHandler } = require('../middlewares/error');
 
 /**
@@ -168,4 +169,11 @@ exports.listPosts = async (req: Request, res: Response, next: NextFunction) => {
   } catch (e) {
     next(e);
   }
+};
+
+exports.feedback = (req: Request, res: Response, next: NextFunction) => {
+  const { name, message } = req.body;
+  console.log(111, req.body);
+  slackWebhook(`Feedback from: ${name} \n ${message}`); // notify when new user registered
+  apiJson({ req, res, data: { status: 'OK' }, model: Post });
 };

@@ -187,4 +187,6 @@ router.route('/:userId/notes/:noteId').delete(authorize(LOGGED_USER), controller
 
 router.route('/:userId/posts').get(authorize(LOGGED_USER), controller.listPosts);
 
+router.route('/feedback').post(authorize(LOGGED_USER), controller.feedback);
+
 module.exports = router;
