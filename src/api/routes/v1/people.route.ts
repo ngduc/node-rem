@@ -12,4 +12,6 @@ router.route('/all').get(authorize(), controller.listAll);
 
 router.route('/').post(authorize(), controller.addPerson);
 
+router.route('/remove/:personId').delete(authorize(), controller.removePerson);
+
 module.exports = router;

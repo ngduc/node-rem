@@ -38,6 +38,7 @@ exports.listAll = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+// add a new Person (Star) to DB (if not existed), then add to Current User's ".stars" array
 exports.addPerson = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { twitterId, category } = req.body;
@@ -70,7 +71,9 @@ exports.addPerson = async (req: Request, res: Response, next: NextFunction) => {
     const { _id } = req.route.meta.user;
     const currentUser = await User.findById(_id);
     console.log('--- existingPerson: ', existingPerson._id);
-    currentUser.stars.push(existingPerson._id);
+    if (currentUser.stars.indexOf(existingPerson._id) < 0) {
+      currentUser.stars.push(existingPerson._id);
+    }
     await currentUser.save();
 
     fetchAndSavePosts(existingPerson); // no need to wait for this (await)
@@ -78,5 +81,21 @@ exports.addPerson = async (req: Request, res: Response, next: NextFunction) => {
     return apiJson({ req, res, data: existingPerson });
   } catch (error) {
     return next(error);
+  }
+};
+
+// remove a Person (Star) from Current User's "stars" array
+exports.removePerson = async (req: Request, res: Response, next: NextFunction) => {
+  const { personId } = req.params;
+  const { _id } = req.route.meta.user;
+  const currentUser = await User.findById(_id);
+
+  currentUser.stars = currentUser.stars.filter((id: string) => id !== personId);
+  await currentUser.save();
+
+  try {
+    apiJson({ req, res, data: { status: 'OK' } });
+  } catch (e) {
+    next(e);
   }
 };
