@@ -5,6 +5,7 @@ import { transformData, listData } from 'api/utils/ModelUtils';
 const schema = new mongoose.Schema(
   {
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    post: { type: mongoose.Schema.Types.ObjectId, ref: 'Post' },
     url: String,
     response: Object,
     createdAt: { type: Date, default: Date.now },

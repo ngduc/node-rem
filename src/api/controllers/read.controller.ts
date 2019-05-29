@@ -9,7 +9,7 @@ const { EMBED_ROCKS_API_KEY } = require('config/vars');
 
 const axios = require('axios');
 
-const cacheData = async ({ userId, url, data }: { userId: string; url: string; data: any }) => {
+const cacheData = async ({ userId, postId, url, data }: { userId: string; postId: string; url: string; data: any }) => {
   // const cache = new ArticleCache({
   //   url,
   //   response: {
@@ -22,6 +22,7 @@ const cacheData = async ({ userId, url, data }: { userId: string; url: string; d
   // await cache.save();
   const cache = new ArticleCache({
     user: new ObjectId(userId),
+    post: new ObjectId(postId),
     url,
     response: {
       data
@@ -36,7 +37,7 @@ exports.read = async (req: Request, res: Response, next: NextFunction) => {
     const { _id } = req.route.meta.user;
     const userId = _id.toString();
 
-    const { url } = req.query;
+    const { url, postId = '' } = req.query;
     const foundArr = await ArticleCache.find({ url });
     let data = null;
     if (foundArr && foundArr.length > 0) {
@@ -48,7 +49,7 @@ exports.read = async (req: Request, res: Response, next: NextFunction) => {
 
       // if (data && data.article && data.article.length > 0 && data.article.indexOf('Twitter may be over capacity') < 0) {
       if (data && (data.article || data.description)) {
-        cacheData({ userId, url, data });
+        cacheData({ userId, postId, url, data });
       }
     }
     return apiJson({ req, res, data });
