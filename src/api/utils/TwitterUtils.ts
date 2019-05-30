@@ -181,7 +181,7 @@ const _fetchAllPeoplePosts = async () => {
 };
 
 export const repeatPostFetching = () => {
-  setInterval(_fetchAllPeoplePosts, 10 * 60 * 1000); // every 10 mins (10 * 60 * 1000)
+  setInterval(_fetchAllPeoplePosts, 30 * 60 * 1000); // every 30 mins (10 * 60 * 1000)
   setTimeout(() => {
     _fetchAllPeoplePosts();
   }, 3000); // wait for Twitter Authentication
