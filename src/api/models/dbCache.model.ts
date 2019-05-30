@@ -24,4 +24,4 @@ DBCache.cache = async (type: string, query: any, response: any) => {
   return await new DBCache(cacheItem).save();
 };
 
-export default DBCache;
+module.exports = DBCache;
