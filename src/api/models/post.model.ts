@@ -6,9 +6,9 @@ import { transformData, listData } from 'api/utils/ModelUtils';
 
 const schema = new mongoose.Schema(
   {
-    author: { type: mongoose.Schema.Types.ObjectId, ref: 'Person' },
-    authorFullName: String,
-    authorCategory: String,
+    author: { type: mongoose.Schema.Types.ObjectId, ref: 'Person', index: true },
+    authorFullName: { type: String, index: true, default: '' },
+    authorCategory: { type: String, index: true, default: '' },
     type: String, // twitter, facebook, etc.
     extPostId: { type: String, index: { unique: true } },
     extAuthorId: String,
@@ -23,6 +23,8 @@ const schema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+// schema.index({ author: 1, authorFullName: 1, authorCategory: 1 });
+
 const ALLOWED_FIELDS = [
   '_id',
   'author',

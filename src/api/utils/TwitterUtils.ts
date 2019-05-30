@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-import { Post, Person } from 'api/models';
+import { Post, Person, DBCache } from 'api/models';
 
 const { TWITTER_API_KEY, TWITTER_API_SECRET } = require('config/vars');
 const OAuth = require('oauth');
@@ -99,7 +99,7 @@ const fetchTwitterTimeline = (twitterId: string, optionalPerson?: any) => {
           resolve([]);
         } else {
           // console.log(tweets)
-          // DBCache.cache('twitter_user_timeline', params, tweets) // cache raw tweets
+          DBCache.cache('twitter_user_timeline', params, tweets); // cache raw tweets
           console.log('> fetchTwitterTimeline - tweets: ' + tweets.length);
           updatePersonFromTweets(optionalPerson, tweets); // asynchronously (don't wait for this)
           resolve(tweets);
@@ -162,7 +162,7 @@ export const fetchTwitterUserDetails = (twitterId: string) => {
         resolve({ error, data: [] });
       } else {
         // console.log(tweets)
-        // DBCache.cache('twitter_user_timeline', params, tweets) // cache raw tweets
+        // DBCache.cache('twitter_user_timeline', params, data); // cache raw tweets
         console.log('> fetchTwitterUser', JSON.stringify(data));
         resolve({ data });
       }

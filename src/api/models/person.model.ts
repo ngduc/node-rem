@@ -4,13 +4,13 @@ import { transformData, listData } from 'api/utils/ModelUtils';
 
 const schema = new mongoose.Schema(
   {
-    category: String,
+    category: { type: String, default: '', index: true },
     firstName: String,
     middleName: { type: String, default: '' },
     lastName: { type: String, default: '' },
     bio: { type: String, default: '' },
     githubId: { type: String, default: '' },
-    twitterId: { type: String, default: '' },
+    twitterId: { type: String, default: '', index: { unique: true } },
     facebookId: { type: String, default: '' },
     linkedinId: { type: String, default: '' },
     instagramId: { type: String, default: '' },
