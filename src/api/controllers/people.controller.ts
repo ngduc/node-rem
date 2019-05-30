@@ -15,10 +15,13 @@ exports.list = async (req: Request, res: Response, next: NextFunction) => {
 
     // const userId = req.params.userId; // , user: new ObjectId(userId)
     req.query = { ...req.query }; // append to query (by userId) to final query
-    const fullList = (await Person.list({ query: req.query })).transform(req);
+    // const fullList = (await Person.list({ query: req.query })).transform(req);
+    // const filteredList = fullList.filter((p: any) => stars.includes(p.id));
+    req.query['_id'] = {
+      $in: stars
+    };
+    const filteredList = (await Person.list({ query: req.query })).transform(req);
 
-    console.log(111, _id, stars);
-    const filteredList = fullList.filter((p: any) => stars.includes(p.id));
     apiJson({ req, res, data: filteredList, model: Person });
   } catch (e) {
     next(e);

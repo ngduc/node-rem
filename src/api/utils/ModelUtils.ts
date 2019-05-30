@@ -26,12 +26,13 @@ export function listData(context: any, query: any, allowedFields: string[]) {
       select: ['id', 'firstName', 'lastName', 'category', 'avatarUrl']
     }
   ];
+  let result = context.find(queryObj).sort(sort);
 
-  let result = context
-    .find(queryObj)
-    .sort(sort)
-    .skip(typeof offset !== 'undefined' ? offset : perPage * (page - 1))
-    .limit(typeof limit !== 'undefined' ? limit : perPage);
+  if (query.limit) {
+    result
+      .skip(typeof offset !== 'undefined' ? offset : perPage * (page - 1))
+      .limit(typeof limit !== 'undefined' ? limit : perPage);
+  }
 
   populateArr.forEach(item => {
     result = result.populate(item);

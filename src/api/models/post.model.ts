@@ -24,7 +24,7 @@ const schema = new mongoose.Schema(
   { timestamps: true }
 );
 const ALLOWED_FIELDS = [
-  'id',
+  '_id',
   'author',
   'authorFullName',
   'authorCategory',
