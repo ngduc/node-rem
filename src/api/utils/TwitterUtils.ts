@@ -139,6 +139,7 @@ const savePostsFromTweets = async (person: any, tweets: any) => {
       imageUrl: imageUrl,
       imageLinkUrl: imageLinkUrl,
       likes: t.favorite_count,
+      withUrl: t.entities.urls && t.entities.urls[0] ? t.entities.urls[0].url : '',
       postedAt: t.created_at // moment(t.created_at, 'dd MMM DD HH:mm:ss ZZ YYYY', 'en')
     };
     await safeSave(Post, post);

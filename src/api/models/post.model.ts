@@ -17,6 +17,10 @@ const schema = new mongoose.Schema(
     imageUrl: String,
     imageLinkUrl: String,
     content: String,
+    // "content" field may have a URL in it.
+    withUrl: { type: String, index: true, default: '' },
+    // after "scraping" & caching the url (withUrl) => keep cache id here for populating later:
+    withUrlData: { type: mongoose.Schema.Types.ObjectId, ref: 'ArticleCache', index: true },
     likes: { type: Number, default: 0 },
     postedAt: Date, // author's posted time
     createdAt: { type: Date, default: Date.now } // db record createdAt (inserted time)
@@ -33,6 +37,8 @@ const ALLOWED_FIELDS = [
   'type',
   'title',
   'likes',
+  'withUrl',
+  'withUrlData',
   'postedAt',
   'createdAt'
 ];

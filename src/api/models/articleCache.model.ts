@@ -13,7 +13,7 @@ const schema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-const ALLOWED_FIELDS = ['id', 'user', 'url', 'response', 'size', 'createdAt'];
+const ALLOWED_FIELDS = ['_id', 'user', 'url', 'response', 'size', 'createdAt'];
 
 schema.method({
   // query is optional, e.g. to transform data for response but only include certain "fields"

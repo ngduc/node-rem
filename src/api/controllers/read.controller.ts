@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 import { NextFunction, Request, Response } from 'express';
 import { apiJson } from 'api/utils/Utils';
-import { ArticleCache } from 'api/models';
+import { Post, ArticleCache } from 'api/models';
 
 const { EMBED_ROCKS_API_KEY } = require('config/vars');
 
@@ -29,20 +29,29 @@ const cacheData = async ({ userId, postId, url, data }: { userId: string; postId
     },
     size: JSON.stringify(data).length
   });
-  await cache.save();
+  const savedRec = await cache.save();
+
+  // save "withUrlData" back to Post
+  const foundPost = await Post.findOne({ _id: new ObjectId(postId) });
+  if (foundPost) {
+    foundPost.withUrlData = new ObjectId(savedRec._id);
+    foundPost.save();
+  }
 };
 
 exports.read = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { _id } = req.route.meta.user;
     const userId = _id.toString();
-
     const { url, postId = '' } = req.query;
-    const foundArr = await ArticleCache.find({ url });
+
+    let cachedArticle = await ArticleCache.findOne({ url });
     let data = null;
-    if (foundArr && foundArr.length > 0) {
-      data = foundArr[0].response.data;
+    if (cachedArticle) {
+      // respond with cached article
+      data = cachedArticle.response.data;
     } else {
+      // fetch article
       const str = `https://api.embed.rocks/api?url=${url}`;
       const response = await axios.get(str, { headers: { 'x-api-key': EMBED_ROCKS_API_KEY } });
       data = response.data;
@@ -52,6 +61,7 @@ exports.read = async (req: Request, res: Response, next: NextFunction) => {
         cacheData({ userId, postId, url, data });
       }
     }
+
     return apiJson({ req, res, data });
   } catch (error) {
     return next(error);

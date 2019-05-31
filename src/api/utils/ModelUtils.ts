@@ -23,7 +23,11 @@ export function listData(context: any, query: any, allowedFields: string[]) {
   const populateArr = [
     {
       path: 'author',
-      select: ['id', 'firstName', 'lastName', 'category', 'avatarUrl']
+      select: ['_id', 'firstName', 'lastName', 'category', 'avatarUrl']
+    },
+    {
+      path: 'withUrlData',
+      select: ['_id', 'url', 'response']
     }
   ];
   let result = context.find(queryObj).sort(sort);
