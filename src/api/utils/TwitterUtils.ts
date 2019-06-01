@@ -99,7 +99,7 @@ const fetchTwitterTimeline = (twitterId: string, optionalPerson?: any) => {
           resolve([]);
         } else {
           // console.log(tweets)
-          DBCache.cache('twitter_user_timeline', params, tweets); // cache raw tweets
+          // DBCache.cache('twitter_user_timeline', params, tweets); // cache raw tweets
           console.log('> fetchTwitterTimeline - tweets: ' + tweets.length);
           updatePersonFromTweets(optionalPerson, tweets); // asynchronously (don't wait for this)
           resolve(tweets);
