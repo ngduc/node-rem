@@ -4,6 +4,7 @@ import { startTimer, apiJson } from 'api/utils/Utils';
 import { fetchTwitterUserDetails, fetchAndSavePosts } from 'api/utils/TwitterUtils';
 
 import { User, Person } from 'api/models';
+const { isAdmin } = require('../../config/vars');
 
 // list all people for current users
 exports.list = async (req: Request, res: Response, next: NextFunction) => {
@@ -30,6 +31,7 @@ exports.list = async (req: Request, res: Response, next: NextFunction) => {
 
 // list all people
 exports.listAll = async (req: Request, res: Response, next: NextFunction) => {
+  console.log('----- ', isAdmin);
   try {
     startTimer(req);
     req.query = { ...req.query };
