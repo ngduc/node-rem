@@ -112,7 +112,8 @@ exports.login = async (req: Request, res: Response, next: NextFunction) => {
     if (email === SEC_ADMIN_EMAIL) {
       // setAdminToken(token); // remember admin token for checking later
     } else {
-      slackWebhook(`User logged in: ${email}`);
+      const { ip, headers } = req;
+      slackWebhook(`User logged in: ${email} - IP: ${ip} - User Agent: ${headers['user-agent']}`);
     }
 
     const userTransformed = user.transform();
