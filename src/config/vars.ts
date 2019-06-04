@@ -9,7 +9,7 @@ require('dotenv-safe').load({
 });
 
 const env = process.env; // this has ".env" keys & values
-let adminToken = '';
+// let adminToken = '';
 
 module.exports = {
   env: env.NODE_ENV,
@@ -29,8 +29,8 @@ module.exports = {
   TWITTER_API_KEY: env.TWITTER_API_KEY,
   TWITTER_API_SECRET: env.TWITTER_API_SECRET,
   SEC_ADMIN_EMAIL: env.SEC_ADMIN_EMAIL,
-  setAdminToken: (admToken: string) => (adminToken = admToken),
-  isAdmin: (token: string) => token === adminToken,
+  // setAdminToken: (admToken: string) => (adminToken = admToken),
+  isAdmin: (user: any) => user && user.email === env.SEC_ADMIN_EMAIL,
   mongo: {
     uri: env.NODE_ENV === 'test' ? env.MONGO_URI_TESTS : env.MONGO_URI
   },

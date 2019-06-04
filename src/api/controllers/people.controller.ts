@@ -6,13 +6,15 @@ import { fetchTwitterUserDetails, fetchAndSavePosts } from 'api/utils/TwitterUti
 import { User, Person } from 'api/models';
 const { isAdmin } = require('../../config/vars');
 
-// list all people for current users
+// list all people for current logged-in user
 exports.list = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    startTimer(req);
+    startTimer({ req });
     const { _id } = req.route.meta.user;
     const currentUser = await User.findById(_id);
     const { stars } = currentUser;
+
+    console.log('----- isAdmin: ', isAdmin(currentUser.email));
 
     // const userId = req.params.userId; // , user: new ObjectId(userId)
     req.query = { ...req.query }; // append to query (by userId) to final query
@@ -31,9 +33,8 @@ exports.list = async (req: Request, res: Response, next: NextFunction) => {
 
 // list all people
 exports.listAll = async (req: Request, res: Response, next: NextFunction) => {
-  console.log('----- ', isAdmin);
   try {
-    startTimer(req);
+    startTimer({ req });
     req.query = { ...req.query };
     const fullList = (await Person.list({ query: req.query })).transform(req);
 

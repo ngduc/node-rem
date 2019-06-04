@@ -57,14 +57,26 @@ export function uuid() {
   return formatUuid(getRandomValuesFunc());
 }
 
-export function startTimer(req: Request) {
-  mstime.start(req.originalUrl, { uuid: uuid() });
+export function startTimer({ key, req }: { key?: string; req?: Request }) {
+  let timerKey = key;
+  if (!key && req) {
+    // url path only - remove query string (after "?"):
+    timerKey = (req.originalUrl + '?').slice(0, req.originalUrl.indexOf('?'));
+  }
+  mstime.start(timerKey, { uuid: uuid() });
 }
 
-export function endTimer(req: Request) {
-  const end = mstime.end(req.originalUrl);
+export function endTimer({ key, req }: { key?: string; req?: Request }) {
+  let timerKey = key;
+  if (!key && req) {
+    // url path only - remove query string (after "?"):
+    timerKey = (req.originalUrl + '?').slice(0, req.originalUrl.indexOf('?'));
+  }
+  const end = mstime.end(timerKey);
+  // console.log('- endTimer key: ', timerKey, end);
   if (end) {
-    console.log(`avg time - ${end.avg} (ms)`);
+    console.log(`- mstime: avg time - ${end.avg} (ms)`);
+    // console.log('--- mstime: ', mstime);
     return end;
   }
   return null;
@@ -180,7 +192,7 @@ export async function apiJson({ req, res, data, model, meta = {}, json = false }
     }
   }
   // add Timer data
-  const timer = endTimer(req);
+  const timer = endTimer({ req });
   if (timer) {
     metaData.timer = timer.last;
     metaData.timerAvg = timer.avg;

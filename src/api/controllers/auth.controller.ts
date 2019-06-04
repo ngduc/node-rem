@@ -6,13 +6,7 @@ const RefreshToken = require('../models/refreshToken.model');
 const moment = require('moment-timezone');
 import { apiJson, randomString } from 'api/utils/Utils';
 import { sendEmail, welcomeEmail, forgotPasswordEmail, slackWebhook } from 'api/utils/MsgUtils';
-const {
-  JWT_EXPIRATION_MINUTES,
-  SEC_ADMIN_EMAIL,
-  slackEnabled,
-  emailEnabled,
-  setAdminToken
-} = require('../../config/vars');
+const { JWT_EXPIRATION_MINUTES, SEC_ADMIN_EMAIL, slackEnabled, emailEnabled } = require('../../config/vars');
 
 /**
  * Returns a formated object with tokens
@@ -114,8 +108,9 @@ exports.login = async (req: Request, res: Response, next: NextFunction) => {
     const { user, accessToken } = await User.findAndGenerateToken(req.body);
     const { email } = user;
     const token = generateTokenResponse(user, accessToken);
+
     if (email === SEC_ADMIN_EMAIL) {
-      setAdminToken(token); // remember admin token for checking later
+      // setAdminToken(token); // remember admin token for checking later
     } else {
       slackWebhook(`User logged in: ${email}`);
     }

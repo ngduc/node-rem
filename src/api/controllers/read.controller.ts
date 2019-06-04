@@ -2,7 +2,7 @@ export {};
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 import { NextFunction, Request, Response } from 'express';
-import { apiJson } from 'api/utils/Utils';
+import { startTimer, endTimer, apiJson } from 'api/utils/Utils';
 import { Post, ArticleCache } from 'api/models';
 
 const { EMBED_ROCKS_API_KEY } = require('config/vars');
@@ -51,10 +51,12 @@ exports.read = async (req: Request, res: Response, next: NextFunction) => {
       // respond with cached article
       data = cachedArticle.response.data;
     } else {
+      startTimer({ key: 'fetch-article' });
       // fetch article
       const str = `https://api.embed.rocks/api?url=${url}`;
       const response = await axios.get(str, { headers: { 'x-api-key': EMBED_ROCKS_API_KEY } });
       data = response.data;
+      endTimer({ key: 'fetch-article' });
 
       // if (data && data.article && data.article.length > 0 && data.article.indexOf('Twitter may be over capacity') < 0) {
       if (data && (data.article || data.description)) {
