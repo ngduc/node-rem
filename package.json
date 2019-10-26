@@ -125,7 +125,7 @@
     "chai-as-promised": "^7.1.1",
     "codacy-coverage": "^3.4.0",
     "coveralls": "^3.0.3",
-    "eslint": "^5.15.1",
+    "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
     "forever": "^0.15.3",
