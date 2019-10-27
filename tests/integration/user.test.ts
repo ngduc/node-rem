@@ -188,7 +188,7 @@ describe('Users API', async () => {
         });
     });
 
-    it('should get all users with pagination', () => {
+    it('should get users with pagination - with perPage', () => {
       return request(app)
         .get('/v1/users')
         .set('Authorization', `Bearer ${adminAccessToken}`)
@@ -197,7 +197,26 @@ describe('Users API', async () => {
         .then(async (res: any) => {
           delete dbUsers.jonSnow.password;
           const john = await format(dbUsers.jonSnow);
+          const { data } = res.body;
 
+          // before comparing it is necessary to convert String to Date
+          data[0].createdAt = new Date(data[0].createdAt);
+
+          expect(data).to.be.an('array');
+          expect(data).to.have.lengthOf(1);
+          expect(some(data, john)).to.be.true; // includesjonSnow
+        });
+    });
+
+    it('should get users with pagination - with offset, limit', () => {
+      return request(app)
+        .get('/v1/users')
+        .set('Authorization', `Bearer ${adminAccessToken}`)
+        .query({ offset: 1, limit: 1 })
+        .expect(httpStatus.OK)
+        .then(async (res: any) => {
+          delete dbUsers.jonSnow.password;
+          const john = await format(dbUsers.jonSnow);
           const { data } = res.body;
 
           // before comparing it is necessary to convert String to Date

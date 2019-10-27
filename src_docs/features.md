@@ -64,6 +64,11 @@ openssl req -x509 -out localhost.crt -keyout localhost.key \
   - Example 2: GET https://localhost:3009/v1/users?page=1&perPage=20
   - Example 3: GET https://localhost:3009/v1/users/5c7f85009d65d4210efffa42/notes?note=*partialtext*
 
+### Registration / Authentication
+- auth.controller.ts
+  - for registration, it goes to: exports.register
+  - for authentication (login), it goes to: exports.login
+
 ### API - Upload File /upload/file
 - Using "multer" to parse form (file) data & store files to "/uploads"
 - Example: POST https://localhost:3009/v1/upload/file
