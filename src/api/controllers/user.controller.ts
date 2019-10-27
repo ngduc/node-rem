@@ -24,16 +24,17 @@ exports.load = async (req: Request, res: Response, next: NextFunction, id: any) 
 };
 
 /**
- * Get user
- * @public
- */
-exports.get = (req: Request, res: Response) => res.json(req.route.meta.user.transform());
-
-/**
  * Get logged in user info
  * @public
  */
-exports.loggedIn = (req: Request, res: Response) => res.json(req.route.meta.user.transform());
+const loggedIn = (req: Request, res: Response) => res.json(req.route.meta.user.transform());
+exports.loggedIn = loggedIn;
+
+/**
+ * Get user
+ * @public
+ */
+exports.get = loggedIn;
 
 /**
  * Create new user

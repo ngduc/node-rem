@@ -16,17 +16,17 @@ async function setup() {
   const adminUser1 = new User(ADMIN_USER_1);
   await adminUser1.save();
 
-  for (let i = 0; i < 100; i += 1) {
-    const note = new UserNote({ user: adminUser1, note: `admin1 note ${i}` });
-    await note.save();
-  }
+  const createUserNotes = async (user: any, num: number, text: string) => {
+    for (let i = 0; i < num; i += 1) {
+      const note = new UserNote({ user, note: `${text} ${i}` });
+      await note.save();
+    }
+  };
+  await createUserNotes(adminUser1, 100, 'admin1 note');
 
   const adminUser2 = new User(ADMIN_USER_2);
   await adminUser2.save();
-  for (let i = 0; i < 50; i += 1) {
-    const note = new UserNote({ user: adminUser2, note: `admin2 note ${i}` });
-    await note.save();
-  }
+  await createUserNotes(adminUser2, 50, 'admin2 note');
 }
 
 async function checkNewDB() {
