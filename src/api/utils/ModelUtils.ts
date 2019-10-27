@@ -47,10 +47,14 @@ const queryPagination = (mongoQuery: any, query: any) => {
   mongoQuery.sort(sort);
 
   // 2 ways to have pagination using: offset & limit OR page & perPage
-  if (query.limit || query.perPage) {
-    mongoQuery
-      .skip(typeof offset !== 'undefined' ? offset : perPage * (page - 1))
-      .limit(typeof limit !== 'undefined' ? limit : perPage);
+  if (query.perPage) {
+    mongoQuery.skip(perPage * (page - 1)).limit(perPage);
+  }
+  if (typeof offset !== 'undefined') {
+    mongoQuery.skip(offset);
+  }
+  if (typeof limit !== 'undefined') {
+    mongoQuery.limit(limit);
   }
 };
 
