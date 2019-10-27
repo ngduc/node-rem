@@ -57,11 +57,15 @@ export function uuid() {
   return formatUuid(getRandomValuesFunc());
 }
 
+const getUrlPathOnly = (fullUrl: string) => {
+  return `${fullUrl}?`.slice(0, fullUrl.indexOf('?'));
+};
+
 export function startTimer({ key, req }: { key?: string; req?: Request }) {
   let timerKey = key;
   if (!key && req) {
     // url path only - remove query string (after "?"):
-    timerKey = `${req.originalUrl}?`.slice(0, req.originalUrl.indexOf('?'));
+    timerKey = getUrlPathOnly(req.originalUrl);
   }
   mstime.start(timerKey, { uuid: uuid() });
 }
@@ -70,7 +74,7 @@ export function endTimer({ key, req }: { key?: string; req?: Request }) {
   let timerKey = key;
   if (!key && req) {
     // url path only - remove query string (after "?"):
-    timerKey = `${req.originalUrl}?`.slice(0, req.originalUrl.indexOf('?'));
+    timerKey = getUrlPathOnly(req.originalUrl);
   }
   const end = mstime.end(timerKey);
   // console.log('- endTimer key: ', timerKey, end);

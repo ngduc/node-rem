@@ -20,7 +20,6 @@ const handleJWT = (req: any, res: any, next: any, roles: any) => async (err: any
     status: httpStatus.UNAUTHORIZED,
     stack: error ? error.stack : undefined
   });
-  let isError = false;
 
   try {
     if (error || !user) {
@@ -28,35 +27,27 @@ const handleJWT = (req: any, res: any, next: any, roles: any) => async (err: any
     }
     await logIn(user, { session: false });
   } catch (e) {
-    isError = true;
-    // return next(apiError);
+    return next(apiError);
   }
 
   if (roles === LOGGED_USER) {
     if (user.role !== 'admin' && req.params.userId !== user._id.toString()) {
       apiError.status = httpStatus.FORBIDDEN;
       apiError.message = 'Forbidden';
-      isError = true;
-      // return next(apiError);
+      return next(apiError);
     }
   } else if (!roles.includes(user.role)) {
     apiError.status = httpStatus.FORBIDDEN;
     apiError.message = 'Forbidden';
-    isError = true;
-    // return next(apiError);
+    return next(apiError);
   } else if (err || !user) {
-    isError = true;
-    // return next(apiError);
+    return next(apiError);
   }
 
   req.route.meta = req.route.meta || {};
   req.route.meta.user = user;
 
-  if (isError) {
-    return next(apiError);
-  } else {
-    return next();
-  }
+  return next();
 };
 
 exports.ADMIN = ADMIN;
