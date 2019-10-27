@@ -13,35 +13,45 @@ export function transformData(context: any, query: any, allowedFields: string[])
   return transformed;
 }
 
+// example: URL queryString = '&populate=author:_id,firstName&populate=withUrlData:_id,url'
+// => queryArray = ['author:_id,firstName', 'withUrlData:_id,url']
+// return array of fields we want to populate (MongoDB spec)
+const getPopulateArray = (queryArray: [], allowedFields: string[]) => {
+  if (!queryArray) {
+    return [];
+  }
+  const ret: any[] = [];
+  queryArray.map((str: string) => {
+    const arr = str.split(':');
+    // only populate fields belong to "allowedFields"
+    if (arr && arr.length === 2 && allowedFields.indexOf(arr[0]) >= 0) {
+      ret.push({
+        path: arr[0],
+        select: arr[1].split(',')
+      });
+    }
+  });
+  // example of returned array (MongoDB spec):
+  // ret = [
+  //   {
+  //     path: 'author',
+  //     select: ['_id', 'firstName', 'lastName', 'category', 'avatarUrl']
+  //   }
+  // ];
+  return ret;
+};
+
 // list data with pagination support
 // return a promise for chaining. (e.g. list then transform)
 export function listData(context: any, query: any, allowedFields: string[]) {
   const queryObj = getQuery(query, allowedFields); // allowed filter fields
   const { page = 1, perPage = 30, limit, offset, sort } = getPageQuery(query);
 
-  // query.populate is an array like: ['author:_id,firstName', 'withUrlData:_id,url']
-  const populateArr: any = [];
-  if (query.populate) {
-    query.populate.map((str: string) => {
-      const arr = str.split(':');
-      // only populate fields belong to "allowedFields"
-      if (arr && arr.length === 2 && allowedFields.indexOf(arr[0]) >= 0) {
-        populateArr.push({
-          path: arr[0],
-          select: arr[1].split(',')
-        });
-      }
-    });
-  }
+  const populateArr = getPopulateArray(query.populate, allowedFields);
+
   // console.log('--- query: ', query);
   // console.log('--- allowedFields: ', allowedFields);
   // console.log('--- populateArr: ', populateArr);
-  // const populateArr = [
-  //   {
-  //     path: 'author',
-  //     select: ['_id', 'firstName', 'lastName', 'category', 'avatarUrl']
-  //   }
-  // ];
   let result = context.find(queryObj).sort(sort);
 
   if (query.limit || query.perPage) {

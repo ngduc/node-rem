@@ -57,6 +57,7 @@ export function uuid() {
   return formatUuid(getRandomValuesFunc());
 }
 
+// get url path only - remove query string (after "?"):
 const getUrlPathOnly = (fullUrl: string) => {
   return `${fullUrl}?`.slice(0, fullUrl.indexOf('?'));
 };
@@ -64,7 +65,6 @@ const getUrlPathOnly = (fullUrl: string) => {
 export function startTimer({ key, req }: { key?: string; req?: Request }) {
   let timerKey = key;
   if (!key && req) {
-    // url path only - remove query string (after "?"):
     timerKey = getUrlPathOnly(req.originalUrl);
   }
   mstime.start(timerKey, { uuid: uuid() });
@@ -73,7 +73,6 @@ export function startTimer({ key, req }: { key?: string; req?: Request }) {
 export function endTimer({ key, req }: { key?: string; req?: Request }) {
   let timerKey = key;
   if (!key && req) {
-    // url path only - remove query string (after "?"):
     timerKey = getUrlPathOnly(req.originalUrl);
   }
   const end = mstime.end(timerKey);
