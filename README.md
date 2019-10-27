@@ -2,7 +2,7 @@
 
 NodeJS Rest Express MongoDB (REM) - a production-ready lightweight backend setup.
 
-[![Build Status](https://travis-ci.org/ngduc/node-rem.svg?branch=master)](https://travis-ci.org/ngduc/node-rem)
+[![Build Status](https://travis-ci.org/ngduc/node-rem.svg?branch=master)](https://travis-ci.org/ngduc/node-rem) [![Maintainability](https://api.codeclimate.com/v1/badges/11155b15b675ef311f72/maintainability)](https://codeclimate.com/github/ngduc/node-rem/maintainability)
 
 🌟 It rains ~~cats and dogs~~ features:
 
