@@ -2,6 +2,11 @@ export {};
 import * as Joi from 'joi';
 import { User } from 'api/models';
 
+const requireEmail = () =>
+  Joi.string()
+    .email()
+    .required();
+
 module.exports = {
   // GET /v1/users
   listUsers: {
@@ -19,9 +24,7 @@ module.exports = {
   // POST /v1/users
   createUser: {
     body: {
-      email: Joi.string()
-        .email()
-        .required(),
+      email: requireEmail(),
       password: Joi.string()
         .min(6)
         .max(128)
@@ -34,9 +37,7 @@ module.exports = {
   // PUT /v1/users/:userId
   replaceUser: {
     body: {
-      email: Joi.string()
-        .email()
-        .required(),
+      email: requireEmail(),
       password: Joi.string()
         .min(6)
         .max(128)

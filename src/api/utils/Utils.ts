@@ -70,7 +70,7 @@ export function endTimer({ key, req }: { key?: string; req?: Request }) {
   let timerKey = key;
   if (!key && req) {
     // url path only - remove query string (after "?"):
-    timerKey = (req.originalUrl + '?').slice(0, req.originalUrl.indexOf('?'));
+    timerKey = `${req.originalUrl}?`.slice(0, req.originalUrl.indexOf('?'));
   }
   const end = mstime.end(timerKey);
   // console.log('- endTimer key: ', timerKey, end);
