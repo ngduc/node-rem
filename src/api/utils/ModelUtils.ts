@@ -1,4 +1,4 @@
-import { getQuery, getPageQuery, queryPromise } from 'api/utils/Utils';
+import { getMongoQuery, getPageQuery, queryPromise } from '../../api/utils/Utils';
 
 // transform every record (only respond allowed fields and "&fields=" in query)
 export function transformData(context: any, query: any, allowedFields: string[]) {
@@ -41,25 +41,36 @@ const getPopulateArray = (queryArray: [], allowedFields: string[]) => {
   return ret;
 };
 
+const queryPagination = (mongoQuery: any, query: any) => {
+  const { page = 1, perPage = 30, limit, offset, sort } = getPageQuery(query);
+
+  mongoQuery.sort(sort);
+
+  // 2 ways to have pagination using: offset & limit OR page & perPage
+  if (query.perPage) {
+    mongoQuery.skip(perPage * (page - 1)).limit(perPage);
+  }
+  if (typeof offset !== 'undefined') {
+    mongoQuery.skip(offset);
+  }
+  if (typeof limit !== 'undefined') {
+    mongoQuery.limit(limit);
+  }
+};
+
 // list data with pagination support
 // return a promise for chaining. (e.g. list then transform)
 export function listData(context: any, query: any, allowedFields: string[]) {
-  const queryObj = getQuery(query, allowedFields); // allowed filter fields
-  const { page = 1, perPage = 30, limit, offset, sort } = getPageQuery(query);
-
-  const populateArr = getPopulateArray(query.populate, allowedFields);
+  const mongoQueryObj = getMongoQuery(query, allowedFields); // allowed filter fields
 
   // console.log('--- query: ', query);
   // console.log('--- allowedFields: ', allowedFields);
   // console.log('--- populateArr: ', populateArr);
-  let result = context.find(queryObj).sort(sort);
+  let result = context.find(mongoQueryObj);
 
-  if (query.limit || query.perPage) {
-    result
-      .skip(typeof offset !== 'undefined' ? offset : perPage * (page - 1))
-      .limit(typeof limit !== 'undefined' ? limit : perPage);
-  }
+  queryPagination(result, query);
 
+  const populateArr = getPopulateArray(query.populate, allowedFields);
   populateArr.forEach((item: any) => {
     result = result.populate(item);
   });
