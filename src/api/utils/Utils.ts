@@ -129,7 +129,7 @@ export function getPageQuery(reqQuery: any) {
 }
 
 // normalize req.query to get "safe" query fields => return "query" obj for mongoose (find, etc.)
-export function getQuery(reqQuery: any, fieldArray: string[]) {
+export function getMongoQuery(reqQuery: any, fieldArray: string[]) {
   const queryObj: any = {};
   fieldArray.map(field => {
     // get query fields excluding pagination fields:
@@ -184,7 +184,7 @@ export async function apiJson({ req, res, data, model, meta = {}, json = false }
     // if pass in "model" => query for totalCount & put in "meta"
     const isPagination = req.query.limit || req.query.page;
     if (isPagination && model.countDocuments) {
-      const query = getQuery(req.query, model.ALLOWED_FIELDS);
+      const query = getMongoQuery(req.query, model.ALLOWED_FIELDS);
       const countQuery = jsonClone(query);
       const totalCount = await model.countDocuments(countQuery);
       metaData.totalCount = totalCount;

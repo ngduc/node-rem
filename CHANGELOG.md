@@ -1,3 +1,12 @@
+## [0.9.0] - 2019-10-27
+
+### Added
+- support MongoDB populate - example: '&populate=author:_id,firstName&populate=book:_id,url'
+### Changed
+- switched to CodeClimate for better static code analysis.
+- codeclimate: refactored ModelUtils.listData; fixed duplicate logic.
+- BREAKING: Utils: startTimer, endTimer: changed function arguments.
+
 ## [0.8.0] - 2019-05-08
 
 ### Changed
