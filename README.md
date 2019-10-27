@@ -46,7 +46,7 @@ yarn dev      launch DEV mode
 yarn start    launch PROD mode
 yarn stop
 
-yarn test     Run tests
+yarn test     Run tests   (requires MongoDB)
 ```
 
 ### 📖 Features

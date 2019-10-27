@@ -92,7 +92,7 @@ exports.update = (req: Request, res: Response, next: NextFunction) => {
  */
 exports.list = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    startTimer(req);
+    startTimer({ req });
     const data = (await User.list(req)).transform(req);
     apiJson({ req, res, data, model: User });
   } catch (e) {
@@ -108,7 +108,7 @@ exports.list = async (req: Request, res: Response, next: NextFunction) => {
  */
 exports.listUserNotes = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    startTimer(req);
+    startTimer({ req });
     const userId = req.params.userId;
     req.query = { ...req.query, user: new ObjectId(userId) }; // append to query (by userId) to final query
     const data = (await UserNote.list({ query: req.query })).transform(req);

@@ -57,8 +57,13 @@ export function uuid() {
   return formatUuid(getRandomValuesFunc());
 }
 
-export function startTimer(req: Request) {
-  mstime.start(req.originalUrl, { uuid: uuid() });
+export function startTimer({ key, req }: { key?: string; req?: Request }) {
+  let timerKey = key;
+  if (!key && req) {
+    // url path only - remove query string (after "?"):
+    timerKey = (req.originalUrl + '?').slice(0, req.originalUrl.indexOf('?'));
+  }
+  mstime.start(timerKey, { uuid: uuid() });
 }
 
 export function endTimer(req: Request) {
