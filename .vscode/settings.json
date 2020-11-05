@@ -1,4 +1,18 @@
 {
-  "standard.enable": false,
-  "editor.formatOnSave": true
+  "search.exclude": {
+    "**/node_modules": true,
+    "dist/": true,
+    "static/": true
+  },
+  "files.exclude": {
+    "**/node_modules": true,
+    "npm-debug.log*": true,
+    "dist/": true,
+    "static/": true
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[json]": {
+    "editor.formatOnSave": false
+  }
 }

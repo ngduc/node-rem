@@ -1,3 +1,17 @@
+// prettier-ignore
 {
-  "recommendations": ["esbenp.prettier-vscode"]
+	"recommendations": [
+    "waderyan.gitblame",
+    "editorconfig.editorconfig",
+    "donjayamanne.githistory",
+    "esbenp.prettier-vscode",
+    "eg2.vscode-npm-script",
+    "ms-azuretools.vscode-docker",
+    "redhat.vscode-yaml",
+    "me-dutour-mathieu.vscode-github-actions",
+    "coddx.coddx-alpha",
+    "humao.rest-client"
+	],
+	"unwantedRecommendations": [
+	]
 }
