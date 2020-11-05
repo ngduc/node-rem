@@ -9,7 +9,7 @@ NodeJS Rest Express MongoDB (REM) - a production-ready lightweight backend setup
 ```
   Typescript      Express 4.15       CORS     Helmet    DotEnv   joi (validation)   forever
   Mongoose 4.9    Passport  JWT      Await
-  Tslint          Apidoc    Docker   Husky    Morgan    Travis   Windows (Powershell)
+  Tslint          Apidoc    Docker   Husky    Morgan    Travis   Unix/Mac/Win (Powershell)
   Tests
             Mocha  Chai     Sinon    istanbul
   MORE:
@@ -27,6 +27,8 @@ NodeJS Rest Express MongoDB (REM) - a production-ready lightweight backend setup
 
 ### 📦 Installation
 
+Require: `MongoDB` and `NodeJS v8.12.0 +`
+
 Clone this project:
 ```
 git clone https://github.com/ngduc/node-rem.git your-app
@@ -36,11 +38,13 @@ yarn
 ```
 - Update `package.json` and `.env` file with your information.
 - Run `yarn dev`, it will create a new Mongo DB "node-rem"
+- Verify `yarn test` can run all unit tests.
 - Verify: use Postman to POST https://localhost:3009/v1/auth/register to create a new user. (set payload to have email, password)
+```
+curl -k -d '{"email":"example1@email.com", "password":"testpsw"}' -H "Content-Type: application/json" -X POST https://localhost:3009/v1/auth/register
+```
 
 ### 🔧 Commands
-
-Require: `MongoDB` and `NodeJS v8.12.0 +`
 
 ```
 yarn dev      launch DEV mode

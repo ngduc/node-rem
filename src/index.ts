@@ -7,8 +7,8 @@ mstime.start('app-start');
 Promise = require('bluebird'); // eslint-disable-line no-global-assign
 const { port, env, socketEnabled } = require('./config/vars');
 
-// const https = require('https');
-const spdy = require('spdy'); // for HTTP2
+const https = require('https');
+// const https = require('spdy'); // for HTTP2
 const fs = require('fs');
 const app = require('./config/express');
 const socket = require('api/services/socket');
@@ -23,7 +23,7 @@ const options = {
   key: fs.readFileSync('./src/config/https/localhost-key.pem'),
   cert: fs.readFileSync('./src/config/https/localhost.pem')
 };
-const server = spdy.createServer(options, app);
+const server = https.createServer(options, app);
 
 if (socketEnabled) {
   socket.setup(server);
