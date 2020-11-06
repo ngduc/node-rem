@@ -120,6 +120,26 @@ exports.listUserNotes = async (req: Request, res: Response, next: NextFunction) 
 };
 
 /**
+ * Add a note.
+ * @example POST https://localhost:3009/v1/users/USERID/notes - payload { title, note }
+ */
+exports.createNote = async (req: Request, res: Response, next: NextFunction) => {
+  const { userId } = req.params;
+  const { title, note } = req.body;
+  try {
+    const newNote = new UserNote({
+      user: new ObjectId(userId),
+      title,
+      note
+    });
+    const data = await newNote.save();
+    apiJson({ req, res, data, model: UserNote });
+  } catch (e) {
+    next(e);
+  }
+};
+
+/**
  * Delete user note
  * @public
  */

@@ -1,5 +1,6 @@
 ## [0.10.0] - 2020-11-05
 - upgraded dependencies.
+- added: endpoint: create User Note: POST /users/USERID/notes - payload { title, note }
 
 ## [0.9.0] - 2019-10-27
 
