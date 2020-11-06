@@ -9,7 +9,7 @@
   - more... (see package.json)
 
 ### Platforms
-- Mainly tested on MacOS High Sierra, node 8.10.x, yarn
+- Mainly tested on MacOS, node 14.7.x, yarn
 - Also tested on Windows 10 (Powershell) with MongoDB, latest nodejs, yarn
 
 ### Initialize DB Data
@@ -68,6 +68,12 @@ openssl req -x509 -out localhost.crt -keyout localhost.key \
 - auth.controller.ts
   - for registration, it goes to: exports.register
   - for authentication (login), it goes to: exports.login
+
+- Example: POST https://localhost:3009/v1/auth/register
+  - payload: { "email": "newuser@example.com", "password": "1user1", "name": "John" }
+- Example: POST https://localhost:3009/v1/auth/login
+  - payload: { "email": "admin1@example.com", "password": "1admin1" }
+- Subsequent API calls will need "Authorization" header set to "Bearer ...accessToken..."
 
 ### API - Upload File /upload/file
 - Using "multer" to parse form (file) data & store files to "/uploads"

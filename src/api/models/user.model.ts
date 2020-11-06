@@ -103,9 +103,7 @@ userSchema.method({
 
   token() {
     const playload = {
-      exp: moment()
-        .add(JWT_EXPIRATION_MINUTES, 'minutes')
-        .unix(),
+      exp: moment().add(JWT_EXPIRATION_MINUTES, 'minutes').unix(),
       iat: moment().unix(),
       sub: this._id
     };

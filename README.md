@@ -22,7 +22,7 @@ NodeJS Rest Express MongoDB (REM) - a production-ready lightweight backend setup
             Regex query     Whitelist fields in response         Populate deep fields
             mstime          API response time     Stack trace in Response
 ```
-  - More details in [Feature Documentation](src_docs/features.md)
+  - More details in [Documentation / Features](src_docs/features.md)
   - [Live Demo](https://node-rem-demo.now.sh/) (login & inspect API calls to learn more)
 
 ### 📦 Installation
@@ -72,8 +72,8 @@ API Response is similar to [JSON API](http://jsonapi.org/examples/#pagination) s
 
 ```js
 GET https://localhost:3009/v1/users?fields=id,name&name=*john* (get id & name only in response)
-GET https://localhost:3009/v1/users?role=admin&page=1&perPage=20 (query & pagination)
-GET https://localhost:3009/v1/users?role=admin&limit=5&offset=0&sort=email:desc,createdAt
+GET https://localhost:3009/v1/users?role=user&page=1&perPage=20 (query & pagination)
+GET https://localhost:3009/v1/users?role=user&limit=5&offset=0&sort=email:desc,createdAt
 {
     "meta": {
         "limit": 5,
@@ -91,7 +91,7 @@ GET https://localhost:3009/v1/users?role=admin&limit=5&offset=0&sort=email:desc,
             "id": "5bad07cdc099dfbe49ef69d7",
             "name": "John Doe",
             "email": "john.doe@gmail.com",
-            "role": "admin",
+            "role": "user",
             "createdAt": "2018-09-27T16:39:41.498Z"
         },
         // more items...
@@ -102,7 +102,7 @@ Example of generated API Docs (using `apidoc`) - https://node-rem.netlify.com
 
 ### 📖 Documentation
 
-- [Feature Documentation](src_docs/features.md)
+- [Documentation / Features](src_docs/features.md)
 - [Build System](src_docs/build.md)
 - [Dependencies Notes](src_docs/dependencies.md)
 - [Change Log](CHANGELOG.md)
@@ -110,5 +110,3 @@ Example of generated API Docs (using `apidoc`) - https://node-rem.netlify.com
 ### 🙌 Thanks
 
 All contributions are welcome!
-
-[danielfsousa/express-rest-es2017-boilerplate](https://github.com/danielfsousa/express-rest-es2017-boilerplate)
