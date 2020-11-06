@@ -2,18 +2,21 @@
 
 ## DEVELOPMENT
 
-### Docker
+### Docker (optional)
 - Built on lightweight docker image "node:8-alpine" (see Dockerfile)
 - Command lines to launch docker images:
   - `yarn docker:dev` launch project in DEV mode
   - more... (see package.json)
 
-### Platforms
-- Mainly tested on MacOS, node 14.7.x, yarn
-- Also tested on Windows 10 (Powershell) with MongoDB, latest nodejs, yarn
+### Requirements
+Platforms:
+  - Mainly tested on MacOS, node 14.7.x, yarn
+  - Also tested on Windows 10 (Powershell) with MongoDB, latest nodejs, yarn
+Require:
+  - MongoDB, also a client tool to manage data like Robo 3T.
 
 ### Initialize DB Data
-- When launching in development mode, it will check if admin user not existed (New DB) & generate it & some dev data.
+- When launching in development mode, it will check if the dummy user not existed (New DB) then generate some dev data.
 - Example: [../src/api/utils/InitData.ts](../src/api/utils/InitData.ts)
 
 ### Environments

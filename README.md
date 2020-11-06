@@ -41,7 +41,7 @@ yarn
 - Verify `yarn test` can run all unit tests.
 - Verify: use Postman to POST https://localhost:3009/v1/auth/register to create a new user. (set payload to have email, password)
 ```
-curl -k -d '{"email":"example1@email.com", "password":"testpsw"}' -H "Content-Type: application/json" -X POST https://localhost:3009/v1/auth/register
+curl -k -d '{"email": "example1@email.com", "password": "testpsw"}' -H "Content-Type: application/json" -X POST https://localhost:3009/v1/auth/register
 ```
 
 ### 🔧 Commands

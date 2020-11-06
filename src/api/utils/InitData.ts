@@ -1,6 +1,11 @@
 export {};
 import { User, UserNote } from 'api/models';
 
+const DUMMY_USER = {
+  email: 'dummy1@example.com',
+  role: 'user',
+  password: 'dummy111'
+};
 const ADMIN_USER_1 = {
   email: 'admin1@example.com',
   role: 'admin',
@@ -13,6 +18,9 @@ const ADMIN_USER_2 = {
 };
 
 async function setup() {
+  const dummyUser = new User(DUMMY_USER);
+  await dummyUser.save();
+
   const adminUser1 = new User(ADMIN_USER_1);
   await adminUser1.save();
 
@@ -30,8 +38,8 @@ async function setup() {
 }
 
 async function checkNewDB() {
-  const adminUser1 = await User.findOne({ email: ADMIN_USER_1.email });
-  if (!adminUser1) {
+  const dummyUser = await User.findOne({ email: DUMMY_USER.email });
+  if (!dummyUser) {
     console.log('- New DB detected ===> Initializing Dev Data...');
     await setup();
   } else {
