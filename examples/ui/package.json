@@ -1,0 +1,74 @@
+{
+  "name": "node-rem-ui",
+  "version": "0.1.0",
+  "private": true,
+  "description": "",
+  "prettier": {
+    "tabWidth": 2,
+    "printWidth": 120,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "parser": "typescript"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "echo --- npm test"
+    }
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.5",
+    "@testing-library/react": "^11.1.1",
+    "@testing-library/user-event": "^12.2.0",
+    "@types/axios": "^0.14.0",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^14.14.6",
+    "@types/react": "^16.9.55",
+    "@types/react-dom": "^16.9.9",
+    "authui-ui": "^0.1.0",
+    "axios": "^0.21.0",
+    "cross-env": "7.x",
+    "history": "^5.0.0",
+    "npm-run-all": "4.x",
+    "postcss-cli": "8.x",
+    "postcss-preset-env": "6.x",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^6.0.0-beta.0",
+    "react-scripts": "4.0.0",
+    "swr": "^0.3.8",
+    "tailwindcss": "1.x",
+    "typescript": "4.x",
+    "unfetch": "^4.2.0"
+  },
+  "scripts": {
+    "start": "run-p watch:css react-scripts:start",
+    "build": "run-s build:css react-scripts:build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "build:css": "cross-env NODE_ENV=production postcss src/styles/tailwind.css -o src/styles/index.css",
+    "watch:css": "cross-env NODE_ENV=development postcss src/styles/tailwind.css -o src/styles/index.css --watch",
+    "react-scripts:start": "sleep 5 && react-scripts start",
+    "react-scripts:build": "react-scripts build"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "husky": "^5.0.0-beta.0"
+  }
+}

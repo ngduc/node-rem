@@ -1,0 +1,9 @@
+body, input {
+  color: #333;
+}
+
+#authui-container {
+  padding: 20px;
+  width: 40vw;
+  min-width: 400px;
+}

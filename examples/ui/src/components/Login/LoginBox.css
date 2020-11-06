@@ -1,0 +1,28 @@
+.pxlogin-main {}
+
+.pxlogin-main a {
+  cursor: pointer;
+}
+
+.pxlogin-main input {
+  display: block;
+  margin: 10px 0;
+  padding: 5px;
+  min-width: 300px;
+  border: 1px solid darkgray;
+}
+
+.pxlogin-main footer {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+}
+
+.pxlogin-main button {
+  padding: 5px 20px;
+}
+
+.pxlogin-main div[data-error="true"] {
+  margin-top: 10px;
+  color: darkred;
+}
