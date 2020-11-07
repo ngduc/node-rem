@@ -3,7 +3,7 @@ const express = require('express');
 import { NextFunction, Request, Response, Router } from 'express';
 const router = express.Router();
 const { authorize } = require('../../middlewares/auth');
-const { UPLOAD_LIMIT } = require('config/vars');
+const { UPLOAD_LIMIT } = require('../../../config/vars');
 
 const controller = require('../../controllers/upload.controller');
 

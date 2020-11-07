@@ -12,6 +12,7 @@
 Platforms:
   - Mainly tested on MacOS, node 14.7.x, yarn
   - Also tested on Windows 10 (Powershell) with MongoDB, latest nodejs, yarn
+
 Require:
   - MongoDB, also a client tool to manage data like Robo 3T.
 
@@ -99,3 +100,5 @@ openssl req -x509 -out localhost.crt -keyout localhost.key \
 - Using "handlebars" to get email templates: welcomeEmail({ name: 'John Doe', email: 'emailexample@gmail.com' })
 - Obtain your Mailgun API Key & Email Domain (use sandbox domain name for testing) & put it in .env file
 - Example: [../src/api/controllers/auth.controller.ts](../src/api/controllers/auth.controller.ts) (send email after user registered (POST v1/auth/register))
+
+## Deployment

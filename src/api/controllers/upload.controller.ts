@@ -1,7 +1,7 @@
 export {};
 import { NextFunction, Request, Response } from 'express';
 
-import { apiJson } from 'api/utils/Utils';
+import { apiJson } from '../../api/utils/Utils';
 
 exports.upload = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -10,4 +10,4 @@ exports.upload = async (req: Request, res: Response, next: NextFunction) => {
   } catch (error) {
     return next(error);
   }
-}
+};

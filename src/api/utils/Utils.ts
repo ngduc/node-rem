@@ -1,6 +1,6 @@
 const mstime = require('mstime');
 import { NextFunction, Request, Response, Router } from 'express';
-import { ITEMS_PER_PAGE } from 'api/utils/Const';
+import { ITEMS_PER_PAGE } from '../../api/utils/Const';
 
 export function jsonClone(obj: any) {
   return JSON.parse(JSON.stringify(obj));
@@ -119,7 +119,7 @@ export function getPageQuery(reqQuery: any) {
   }
   // number (type) query params => parse them:
   const numParams = ['page', 'perPage', 'limit', 'offset'];
-  numParams.forEach(field => {
+  numParams.forEach((field) => {
     if (reqQuery[field]) {
       output[field] = parseInt(reqQuery[field], 10);
     }
@@ -131,7 +131,7 @@ export function getPageQuery(reqQuery: any) {
 // normalize req.query to get "safe" query fields => return "query" obj for mongoose (find, etc.)
 export function getMongoQuery(reqQuery: any, fieldArray: string[]) {
   const queryObj: any = {};
-  fieldArray.map(field => {
+  fieldArray.map((field) => {
     // get query fields excluding pagination fields:
     if (['page', 'perPage', 'limit', 'offset'].indexOf(field) < 0 && reqQuery[field]) {
       // TODO: do more checks of query parameters for better security...
@@ -153,7 +153,7 @@ export function getMongoQuery(reqQuery: any, fieldArray: string[]) {
 // function to decorate a promise with useful helpers like: .transform(), etc.
 // @example: return queryPromise( this.find({}) )
 export function queryPromise(mongoosePromise: any) {
-  return new Promise(async resolve => {
+  return new Promise(async (resolve) => {
     const items = await mongoosePromise;
 
     // decorate => transform() on the result
@@ -210,5 +210,5 @@ export async function apiJson({ req, res, data, model, meta = {}, json = false }
 
 export function randomString(len = 10, charStr = 'abcdefghijklmnopqrstuvwxyz0123456789') {
   const chars = [...`${charStr}`];
-  return [...Array(len)].map(i => chars[(Math.random() * chars.length) | 0]).join('');
+  return [...Array(len)].map((i) => chars[(Math.random() * chars.length) | 0]).join('');
 }

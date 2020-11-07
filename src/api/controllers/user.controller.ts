@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 const httpStatus = require('http-status');
 const { omit } = require('lodash');
-import { User, UserNote } from 'api/models';
-import { startTimer, apiJson } from 'api/utils/Utils';
+import { User, UserNote } from '../../api/models';
+import { startTimer, apiJson } from '../../api/utils/Utils';
 const { handler: errorHandler } = require('../middlewares/error');
 
 /**

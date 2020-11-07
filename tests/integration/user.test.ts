@@ -8,8 +8,8 @@ const sinon = require('sinon');
 const bcrypt = require('bcryptjs');
 const { some, omitBy, isNil } = require('lodash');
 const app = require('../../src/index');
-import { User } from 'api/models';
-const JWT_EXPIRATION_MINUTES = require('config/vars').JWT_EXPIRATION_MINUTES;
+import { User } from '../../src/api/models';
+const JWT_EXPIRATION_MINUTES = require('../../src/config/vars').JWT_EXPIRATION_MINUTES;
 
 /**
  * root level hooks

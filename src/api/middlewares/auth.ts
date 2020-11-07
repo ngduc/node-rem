@@ -1,7 +1,7 @@
 export {};
 const httpStatus = require('http-status');
 const passport = require('passport');
-import { User } from 'api/models';
+import { User } from '../../api/models';
 const APIError = require('../utils/APIError');
 
 const ADMIN = 'admin';

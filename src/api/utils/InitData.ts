@@ -1,5 +1,5 @@
 export {};
-import { User, UserNote } from 'api/models';
+import { User, UserNote } from '../../api/models';
 
 const DUMMY_USER = {
   email: 'dummy1@example.com',

@@ -1,6 +1,6 @@
 export {};
 const mongoose = require('mongoose');
-import { transformData, listData } from 'api/utils/ModelUtils';
+import { transformData, listData } from '../../api/utils/ModelUtils';
 
 const userNoteSchema = new mongoose.Schema(
   {

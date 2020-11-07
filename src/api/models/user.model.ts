@@ -6,9 +6,9 @@ const bcrypt = require('bcryptjs');
 const moment = require('moment-timezone');
 const jwt = require('jwt-simple');
 const uuidv4 = require('uuid/v4');
-const APIError = require('api/utils/APIError');
-import { transformData, listData } from 'api/utils/ModelUtils';
-const { env, JWT_SECRET, JWT_EXPIRATION_MINUTES } = require('config/vars');
+const APIError = require('../../api/utils/APIError');
+import { transformData, listData } from '../../api/utils/ModelUtils';
+const { env, JWT_SECRET, JWT_EXPIRATION_MINUTES } = require('../../config/vars');
 
 /**
  * User Roles

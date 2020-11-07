@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 // configure for Slack
-const { SLACK_WEBHOOK_URL } = require('config/vars');
+const { SLACK_WEBHOOK_URL } = require('../../config/vars');
 const { IncomingWebhook } = require('@slack/client');
 let incomingWebhook: any = null;
 if (SLACK_WEBHOOK_URL) {
@@ -9,7 +9,12 @@ if (SLACK_WEBHOOK_URL) {
 }
 
 // configure for emailing
-const { EMAIL_MAILGUN_API_KEY, EMAIL_FROM_SUPPORT, EMAIL_MAILGUN_DOMAIN, EMAIL_TEMPLATE_BASE } = require('config/vars');
+const {
+  EMAIL_MAILGUN_API_KEY,
+  EMAIL_FROM_SUPPORT,
+  EMAIL_MAILGUN_DOMAIN,
+  EMAIL_TEMPLATE_BASE
+} = require('../../config/vars');
 const handlebars = require('handlebars');
 
 // load template file & inject data => return content with injected data.

@@ -1,6 +1,6 @@
 export {};
 import * as express from 'express';
-import { apiJson } from 'api/utils/Utils';
+import { apiJson } from '../../../api/utils/Utils';
 
 const userRoutes = require('./user.route');
 const authRoutes = require('./auth.route');

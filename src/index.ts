@@ -1,3 +1,5 @@
+const serverless = require('serverless-http'); // Netlify
+
 // setup mstime to measure API response time
 const mstime = require('mstime');
 mstime.plugins([{ plugin: require('mstime/dist/cjs/plugins/msPluginTrimMean') }]);
@@ -11,7 +13,7 @@ const https = require('https');
 // const https = require('spdy'); // for HTTP2
 const fs = require('fs');
 const app = require('./config/express');
-const socket = require('api/services/socket');
+const socket = require('./api/services/socket');
 
 const mongoose = require('./config/mongoose');
 
@@ -20,8 +22,8 @@ mongoose.connect();
 
 // HTTPS options
 const options = {
-  key: fs.readFileSync('./src/config/https/localhost-key.pem'),
-  cert: fs.readFileSync('./src/config/https/localhost.pem')
+  key: fs.readFileSync(__dirname + '/config/https/localhost-key.pem'),
+  cert: fs.readFileSync(__dirname + '/config/https/localhost.pem')
 };
 const server = https.createServer(options, app);
 
@@ -44,3 +46,5 @@ if (env === 'development') {
  * @public
  */
 module.exports = app;
+
+module.exports.handler = serverless(app);

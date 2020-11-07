@@ -7,9 +7,9 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 const moment = require('moment-timezone');
 const app = require('../../src/index');
-import { User } from 'api/models';
-const RefreshToken = require('api/models/refreshToken.model');
-const authProviders = require('api/services/authProviders');
+import { User } from '../../src/api/models';
+const RefreshToken = require('../../src/api/models/refreshToken.model');
+const authProviders = require('../../src/api/services/authProviders');
 
 const sandbox = sinon.createSandbox();
 
@@ -47,9 +47,7 @@ describe('Authentication API', () => {
         '5947397b323ae82d8c3a333b.c69d0435e62c9f4953af912442a3d064e20291f0d228c0552ed4be473e7d191ba40b18c2c47e8b9d',
       userId: '5947397b323ae82d8c3a333b',
       userEmail: dbUser.email,
-      expires: moment()
-        .add(1, 'day')
-        .toDate()
+      expires: moment().add(1, 'day').toDate()
     };
 
     expiredRefreshToken = {
@@ -57,9 +55,7 @@ describe('Authentication API', () => {
         '5947397b323ae82d8c3a333b.c69d0435e62c9f4953af912442a3d064e20291f0d228c0552ed4be473e7d191ba40b18c2c47e8b9d',
       userId: '5947397b323ae82d8c3a333b',
       userEmail: dbUser.email,
-      expires: moment()
-        .subtract(1, 'day')
-        .toDate()
+      expires: moment().subtract(1, 'day').toDate()
     };
 
     await User.remove({});

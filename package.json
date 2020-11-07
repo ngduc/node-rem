@@ -16,6 +16,7 @@
     "prestart": "yarn docs",
     "start": "cross-env NODE_ENV=production forever start -a --uid 'node-rem' -v -c ts-node --files src/index.ts",
     "stop": "cross-env NODE_ENV=production forever stop 'node-rem'",
+    "build": "tsc -p . && cp -R src/config ./built",
     "logs": "forever logs",
     "dev": "yarn postinstall && nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec ts-node --files src/index.ts",
     "lint": "tslint src/**/*.ts",
@@ -110,6 +111,7 @@
     "passport": "^0.4.0",
     "passport-http-bearer": "^1.0.1",
     "passport-jwt": "4.0.0",
+    "serverless-http": "^2.6.0",
     "socket.io": "^2.2.0",
     "spdy": "^4.0.0",
     "uuid": "^3.3.2"
@@ -138,6 +140,7 @@
     "sinon-chai": "^3.3.0",
     "supertest": "^3.4.2",
     "ts-node": "9.0.0",
+    "tsc": "^1.20150623.0",
     "tslint": "^5.20.0",
     "tslint-config-airbnb": "^5.11.1",
     "tslint-config-prettier": "^1.18.0",

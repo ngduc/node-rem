@@ -1,11 +1,11 @@
 export {};
 import { NextFunction, Request, Response, Router } from 'express';
 const httpStatus = require('http-status');
-import { User } from 'api/models';
+import { User } from '../../api/models';
 const RefreshToken = require('../models/refreshToken.model');
 const moment = require('moment-timezone');
-import { apiJson, randomString } from 'api/utils/Utils';
-import { sendEmail, welcomeEmail, forgotPasswordEmail, slackWebhook } from 'api/utils/MsgUtils';
+import { apiJson, randomString } from '../../api/utils/Utils';
+import { sendEmail, welcomeEmail, forgotPasswordEmail, slackWebhook } from '../../api/utils/MsgUtils';
 const { SEC_ADMIN_EMAIL, JWT_EXPIRATION_MINUTES, slackEnabled, emailEnabled } = require('../../config/vars');
 
 /**

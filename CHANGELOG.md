@@ -2,6 +2,7 @@
 - upgraded dependencies.
 - added: endpoint: create User Note: POST /users/USERID/notes - payload { title, note }
 - added a CRA v4 webapp as an example to access APIs.
+- added "yarn build" using "tsc"
 
 ## [0.9.0] - 2019-10-27
 
