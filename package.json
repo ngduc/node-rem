@@ -141,7 +141,6 @@
     "sinon-chai": "^3.3.0",
     "supertest": "^3.4.2",
     "ts-node": "9.0.0",
-    "tsc": "^1.20150623.0",
     "tslint": "^5.20.0",
     "tslint-config-airbnb": "^5.11.1",
     "tslint-config-prettier": "^1.18.0",

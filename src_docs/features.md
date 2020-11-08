@@ -102,3 +102,6 @@ openssl req -x509 -out localhost.crt -keyout localhost.key \
 - Example: [../src/api/controllers/auth.controller.ts](../src/api/controllers/auth.controller.ts) (send email after user registered (POST v1/auth/register))
 
 ## Deployment
+
+With Vercel:
+- Try this repo: https://github.com/ngduc/vercel-express
