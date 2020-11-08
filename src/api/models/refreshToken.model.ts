@@ -3,6 +3,8 @@ import * as crypto from 'crypto';
 const mongoose = require('mongoose');
 // const crypto = require('crypto');
 const moment = require('moment-timezone');
+const APIError = require('../../api/utils/APIError');
+const httpStatus = require('http-status');
 
 /**
  * Refresh Token Schema
@@ -38,9 +40,7 @@ refreshTokenSchema.statics = {
     const userId = user._id;
     const userEmail = user.email;
     const token = `${userId}.${crypto.randomBytes(40).toString('hex')}`;
-    const expires = moment()
-      .add(30, 'days')
-      .toDate();
+    const expires = moment().add(30, 'days').toDate();
     const tokenObject = new RefreshToken({
       token,
       userId,
@@ -49,6 +49,31 @@ refreshTokenSchema.statics = {
     });
     tokenObject.save();
     return tokenObject;
+  },
+
+  /**
+   * Find user by user ID then delete token record from DB.
+   *
+   * @param {ObjectId} id - The objectId of user.
+   * @returns {Promise<User, APIError>}
+   */
+  async findAndDeleteToken(options: any) {
+    const { userId } = options;
+    if (!userId) {
+      throw new APIError({ message: 'An userId is required to delete a token' });
+    }
+    const tokenRec = await this.findOne({ userId: new mongoose.Types.ObjectId(userId) }).exec();
+    const err: any = {
+      status: httpStatus.UNAUTHORIZED,
+      isPublic: true
+    };
+    if (tokenRec) {
+      await this.remove({ userId: new mongoose.Types.ObjectId(userId) });
+      return { status: 'OK' };
+    } else {
+      err.message = 'Logout failed. User already logged out?';
+    }
+    throw new APIError(err);
   }
 };
 

@@ -1,6 +1,7 @@
-## [0.10.0] - 2020-11-05
+## [0.10.1] - 2020-11-05
 - upgraded dependencies.
-- added: endpoint: create User Note: POST /users/USERID/notes - payload { title, note }
+- added endpoint: create User Note: POST /users/USERID/notes - payload { title, note }
+- added endpoint: POST /auth/logout - payload { userId }
 - added a CRA v4 webapp as an example to access APIs.
 - added "yarn build" using "tsc"
 

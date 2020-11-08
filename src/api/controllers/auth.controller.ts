@@ -73,6 +73,22 @@ exports.login = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 /**
+ * Logout function: delete token from DB.
+ * @public
+ */
+exports.logout = async (req: Request, res: Response, next: NextFunction) => {
+  console.log('- logout');
+  try {
+    const { userId } = req.body;
+    await RefreshToken.findAndDeleteToken({ userId });
+    const data = { status: 'OK' };
+    return apiJson({ req, res, data });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+/**
  * login with an existing user or creates a new one if valid accessToken token
  * Returns jwt token
  * @public

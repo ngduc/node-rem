@@ -70,13 +70,16 @@ openssl req -x509 -out localhost.crt -keyout localhost.key \
 
 ### Registration / Authentication
 - auth.controller.ts
-  - for registration, it goes to: exports.register
-  - for authentication (login), it goes to: exports.login
+  - for registration, it goes to: exports.register.
+  - for authentication (login/logout), it goes to: exports.login, logout.
+  - when logging in, a "accessToken" is generated and saved (generateTokenResponse()) to "refreshtokens" table in DB.
 
-- Example: POST https://localhost:3009/v1/auth/register
+- Register: POST https://localhost:3009/v1/auth/register
   - payload: { "email": "newuser@example.com", "password": "1user1", "name": "John" }
-- Example: POST https://localhost:3009/v1/auth/login
+- Login: POST https://localhost:3009/v1/auth/login
   - payload: { "email": "admin1@example.com", "password": "1admin1" }
+- Logout: POST https://localhost:3009/v1/auth/logout
+  - payload: { "userId": "..." }
 - Subsequent API calls will need "Authorization" header set to "Bearer ...accessToken..."
 
 ### API - Upload File /upload/file
