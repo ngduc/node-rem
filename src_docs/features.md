@@ -17,7 +17,7 @@ Require:
   - MongoDB, also a client tool to manage data like Robo 3T.
 
 ### Initialize DB Data
-- When launching in development mode, it will check if the dummy user not existed (New DB) then generate some dev data.
+- When launching in development mode, it will check if the default user1 not existed (New DB) then generate some dev data.
 - Example: [../src/api/utils/InitData.ts](../src/api/utils/InitData.ts)
 
 ### Environments
