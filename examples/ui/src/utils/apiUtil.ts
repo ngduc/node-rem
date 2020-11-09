@@ -85,6 +85,13 @@ export const apiPost = (path: string, options?: AxiosRequestConfig): Promise<Res
   return axiosApi({ url, method: 'POST', ...options }).catch(onError);
 };
 
+// apiDelete - uses axios POST - path can be a relative path (uses BaseApiUrl) or absolute url path (startsWith http...)
+export const apiDelete = (path: string, options?: AxiosRequestConfig): Promise<ResponseInterface> => {
+  const url = path.startsWith('http') ? path : `${BaseApiUrl}${path}`;
+  // TODO: sanitize data, track xhr errors, analytics... here
+  return axiosApi({ url, method: 'DELETE', ...options }).catch(onError);
+};
+
 /**
  * useRequest hook for calling an API endpoint using useSWR.
  *
