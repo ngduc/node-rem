@@ -85,7 +85,7 @@
   },
   "dependencies": {
     "@slack/client": "^5.0.1",
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "bcryptjs": "2.4.3",
     "bluebird": "^3.5.3",
     "body-parser": "^1.18.3",
