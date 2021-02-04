@@ -33,15 +33,15 @@ Clone this project:
 ```
 git clone https://github.com/ngduc/node-rem.git your-app
 cd your-app
-rm -rf .git
+rm -rf .git   (remove this github repo's git settings)
 yarn
 ```
 - Update `package.json` and `.env` file with your information.
 - Run `yarn dev`, it will create a new Mongo DB "node-rem"
 - Verify `yarn test` can run all unit tests.
-- Verify: use Postman to POST https://localhost:3009/v1/auth/register to create a new user. (set payload to have email, password)
+- Verify: use Postman to POST http://localhost:3009/v1/auth/register to create a new user. (set payload to have email, password)
 ```
-curl -k -d '{"email": "example1@email.com", "password": "testpsw"}' -H "Content-Type: application/json" -X POST https://localhost:3009/v1/auth/register
+curl -k -d '{"email": "example1@email.com", "password": "testpsw"}' -H "Content-Type: application/json" -X POST http://localhost:3009/v1/auth/register
 ```
 
 ### 🔧 Commands
@@ -71,9 +71,9 @@ exports.list = async (req: Request, res: Response, next: NextFunction) => {
 API Response is similar to [JSON API](http://jsonapi.org/examples/#pagination) standard:
 
 ```js
-GET https://localhost:3009/v1/users?fields=id,name&name=*john* (get id & name only in response)
-GET https://localhost:3009/v1/users?role=user&page=1&perPage=20 (query & pagination)
-GET https://localhost:3009/v1/users?role=user&limit=5&offset=0&sort=email:desc,createdAt
+GET http://localhost:3009/v1/users?fields=id,name&name=*john* (get id & name only in response)
+GET http://localhost:3009/v1/users?role=user&page=1&perPage=20 (query & pagination)
+GET http://localhost:3009/v1/users?role=user&limit=5&offset=0&sort=email:desc,createdAt
 {
     "meta": {
         "limit": 5,

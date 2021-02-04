@@ -1,0 +1,175 @@
+{
+	"info": {
+		"_postman_id": "e5d5f786-aec1-4eaf-9b45-ea0373f68b78",
+		"name": "--- Node-rem",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST /auth/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"email\": \"admin1@example.com\", \"password\": \"1admin1\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3009/v1/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3009",
+					"path": [
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /auth/logout",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"userId\": \"5fa6386a00204e0821e9fb65\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:3009/v1/auth/logout",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3009",
+					"path": [
+						"v1",
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /users - (require admin)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3009/v1/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3009",
+					"path": [
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /users/USERID/notes",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"title\": \"Title 1\", \"note\": \"note 1\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3009/v1/users/601ba66975aa395170c7153a/notes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3009",
+					"path": [
+						"v1",
+						"users",
+						"601ba66975aa395170c7153a",
+						"notes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /users/USERID/notes",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3009/v1/users/601ba66975aa395170c7153a/notes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3009",
+					"path": [
+						"v1",
+						"users",
+						"601ba66975aa395170c7153a",
+						"notes"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

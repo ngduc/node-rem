@@ -1,6 +1,6 @@
 {
   "name": "node-rem",
-  "version": "0.10.1",
+  "version": "0.10.5",
   "description": "Node REM - NodeJS Rest Express MongoDB and more: typescript, passport, JWT, socket.io, HTTPS, HTTP2, async/await, nodemailer, templates, pagination, docker, etc.",
   "author": "Duc Nguyen",
   "main": "src/index.js",
@@ -11,7 +11,6 @@
     "yarn": "*"
   },
   "scripts": {
-    "postinstall": "cd ./node_modules && node ../package_symlinks.js && cd ..",
     "precommit": "yarn lint",
     "prestart": "yarn docs",
     "forever-start": "cross-env NODE_ENV=production forever start -a --uid 'node-rem' -v -c ts-node --files src/index.ts",
@@ -19,7 +18,7 @@
     "stop": "cross-env NODE_ENV=production forever stop 'node-rem'",
     "build": "tsc -p . && cp -R src/config ./built",
     "logs": "forever logs",
-    "dev": "yarn postinstall && nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec ts-node --files src/index.ts",
+    "dev": "npx nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec ts-node --files src/index.ts",
     "lint": "tslint src/**/*.ts",
     "lint:fix": "yarn lint --fix",
     "lint:watch": "yarn lint --watch",

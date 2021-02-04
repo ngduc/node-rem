@@ -9,7 +9,7 @@ mstime.start('app-start');
 Promise = require('bluebird'); // eslint-disable-line no-global-assign
 const { port, env, socketEnabled } = require('./config/vars');
 
-const https = require('https');
+const http = require('http');
 // const https = require('spdy'); // for HTTP2
 const fs = require('fs');
 const app = require('./config/express');
@@ -21,18 +21,19 @@ const mongoose = require('./config/mongoose');
 mongoose.connect();
 
 // HTTPS options
-const options = {
-  key: fs.readFileSync(__dirname + '/config/https/localhost-key.pem'),
-  cert: fs.readFileSync(__dirname + '/config/https/localhost.pem')
-};
-const server = https.createServer(options, app);
+const options = {};
+// const options = {
+//   key: fs.readFileSync(__dirname + '/config/https/localhost-key.pem'),
+//   cert: fs.readFileSync(__dirname + '/config/https/localhost.pem')
+// };
+const server = http.createServer(options, app);
 
 if (socketEnabled) {
   socket.setup(server);
 }
 
 server.listen(port, () => {
-  console.info(`--- 🌟  Started (${env}) --- https://localhost:${port}`);
+  console.info(`--- 🌟  Started (${env}) --- http://localhost:${port}`);
   console.log(`${mstime.end('app-start').last} ms`);
 });
 

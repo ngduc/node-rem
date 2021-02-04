@@ -21,7 +21,7 @@ const getPopulateArray = (queryArray: [], allowedFields: string[]) => {
     return [];
   }
   const ret: any[] = [];
-  queryArray.map((str: string) => {
+  queryArray.map((str: string = '') => {
     const arr = str.split(':');
     // only populate fields belong to "allowedFields"
     if (arr && arr.length === 2 && allowedFields.indexOf(arr[0]) >= 0) {
@@ -65,14 +65,15 @@ export function listData(context: any, query: any, allowedFields: string[]) {
 
   // console.log('--- query: ', query);
   // console.log('--- allowedFields: ', allowedFields);
-  // console.log('--- populateArr: ', populateArr);
+  // console.log('--- populateArr: ', query.populate);
   let result = context.find(mongoQueryObj);
 
   queryPagination(result, query);
 
-  const populateArr = getPopulateArray(query.populate, allowedFields);
+  const queryPopulate = Array.isArray(query.populate) ? query.populate : [query.populate]; // to array.
+  const populateArr = getPopulateArray(queryPopulate, allowedFields); // get Mongo-spec's populate array.
   populateArr.forEach((item: any) => {
-    result = result.populate(item);
+    result = result.populate(item); // Mongo's populate() to populate nested object.
   });
 
   const execRes = result.exec();

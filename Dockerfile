@@ -6,7 +6,7 @@ ARG NODE_ENV
 ENV NODE_ENV $NODE_ENV
 
 RUN mkdir /app
-ADD package.json package_symlinks.js yarn.lock /app/
+ADD package.json yarn.lock /app/
 
 ADD . /app
 

@@ -1,3 +1,8 @@
+## [0.10.2] - 2022-02-03
+- removed symlink script (package_symlinks.js) to run on Windows.
+- changed to use HTTP instead of HTTPS (harder for beginners to try).
+- added "postman-examples.json" (Postman Collection).
+
 ## [0.10.1] - 2020-11-05
 - upgraded dependencies.
 - added endpoint: create User Note: POST /users/USERID/notes - payload { title, note }
