@@ -44,6 +44,14 @@ yarn
 curl -k -d '{"email": "example1@email.com", "password": "testpsw"}' -H "Content-Type: application/json" -X POST http://localhost:3009/v1/auth/register
 ```
 
+#### Frontend Example - uses this node-rem backend:
+```
+(first, start the Backend with yarn dev)
+cd examples/ui
+yarn
+yarn start    (then login with a test user: user1@example.com, user111)
+```
+
 ### 🔧 Commands
 
 ```

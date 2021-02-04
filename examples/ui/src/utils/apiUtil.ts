@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import useSWR from 'swr';
 
 // base URL and Path of API endpoints:
-const BaseUrl = 'https://localhost:3009';
+const BaseUrl = 'http://localhost:3009';
 const BaseApiPath = '/v1';
 let BaseApiUrl = `${BaseUrl}${BaseApiPath}`;
 

@@ -64,9 +64,9 @@ openssl req -x509 -out localhost.crt -keyout localhost.key \
 - a Model has "ALLOWED_FIELDS" array to allow those fields in API response.
   - Additionally, you can add "&fields=" as an URL param to include just a few fields. (to reduce response size)
 - API list endpoints also support URL params for pagination
-  - Example 1: GET https://localhost:3009/v1/users?limit=5&offset=0&sort=email:desc,createdAt
-  - Example 2: GET https://localhost:3009/v1/users?page=1&perPage=20
-  - Example 3: GET https://localhost:3009/v1/users/5c7f85009d65d4210efffa42/notes?note=*partialtext*
+  - Example 1: GET http://localhost:3009/v1/users?limit=5&offset=0&sort=email:desc,createdAt
+  - Example 2: GET http://localhost:3009/v1/users?page=1&perPage=20
+  - Example 3: GET http://localhost:3009/v1/users/5c7f85009d65d4210efffa42/notes?note=*partialtext*
 
 ### Registration / Authentication
 - auth.controller.ts
@@ -74,17 +74,17 @@ openssl req -x509 -out localhost.crt -keyout localhost.key \
   - for authentication (login/logout), it goes to: exports.login, logout.
   - when logging in, a "accessToken" is generated and saved (generateTokenResponse()) to "refreshtokens" table in DB.
 
-- Register: POST https://localhost:3009/v1/auth/register
+- Register: POST http://localhost:3009/v1/auth/register
   - payload: { "email": "newuser@example.com", "password": "1user1", "name": "John" }
-- Login: POST https://localhost:3009/v1/auth/login
+- Login: POST http://localhost:3009/v1/auth/login
   - payload: { "email": "admin1@example.com", "password": "1admin1" }
-- Logout: POST https://localhost:3009/v1/auth/logout
+- Logout: POST http://localhost:3009/v1/auth/logout
   - payload: { "userId": "..." }
 - Subsequent API calls will need "Authorization" header set to "Bearer ...accessToken..."
 
 ### API - Upload File /upload/file
 - Using "multer" to parse form (file) data & store files to "/uploads"
-- Example: POST https://localhost:3009/v1/upload/file
+- Example: POST http://localhost:3009/v1/upload/file
   - set Authorization: Bearer TOKEN, Content-Type: application/x-www-form-urlencoded
   - set form-data, field "file" and select a file to upload
   - uploaded file will be stored in "/uploads" directory

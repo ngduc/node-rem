@@ -89,7 +89,7 @@ exports.update = (req: Request, res: Response, next: NextFunction) => {
 /**
  * Get user list
  * @public
- * @example GET https://localhost:3009/v1/users?role=admin&limit=5&offset=0&sort=email:desc,createdAt
+ * @example GET http://localhost:3009/v1/users?role=admin&limit=5&offset=0&sort=email:desc,createdAt
  */
 exports.list = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -105,7 +105,7 @@ exports.list = async (req: Request, res: Response, next: NextFunction) => {
  * Get user's notes.
  * NOTE: Any logged in user can get a list of notes of any user.
  * @public
- * @example GET https://localhost:3009/v1/users/USERID/notes
+ * @example GET http://localhost:3009/v1/users/USERID/notes
  */
 exports.listUserNotes = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -121,7 +121,7 @@ exports.listUserNotes = async (req: Request, res: Response, next: NextFunction) 
 
 /**
  * Add a note.
- * @example POST https://localhost:3009/v1/users/USERID/notes - payload { title, note }
+ * @example POST http://localhost:3009/v1/users/USERID/notes - payload { title, note }
  */
 exports.createNote = async (req: Request, res: Response, next: NextFunction) => {
   const { userId } = req.params;

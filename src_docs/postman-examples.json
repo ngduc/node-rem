@@ -56,7 +56,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:3009/v1/auth/logout",
+					"raw": "http://localhost:3009/v1/auth/logout",
 					"protocol": "https",
 					"host": [
 						"localhost"
