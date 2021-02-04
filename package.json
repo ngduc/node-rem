@@ -88,7 +88,7 @@
     "bcryptjs": "2.4.3",
     "bluebird": "^3.5.3",
     "body-parser": "^1.18.3",
-    "compression": "^1.7.3",
+    "compression": "^1.7.4",
     "cors": "^2.8.5",
     "cross-env": "^7.0.2",
     "dotenv-safe": "^6.1.0",
