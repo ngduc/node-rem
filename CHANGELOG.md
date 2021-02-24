@@ -1,6 +1,6 @@
 ## [0.10.5] - 2022-02-23
-- removed yarn, switched to npm to use npm audit fix.
 - fixed npm run build: added rimraf.
+- added TODO.md
 
 ## [0.10.2] - 2022-02-03
 - removed symlink script (package_symlinks.js) to run on Windows.

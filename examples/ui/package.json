@@ -19,16 +19,16 @@
     }
   },
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.5",
-    "@testing-library/react": "^11.1.1",
-    "@testing-library/user-event": "^12.2.0",
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/user-event": "^12.7.3",
     "@types/axios": "^0.14.0",
-    "@types/jest": "^26.0.15",
-    "@types/node": "^14.14.6",
-    "@types/react": "^16.9.55",
-    "@types/react-dom": "^16.9.9",
+    "@types/jest": "^26.0.20",
+    "@types/node": "^14.14.31",
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.1",
     "authui-ui": "^0.1.0",
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "cross-env": "7.x",
     "history": "^5.0.0",
     "npm-run-all": "4.x",
@@ -37,8 +37,8 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^6.0.0-beta.0",
-    "react-scripts": "4.0.0",
-    "swr": "^0.3.8",
+    "react-scripts": "4.0.3",
+    "swr": "^0.4.2",
     "tailwindcss": "1.x",
     "typescript": "4.x",
     "unfetch": "^4.2.0"
@@ -69,6 +69,6 @@
     ]
   },
   "devDependencies": {
-    "husky": "^5.0.0-beta.0"
+    "husky": "^5.1.1"
   }
 }

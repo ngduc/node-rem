@@ -46,7 +46,9 @@ curl -k -d '{"email": "example1@email.com", "password": "testpsw"}' -H "Content-
 
 #### Frontend Example - uses this node-rem backend:
 ```
-(first, start the Backend with yarn dev)
+- First, start the Backend with: yarn dev
+
+- Then, start UI:
 cd examples/ui
 yarn
 yarn start    (then login with a test user: user1@example.com, user111)
@@ -55,6 +57,8 @@ yarn start    (then login with a test user: user1@example.com, user111)
 ### 🔧 Commands
 
 ```
+- Start MongoDB first. Verify .env variables.
+
 yarn dev      launch DEV mode
 yarn start    launch PROD mode
 yarn stop

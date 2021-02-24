@@ -24,7 +24,7 @@ export function Login() {
     }
 
     if (apiData?.data?.token) {
-      localStorage.setItem('ld', btoa(JSON.stringify(apiData))); // save to LS in base64
+      localStorage.setItem('ld', btoa(JSON.stringify(apiData))); // save to localStorage in base64
       navigate('/home');
     } else {
       console.log('ERROR: ', err);
