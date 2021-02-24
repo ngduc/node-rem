@@ -6,12 +6,12 @@ ARG NODE_ENV
 ENV NODE_ENV $NODE_ENV
 
 RUN mkdir /app
-ADD package.json yarn.lock /app/
+ADD package.json package-lock.json /app/
 
 ADD . /app
 
-RUN cd /app/ && yarn --pure-lockfile
+RUN cd /app/ && npm install
 
 WORKDIR /app
 
-CMD ["yarn", "docker:start"]
+CMD ["npm", "run docker:start"]

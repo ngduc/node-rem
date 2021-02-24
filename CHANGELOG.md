@@ -1,6 +1,10 @@
+## [0.10.5] - 2022-02-23
+- removed yarn, switched to npm to use npm audit fix.
+- fixed npm run build: added rimraf.
+
 ## [0.10.2] - 2022-02-03
 - removed symlink script (package_symlinks.js) to run on Windows.
-- changed to use HTTP instead of HTTPS (harder for beginners to try).
+- changed to use HTTP (easier for beginners to use) instead of HTTPS.
 - added "postman-examples.json" (Postman Collection).
 
 ## [0.10.1] - 2020-11-05
