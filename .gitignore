@@ -4,9 +4,6 @@ built
 .DS_Store
 /**/.DS_Store
 
-# Use yarn.lock instead
-package-lock.json
-
 # Environment variables
 .env.prod
 .env.production
