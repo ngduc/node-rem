@@ -1,3 +1,6 @@
+## [0.10.6] - 2022-03-04
+- UI Example: added selectedItem and ItemView.
+
 ## [0.10.5] - 2022-02-23
 - fixed npm run build: added rimraf.
 - added TODO.md

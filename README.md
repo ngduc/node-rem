@@ -21,6 +21,8 @@ NodeJS Rest Express MongoDB (REM) - a production-ready lightweight backend setup
             apiJson         Pagination query
             Regex query     Whitelist fields in response         Populate deep fields
             mstime          API response time     Stack trace in Response
+      UI Example
+            Typescript, React-router, Axios, PostCSS, Tailwind. Components: Home, ItemView, Login.
 ```
   - More details in [Documentation / Features](src_docs/features.md)
   - [Live Demo](https://node-rem-demo.now.sh/) (login & inspect API calls to learn more)
@@ -44,16 +46,6 @@ yarn
 curl -k -d '{"email": "example1@email.com", "password": "testpsw"}' -H "Content-Type: application/json" -X POST http://localhost:3009/v1/auth/register
 ```
 
-#### Frontend Example - uses this node-rem backend:
-```
-- First, start the Backend with: yarn dev
-
-- Then, start UI:
-cd examples/ui
-yarn
-yarn start    (then login with a test user: user1@example.com, user111)
-```
-
 ### 🔧 Commands
 
 ```
@@ -64,6 +56,16 @@ yarn start    launch PROD mode
 yarn stop
 
 yarn test     Run tests   (requires MongoDB)
+```
+
+#### Frontend Example - uses this node-rem backend:
+```
+- First, start the Backend with: yarn dev
+
+- Then, start UI:
+cd examples/ui
+yarn
+yarn start    (then open http://localhost:3000 - login with a test user: user1@example.com, user111)
 ```
 
 ### 📖 Features

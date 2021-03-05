@@ -16,13 +16,13 @@ Platforms:
 Require:
   - MongoDB and a client tool to manage data like Robo 3T.
 
-### Initialize DB Data
-- When launching in development mode, it will check if the default user1 not existed (New DB) to generate some dev data.
-- Example: [../src/api/utils/InitData.ts](../src/api/utils/InitData.ts)
-
 ### Environments
 - Env vars are declared in ".env" file (npm: dotenv-safe).
 - They are loaded into "config/vars" and exported to be used across the app.
+
+### Initialize DB Data
+- When launching in development mode, it will check if the default user1 not existed (New DB) to generate some dev data.
+- Example: [../src/api/utils/InitData.ts](../src/api/utils/InitData.ts)
 
 ### SSL Self-signed Cert (for HTTPS localhost)
 - Source: https://goo.gl/Ztv8tt
@@ -104,6 +104,12 @@ openssl req -x509 -out localhost.crt -keyout localhost.key \
 - Using "handlebars" to get email templates: welcomeEmail({ name: 'John Doe', email: 'emailexample@gmail.com' })
 - Obtain your Mailgun API Key & Email Domain (use sandbox domain name for testing) & put it in .env file.
 - Example: [../src/api/controllers/auth.controller.ts](../src/api/controllers/auth.controller.ts) (send email after user registered (POST v1/auth/register))
+
+## UI Example
+
+- UI Example location: /examples/ui
+- Using CRA (create-react-app).
+  - Typescript, React-router, Axios, PostCSS, Tailwind. Components: Home, ItemView, Login.
 
 ## Deployment
 
