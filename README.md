@@ -63,7 +63,7 @@ yarn test     Run tests   (requires MongoDB)
 - First, start the Backend with: yarn dev
 
 - Then, start UI:
-cd examples/ui
+cd ./ui
 yarn
 yarn start    (then open http://localhost:3000 - login with a test user: user1@example.com, user111)
 ```

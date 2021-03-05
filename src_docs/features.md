@@ -107,7 +107,7 @@ openssl req -x509 -out localhost.crt -keyout localhost.key \
 
 ## UI Example
 
-- UI Example location: /examples/ui
+- UI Example location: /ui
 - Using CRA (create-react-app).
   - Typescript, React-router, Axios, PostCSS, Tailwind. Components: Home, ItemView, Login.
 

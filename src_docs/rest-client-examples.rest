@@ -1,5 +1,6 @@
 @base = http://localhost:3009
-@token = TOKEN_FROM_LOGIN_CALL
+### token = TOKEN_FROM_LOGIN_CALL
+@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTUwNDM5NDcsImlhdCI6MTYxNDk1NzU0Nywic3ViIjoiNjA0MjRiZTQzYTE3NGI0MjRjODdmNzdlIn0.auKc_HCkKXTWEcUgJJZWUvFzb9_mx4KxvDNuNdOnU5w
 
 @authHeader = Authorization: Bearer {{token}}
 
@@ -17,5 +18,5 @@ GET {{base}}/v1/users?fields=id,email&email=*user1*
 Authorization: Bearer {{token}}
 
 ### List with Pagination
-GET {{base}}/v1/users?limit=5&offset=0&sort=email:desc,createdAt
+GET {{base}}/v1/users?limit=5&offset=0&sort=email:desc,createdAt&role=bogus
 Authorization: Bearer {{token}}

@@ -45,6 +45,7 @@
   },
   "scripts": {
     "start": "run-p watch:css react-scripts:start",
+    "dev": "npm start",
     "build": "run-s build:css react-scripts:build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
