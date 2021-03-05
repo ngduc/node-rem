@@ -15,6 +15,7 @@ Platforms:
 
 Require:
   - MongoDB.
+
 Good to have:
   - A client tool to manage data like Robo 3T.
   - VSCode Rest Client extension to run examples in "rest-client-examples.rest".
@@ -37,10 +38,6 @@ openssl req -x509 -out localhost.crt -keyout localhost.key \
   -subj '/CN=localhost' -extensions EXT -config <( \
    printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
 ```
-
-### Other Tools
-- Use Postman to try out APIs.
-  - If APIs run on HTTPS localhost, so turn off "SSL Certificate Verification" in Postman Settings.
 
 ## FEATURES
 
