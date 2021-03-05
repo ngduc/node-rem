@@ -17,8 +17,11 @@ module.exports = {
   // GET /v1/users
   listUsers: {
     query: {
-      page: Joi.number().min(1),
-      perPage: Joi.number().min(1).max(100),
+      limit: Joi.number().min(1).max(9999),
+      offset: Joi.number().min(0),
+      page: Joi.number().min(0),
+      perPage: Joi.number().min(1),
+      sort: Joi.string(),
       name: Joi.string(),
       email: Joi.string(),
       role: Joi.string().valid(User.roles)

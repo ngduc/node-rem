@@ -1,0 +1,21 @@
+@base = http://localhost:3009
+@token = TOKEN_FROM_LOGIN_CALL
+
+@authHeader = Authorization: Bearer {{token}}
+
+### Login
+POST {{base}}/v1/auth/login
+Content-Type: application/json
+
+{
+    "email": "user1@example.com",
+    "password": "user111"
+}
+
+### Find users by email (partially matching)
+GET {{base}}/v1/users?fields=id,email&email=*user1*
+Authorization: Bearer {{token}}
+
+### List with Pagination
+GET {{base}}/v1/users?limit=5&offset=0&sort=email:desc,createdAt
+Authorization: Bearer {{token}}

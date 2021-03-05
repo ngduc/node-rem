@@ -3,7 +3,7 @@ import { User, UserNote } from '../../api/models';
 
 const USER_1 = {
   email: 'user1@example.com',
-  role: 'user',
+  role: 'admin',
   password: 'user111'
 };
 const ADMIN_USER_1 = {

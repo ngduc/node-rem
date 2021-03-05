@@ -14,7 +14,10 @@ Platforms:
   - Also tested on Windows 10 (Powershell) with MongoDB, latest nodejs.
 
 Require:
-  - MongoDB and a client tool to manage data like Robo 3T.
+  - MongoDB.
+Good to have:
+  - A client tool to manage data like Robo 3T.
+  - VSCode Rest Client extension to run examples in "rest-client-examples.rest".
 
 ### Environments
 - Env vars are declared in ".env" file (npm: dotenv-safe).
@@ -65,8 +68,8 @@ openssl req -x509 -out localhost.crt -keyout localhost.key \
 - a Model has "ALLOWED_FIELDS" array to allow those fields in API response.
   - Additionally, you can add "&fields=" as an URL param to include just a few fields. (to reduce response size)
 - API list endpoints also support URL params for pagination
-  - Example 1: GET http://localhost:3009/v1/users?limit=5&offset=0&sort=email:desc,createdAt
-  - Example 2: GET http://localhost:3009/v1/users?page=1&perPage=20
+  - Example 1: GET http://localhost:3009/v1/users?fields=id,email&email=*user1* (get id & email only in response)
+  - Example 2: GET http://localhost:3009/v1/users?page=1&perPage=20 (query & pagination)
   - Example 3: GET http://localhost:3009/v1/users/5c7f85009d65d4210efffa42/notes?note=*partialtext*
 
 ### Registration / Authentication

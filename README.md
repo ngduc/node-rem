@@ -85,9 +85,9 @@ exports.list = async (req: Request, res: Response, next: NextFunction) => {
 API Response is similar to [JSON API](http://jsonapi.org/examples/#pagination) standard:
 
 ```js
-GET http://localhost:3009/v1/users?fields=id,name&name=*john* (get id & name only in response)
-GET http://localhost:3009/v1/users?role=user&page=1&perPage=20 (query & pagination)
-GET http://localhost:3009/v1/users?role=user&limit=5&offset=0&sort=email:desc,createdAt
+GET http://localhost:3009/v1/users?fields=id,email&email=*user1* (get id & email only in response)
+GET http://localhost:3009/v1/users?page=1&perPage=20 (query & pagination)
+GET http://localhost:3009/v1/users?limit=5&offset=0&sort=email:desc,createdAt
 {
     "meta": {
         "limit": 5,
