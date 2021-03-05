@@ -2,6 +2,7 @@
 - UI Example: added selectedItem and ItemView.
 - user.validation.ts: updated listUsers validation.
 - added "rest-client-example.rest" - used in VSCode Rest Client extension.
+- upgraded dependencies.
 
 ## [0.10.5] - 2022-02-23
 - fixed npm run build: added rimraf.
