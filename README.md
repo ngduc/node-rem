@@ -7,8 +7,8 @@ NodeJS Rest Express MongoDB (REM) - a production-ready lightweight backend setup
 🌟 It rains ~~cats and dogs~~ features:
 
 ```
-  Typescript      Express 4.15       CORS     Helmet    DotEnv   joi (validation)   forever
-  Mongoose 4.9    Passport  JWT      Await
+  Typescript      Express   CORS     Helmet    DotEnv   joi (validation)   forever
+  Mongoose        Passport  JWT      Await
   Tslint          Apidoc    Docker   Husky    Morgan    Travis   Unix/Mac/Win (Powershell)
   Tests
             Mocha  Chai     Sinon    istanbul
@@ -22,7 +22,7 @@ NodeJS Rest Express MongoDB (REM) - a production-ready lightweight backend setup
             Regex query     Whitelist fields in response         Populate deep fields
             mstime          API response time     Stack trace in Response
       UI Example
-            Typescript, React-router, Axios, PostCSS, Tailwind. Components: Home, ItemView, Login.
+            CRA,Typescript, React-router, Axios, PostCSS, Tailwind. Components: Home, ItemView, Login.
 ```
   - More details in [Documentation / Features](src_docs/features.md)
   - [Live Demo](https://node-rem-demo.now.sh/) (login & inspect API calls to learn more)
