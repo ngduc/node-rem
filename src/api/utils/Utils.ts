@@ -11,6 +11,7 @@ const lut = Array(256)
   .fill('')
   .map((_, i) => (i < 16 ? '0' : '') + i.toString(16));
 const formatUuid = ({ d0, d1, d2, d3 }: { d0: number; d1: number; d2: number; d3: number }) =>
+  /* tslint:disable-next-line */
   lut[d0 & 0xff] +
   lut[(d0 >> 8) & 0xff] +
   lut[(d0 >> 16) & 0xff] +

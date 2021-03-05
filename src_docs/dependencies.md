@@ -1,4 +1,4 @@
 ### NOTES
 
-eslint-config-airbnb-base - pin to ^12.0.1" - 09/27/2018
-  - 13.1.x, eslint will fail: Configuration for rule "import/extensions" is invalid
+uuid - pin to 7.x - 03/04/2021
+  - 8.x will fail unit tests.

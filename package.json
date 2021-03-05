@@ -114,7 +114,7 @@
     "serverless-http": "^2.7.0",
     "socket.io": "^2.2.0",
     "spdy": "^4.0.2",
-    "uuid": "^3.3.2"
+    "uuid": "^7.0.3"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.33",
@@ -128,24 +128,24 @@
     "chai-as-promised": "^7.1.1",
     "codacy-coverage": "^3.2.0",
     "coveralls": "^3.1.0",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.16.0",
+    "eslint": "^7.21.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
     "forever": "^3.0.4",
     "husky": "^5.1.3",
-    "mocha": "^6.0.2",
+    "mocha": "^8.3.0",
     "nodemon": "^2.0.7",
     "nyc": "^15.1.0",
     "opn-cli": "^3.1.0",
     "rimraf": "^3.0.2",
-    "sinon": "^7.5.0",
-    "sinon-chai": "^3.3.0",
+    "sinon": "^9.2.4",
+    "sinon-chai": "^3.5.0",
     "supertest": "^6.1.3",
     "ts-node": "^9.1.1",
     "tslint": "^5.20.1",
     "tslint-config-airbnb": "^5.11.2",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.3.3333"
+    "typescript": "^4.2.3"
   },
   "resolutions": {
     "deep-extend": "^0.5.1"

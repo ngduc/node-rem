@@ -67,13 +67,12 @@ refreshTokenSchema.statics = {
       status: httpStatus.UNAUTHORIZED,
       isPublic: true
     };
-    if (tokenRec) {
-      await this.remove({ userId: new mongoose.Types.ObjectId(userId) });
-      return { status: 'OK' };
-    } else {
+    if (!tokenRec) {
       err.message = 'Logout failed. User already logged out?';
+      throw new APIError(err);
     }
-    throw new APIError(err);
+    await this.remove({ userId: new mongoose.Types.ObjectId(userId) });
+    return { status: 'OK' };
   }
 };
 
