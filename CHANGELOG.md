@@ -1,5 +1,5 @@
 ## [0.10.7] - 2022-03-04
-- UI Example: added selectedItem and ItemView.
+- UI Example: added selectedItem, ItemView, new route /user/:userId/item/:itemId.
 - user.validation.ts: updated listUsers validation.
 - added "rest-client-example.rest" - used in VSCode Rest Client extension.
 - upgraded dependencies.
