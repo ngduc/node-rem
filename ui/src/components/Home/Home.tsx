@@ -4,11 +4,11 @@ import { apiGet, apiPost, apiDelete, getLoginData } from '../../utils/apiUtil';
 
 export function Home() {
   const [items, setItems] = React.useState(null);
-  const { loginData } = getLoginData();
+  const { loginData, userId } = getLoginData();
   console.log('loginData', loginData);
 
   const fetchData = async () => {
-    const { data, error } = await apiGet(`/users/${loginData?.data?.user?.id}/notes?sort=createdAt:desc`);
+    const { data, error } = await apiGet(`/users/${userId}/notes?sort=createdAt:desc`);
     data && setItems(data.data);
   };
 
@@ -18,8 +18,9 @@ export function Home() {
 
   const onClickAddNote = async () => {
     const title = prompt('Note Title', '');
+
     if (title != null) {
-      await apiPost(`/users/${loginData?.data?.user?.id}/notes`, {
+      await apiPost(`/users/${userId}/notes`, {
         data: { title, note: title }
       });
       await fetchData();
@@ -27,7 +28,7 @@ export function Home() {
   };
 
   const onClickDelete = async (item: any) => {
-    await apiDelete(`/users/${loginData?.data?.user?.id}/notes/${item.id}`);
+    await apiDelete(`/users/${userId}/notes/${item.id}`);
     await fetchData();
   };
 
