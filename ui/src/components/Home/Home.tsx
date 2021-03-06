@@ -1,12 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ItemView from '../ItemView/ItemView';
 import { apiGet, apiPost, apiDelete, getLoginData } from '../../utils/apiUtil';
 
 export function Home() {
-  const [items, setItems] = React.useState([]);
-  const [selectedItem, setSelectedItem] = React.useState(null);
-  const loginData = getLoginData();
+  const [items, setItems] = React.useState(null);
+  const { loginData } = getLoginData();
   console.log('loginData', loginData);
 
   const fetchData = async () => {
@@ -36,30 +34,29 @@ export function Home() {
     await fetchData();
   };
 
-  // if (selectedItem) {
-  //   // TODO: use react router to redirect to /item/itemId URL.
-  //   return <ItemView item={selectedItem} onBackClick={() => setSelectedItem(null)} />;
-  // }
   return (
     <div className="p-5">
-      <h3>Current user: {loginData?.data?.user?.email}</h3>
       <h3>List User's Notes:</h3>
 
       <div className="flex flex-wrap items-center mt-4">
-        <div className="border rounded p-4 text-sm mt-4 mr-4 bg-gray-200">
+        <div className="w-1/12 border rounded p-4 text-sm mt-4 mr-4 bg-gray-200">
           <a href="javascript:;" onClick={onClickAddNote}>
             + New Note
           </a>
         </div>
 
-        {items.map((item: any) => (
-          <div className="border rounded p-4 text-sm mt-4 mr-4">
-            <Link to={`/item/${item.id}`}>{item.note} </Link>
-            <a href="javascript:;" onClick={() => onClickDelete(item)}>
-              ✕
-            </a>
-          </div>
-        ))}
+        {items ? (
+          (items || []).map((item: any) => (
+            <div className="w-1/12 border rounded p-4 text-sm mt-4 mr-4 flex justify-between">
+              <Link to={`/item/${item.id}`}>{item.note} </Link>
+              <a href="javascript:;" onClick={() => onClickDelete(item)}>
+                ✕
+              </a>
+            </div>
+          ))
+        ) : (
+          <div>Loading..</div>
+        )}
       </div>
     </div>
   );

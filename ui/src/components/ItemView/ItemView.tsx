@@ -5,7 +5,7 @@ import { apiGet, getLoginData } from '../../utils/apiUtil';
 
 export default () => {
   const { itemId } = useParams();
-  const loginData = getLoginData();
+  const { loginData } = getLoginData();
   const [item, setItem] = React.useState([]);
 
   const fetchData = async () => {

@@ -16,5 +16,8 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[json]": {
     "editor.formatOnSave": false
+  },
+  "tailwindCSS.includeLanguages": {
+    "tsx": "tsx"
   }
 }

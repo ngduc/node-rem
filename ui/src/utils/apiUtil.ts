@@ -29,15 +29,19 @@ export const BaseAxiosConfig: AxiosRequestConfig = {
 };
 
 export function getLoginData() {
-  const loginDataStr = atob(localStorage.getItem('ld') || '') || '{}'; // base64 => string
-  const loginData = JSON.parse(loginDataStr);
-  return loginData;
+  try {
+    const loginDataStr = atob(localStorage.getItem('ld') || '') || '{}'; // base64 => string
+    const loginData = JSON.parse(loginDataStr);
+    return { loginData, userId: loginData?.data?.user?.id ?? '', userEmail: loginData?.data?.user?.email ?? '' };
+  } catch {
+    return { loginData: null, userId: '', userEmail: '' };
+  }
 }
 
 const axiosApi = axios.create({ ...BaseAxiosConfig });
 
 axiosApi.interceptors.request.use((config) => {
-  const loginData = getLoginData();
+  const { loginData } = getLoginData();
   if (loginData?.data?.token?.accessToken) {
     config.headers.Authorization = `Bearer ${loginData?.data?.token?.accessToken}`;
   }
