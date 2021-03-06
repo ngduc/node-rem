@@ -9,7 +9,6 @@ export function Home() {
 
   const fetchData = async () => {
     const { data, error } = await apiGet(`/users/${loginData?.data?.user?.id}/notes?sort=createdAt:desc`);
-    console.log('data', data);
     data && setItems(data.data);
   };
 
@@ -19,12 +18,10 @@ export function Home() {
 
   const onClickAddNote = async () => {
     const title = prompt('Note Title', '');
-
     if (title != null) {
-      const { data, error } = await apiPost(`/users/${loginData?.data?.user?.id}/notes`, {
+      await apiPost(`/users/${loginData?.data?.user?.id}/notes`, {
         data: { title, note: title }
       });
-      console.log('data', data);
       await fetchData();
     }
   };

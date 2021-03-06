@@ -5,22 +5,28 @@ import { apiGet, getLoginData } from '../../utils/apiUtil';
 
 export default () => {
   const { itemId } = useParams();
-  const { loginData } = getLoginData();
+  const { userId } = getLoginData();
   const [item, setItem] = React.useState([]);
 
-  const fetchData = async () => {
-    const { data, error } = await apiGet(`/users/${loginData?.data?.user?.id}/notes/${itemId}`);
-    data && setItem(data.data);
-  };
-
   React.useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await apiGet(`/users/${userId}/notes/${itemId}`);
+      data && setItem(data.data);
+    };
     fetchData();
   }, []);
 
   return (
     <div className="p-5">
-      <div>Selected Item: {JSON.stringify(item)}</div>
-
+      {Object.keys(item).map((itemKey: string) => {
+        return (
+          <div className="flex">
+            <span className="w-1/12 text-gray-500">{itemKey}</span>
+            <span>{(item as any)[itemKey]}</span>
+          </div>
+        );
+      })}
+      <hr className="py-5" />
       <Link to="/home">Go Back</Link>
     </div>
   );
