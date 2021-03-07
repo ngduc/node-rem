@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom';
 import { apiGet, apiPost, apiDelete, getLoginData } from '../../utils/apiUtil';
 
 export function Home() {
+  const [error, setError] = React.useState<any>(null);
   const [items, setItems] = React.useState(null);
   const { loginData, userId } = getLoginData();
   console.log('loginData', loginData);
 
   const fetchData = async () => {
     const { data, error } = await apiGet(`/users/${userId}/notes?sort=createdAt:desc`);
+    setError(error);
     data && setItems(data.data);
   };
 
@@ -32,6 +34,9 @@ export function Home() {
     await fetchData();
   };
 
+  if (error) {
+    return <div className="p-5 text-red-500">Error when fetching data: {error.message}</div>;
+  }
   return (
     <div className="p-5">
       <h3>List User's Notes:</h3>
