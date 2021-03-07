@@ -3,12 +3,12 @@ import useSWR from 'swr';
 
 export const getBaseUrl = () => {
   const baseUrl =
-    window.location.host.indexOf('localhost') >= 0 ? 'http://localhost:3000' : `https://${window.location.host}`;
+    window.location.host.indexOf('localhost') >= 0 ? 'http://localhost:3009' : `https://${window.location.host}`;
   return baseUrl;
 };
 
 export const getBaseApiUrl = () => {
-  return `${getBaseUrl()}/api/v1`;
+  return getBaseUrl() + (window.location.host.indexOf('localhost') >= 0 ? '/v1' : '/api/v1');
 };
 
 // base URL and Path of API endpoints:

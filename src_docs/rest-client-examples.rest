@@ -1,7 +1,5 @@
 @base = http://localhost:3009
-### token = TOKEN_FROM_LOGIN_CALL
-@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTUwNDM5NDcsImlhdCI6MTYxNDk1NzU0Nywic3ViIjoiNjA0MjRiZTQzYTE3NGI0MjRjODdmNzdlIn0.auKc_HCkKXTWEcUgJJZWUvFzb9_mx4KxvDNuNdOnU5w
-
+@token = TOKEN_FROM_LOGIN_CALL
 @authHeader = Authorization: Bearer {{token}}
 
 ### Login
