@@ -22,7 +22,7 @@ NodeJS Rest Express MongoDB (REM) - a production-ready lightweight backend setup
             Regex query     Whitelist fields in response         Populate deep fields
             mstime          API response time     Stack trace in Response
       UI Example
-            CRA,Typescript, React-router, Axios, PostCSS, Tailwind. Components: Home, ItemView, Login.
+            CRA, Typescript, React-router, Axios, PostCSS, Tailwind. Components: Login, Home, ItemView.
 ```
   - More details in [Documentation / Features](src_docs/features.md)
   - [Live Demo](https://node-rem-demo.now.sh/) (login & inspect API calls to learn more)

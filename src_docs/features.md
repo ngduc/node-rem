@@ -74,6 +74,7 @@ openssl req -x509 -out localhost.crt -keyout localhost.key \
   - for registration, it goes to: exports.register.
   - for authentication (login/logout), it goes to: exports.login, logout.
   - when logging in, an "accessToken" is generated and saved (generateTokenResponse()) to "refreshtokens" table in DB.
+  - to get the logged in user object, use ```const { user } = req.route.meta;```
 
 - Register: POST http://localhost:3009/v1/auth/register
   - payload: { "email": "newuser@example.com", "password": "1user1", "name": "John" }
@@ -82,6 +83,9 @@ openssl req -x509 -out localhost.crt -keyout localhost.key \
 - Logout: POST http://localhost:3009/v1/auth/logout
   - payload: { "userId": "..." }
 - Subsequent API calls will need "Authorization" header set to "Bearer ...accessToken..."
+
+### Authorization / Permission Validation
+- auth.ts - handleJWT: validate: only the same logged in userId can call REST endpoints /userId/...
 
 ### API - Upload File /upload/file
 - Using "multer" to parse form (file) data & store files to "/uploads"

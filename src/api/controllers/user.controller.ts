@@ -105,12 +105,12 @@ exports.list = async (req: Request, res: Response, next: NextFunction) => {
  * Get user's notes.
  * NOTE: Any logged in user can get a list of notes of any user.
  * @public
- * @example GET /v1/users/USERID/notes
+ * @example GET /v1/users/userId/notes
  */
 exports.listUserNotes = async (req: Request, res: Response, next: NextFunction) => {
   try {
     startTimer({ req });
-    const userId = req.params.userId;
+    const { userId } = req.params;
     req.query = { ...req.query, user: new ObjectId(userId) }; // append to query (by userId) to final query
     const data = (await UserNote.list({ query: req.query })).transform(req);
     apiJson({ req, res, data, model: UserNote });
@@ -121,7 +121,7 @@ exports.listUserNotes = async (req: Request, res: Response, next: NextFunction) 
 
 /**
  * Add a note.
- * @example POST /v1/users/USERID/notes - payload { title, note }
+ * @example POST /v1/users/userId/notes - payload { title, note }
  */
 exports.createNote = async (req: Request, res: Response, next: NextFunction) => {
   const { userId } = req.params;
@@ -143,7 +143,7 @@ exports.createNote = async (req: Request, res: Response, next: NextFunction) => 
  * Read a user's note.
  * NOTE: Any logged in user can get a list of notes of any user. Implement your own checks.
  * @public
- * @example GET /v1/users/USERID/notes/NOTEID
+ * @example GET /v1/users/userId/notes/noteId
  */
 exports.readUserNote = async (req: Request, res: Response, next: NextFunction) => {
   const { userId, noteId } = req.params;
@@ -163,7 +163,7 @@ exports.readUserNote = async (req: Request, res: Response, next: NextFunction) =
 /**
  * Update a user's note.
  * @public
- * @example POST /v1/users/USERID/notes/NOTEID
+ * @example POST /v1/users/userId/notes/noteId
  */
 exports.updateUserNote = async (req: Request, res: Response, next: NextFunction) => {
   const { userId, noteId } = req.params;
