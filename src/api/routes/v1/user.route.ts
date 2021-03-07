@@ -184,7 +184,8 @@ router
 
 router.route('/:userId/notes').get(authorize(LOGGED_USER), controller.listUserNotes);
 router.route('/:userId/notes').post(authorize(LOGGED_USER), controller.createNote);
-router.route('/:userId/notes/:noteId').get(authorize(LOGGED_USER), controller.readNote);
+router.route('/:userId/notes/:noteId').get(authorize(LOGGED_USER), controller.readUserNote);
+router.route('/:userId/notes/:noteId').post(authorize(LOGGED_USER), controller.updateUserNote);
 router.route('/:userId/notes/:noteId').delete(authorize(LOGGED_USER), controller.deleteUserNote);
 
 module.exports = router;

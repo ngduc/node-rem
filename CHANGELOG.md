@@ -1,14 +1,15 @@
-## [0.10.7] - 2022-03-04
-- UI Example: added selectedItem, ItemView, new route /user/:userId/item/:itemId.
+## [0.10.8] - 2021-03-07
+- UI Example: added selectedItem, ItemView, read & update Item.
+- added new routes: GET, POST /user/:userId/item/:itemId
 - user.validation.ts: updated listUsers validation.
 - added "rest-client-example.rest" - used in VSCode Rest Client extension.
 - upgraded dependencies.
 
-## [0.10.5] - 2022-02-23
+## [0.10.5] - 2021-02-23
 - fixed npm run build: added rimraf.
 - added TODO.md
 
-## [0.10.2] - 2022-02-03
+## [0.10.2] - 2021-02-03
 - removed symlink script (package_symlinks.js) to run on Windows.
 - changed to use HTTP (easier for beginners to use) instead of HTTPS.
 - added "postman-examples.json" (Postman Collection).

@@ -141,11 +141,11 @@ exports.createNote = async (req: Request, res: Response, next: NextFunction) => 
 
 /**
  * Read a user's note.
- * NOTE: Any logged in user can get a list of notes of any user.
+ * NOTE: Any logged in user can get a list of notes of any user. Implement your own checks.
  * @public
  * @example GET /v1/users/USERID/notes/NOTEID
  */
-exports.readNote = async (req: Request, res: Response, next: NextFunction) => {
+exports.readUserNote = async (req: Request, res: Response, next: NextFunction) => {
   const { userId, noteId } = req.params;
   const { _id } = req.route.meta.user;
   const currentUserId = _id.toString();
@@ -155,6 +155,28 @@ exports.readNote = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const data = await UserNote.findOne({ user: new ObjectId(userId), _id: new ObjectId(noteId) });
     apiJson({ req, res, data });
+  } catch (e) {
+    next(e);
+  }
+};
+
+/**
+ * Update a user's note.
+ * @public
+ * @example POST /v1/users/USERID/notes/NOTEID
+ */
+exports.updateUserNote = async (req: Request, res: Response, next: NextFunction) => {
+  const { userId, noteId } = req.params;
+  const { _id } = req.route.meta.user;
+  const { note } = req.body;
+  const currentUserId = _id.toString();
+  if (userId !== currentUserId) {
+    return next(); // only logged in user can delete her own notes
+  }
+  try {
+    const query = { user: new ObjectId(userId), _id: new ObjectId(noteId) };
+    await UserNote.findOneAndUpdate(query, { note }, {});
+    apiJson({ req, res, data: {} });
   } catch (e) {
     next(e);
   }
