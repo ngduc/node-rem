@@ -28,6 +28,9 @@ Good to have:
 - When launching in development mode, it will check if the default user1 not existed (New DB) to generate some dev data.
 - Example: [../src/api/utils/InitData.ts](../src/api/utils/InitData.ts)
 
+### Express
+- config/express.ts is where we set up the Express server.
+
 ### SSL Self-signed Cert (for HTTPS localhost)
 - Source: https://goo.gl/Ztv8tt
 - Use crt & key files in "index.ts"
@@ -65,9 +68,9 @@ openssl req -x509 -out localhost.crt -keyout localhost.key \
 - a Model has "ALLOWED_FIELDS" array to allow those fields in API response.
   - Additionally, you can add "&fields=" as an URL param to include just a few fields. (to reduce response size)
 - API list endpoints also support URL params for pagination
-  - Example 1: GET http://localhost:3009/v1/users?fields=id,email&email=*user1* (get id & email only in response)
-  - Example 2: GET http://localhost:3009/v1/users?page=1&perPage=20 (query & pagination)
-  - Example 3: GET http://localhost:3009/v1/users/5c7f85009d65d4210efffa42/notes?note=*partialtext*
+  - Example 1: GET http://localhost:3009/api/v1/users?fields=id,email&email=*user1* (get id & email only in response)
+  - Example 2: GET http://localhost:3009/api/v1/users?page=1&perPage=20 (query & pagination)
+  - Example 3: GET http://localhost:3009/api/v1/users/5c7f85009d65d4210efffa42/notes?note=*partialtext*
 
 ### Registration / Authentication
 - auth.controller.ts
@@ -76,11 +79,11 @@ openssl req -x509 -out localhost.crt -keyout localhost.key \
   - when logging in, an "accessToken" is generated and saved (generateTokenResponse()) to "refreshtokens" table in DB.
   - to get the logged in user object, use ```const { user } = req.route.meta;```
 
-- Register: POST http://localhost:3009/v1/auth/register
+- Register: POST http://localhost:3009/api/v1/auth/register
   - payload: { "email": "newuser@example.com", "password": "1user1", "name": "John" }
-- Login: POST http://localhost:3009/v1/auth/login
+- Login: POST http://localhost:3009/api/v1/auth/login
   - payload: { "email": "admin1@example.com", "password": "1admin1" }
-- Logout: POST http://localhost:3009/v1/auth/logout
+- Logout: POST http://localhost:3009/api/v1/auth/logout
   - payload: { "userId": "..." }
 - Subsequent API calls will need "Authorization" header set to "Bearer ...accessToken..."
 
@@ -89,7 +92,7 @@ openssl req -x509 -out localhost.crt -keyout localhost.key \
 
 ### API - Upload File /upload/file
 - Using "multer" to parse form (file) data & store files to "/uploads"
-- Example: POST http://localhost:3009/v1/upload/file
+- Example: POST http://localhost:3009/api/v1/upload/file
   - set Authorization: Bearer TOKEN, Content-Type: application/x-www-form-urlencoded
   - set form-data, field "file" and select a file to upload.
   - uploaded files will be stored in "/uploads" directory.

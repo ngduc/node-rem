@@ -8,7 +8,7 @@ export const getBaseUrl = () => {
 };
 
 export const getBaseApiUrl = () => {
-  return getBaseUrl() + (window.location.host.indexOf('localhost') >= 0 ? '/v1' : '/api/v1');
+  return getBaseUrl() + '/api/v1';
 };
 
 // base URL and Path of API endpoints:

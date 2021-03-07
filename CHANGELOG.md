@@ -1,9 +1,11 @@
-## [0.10.8] - 2021-03-07
+## [0.11.0] - 2021-03-07
 - UI Example: added selectedItem, ItemView, read & update Item.
 - added new routes: GET, POST /user/:userId/item/:itemId
 - user.validation.ts: updated listUsers validation.
 - added "rest-client-example.rest" - used in VSCode Rest Client extension.
 - upgraded dependencies.
+- added vercel.json config file for deploying to Vercel.
+- BREAKING: use "/api/v1/" for all endpoints.
 
 ## [0.10.5] - 2021-02-23
 - fixed npm run build: added rimraf.
