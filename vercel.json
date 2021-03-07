@@ -1,0 +1,29 @@
+{
+    "version": 2,
+    "env": {
+    },
+    "builds": [
+      {
+        "src": "built/index.js",
+        "use": "@vercel/node"
+      },
+      {
+        "src": "ui/build/**",
+        "use": "@vercel/static"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/(.*)",
+        "dest": "built/index.js"
+      },
+      {
+        "src": "/",
+        "dest": "ui/build/index.html"
+      },
+      {
+        "src": "/(.+)",
+        "dest": "ui/build/$1"
+      }
+    ]
+  }

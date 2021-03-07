@@ -1,10 +1,19 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import useSWR from 'swr';
 
+export const getBaseUrl = () => {
+  const baseUrl =
+    window.location.host.indexOf('localhost') >= 0 ? 'http://localhost:3000' : `https://${window.location.host}`;
+  return baseUrl;
+};
+
+export const getBaseApiUrl = () => {
+  return `${getBaseUrl()}/api/v1`;
+};
+
 // base URL and Path of API endpoints:
-const BaseUrl = 'http://localhost:3009';
-const BaseApiPath = '/v1';
-let BaseApiUrl = `${BaseUrl}${BaseApiPath}`;
+const BaseUrl = getBaseUrl();
+let BaseApiUrl = getBaseApiUrl();
 
 // set BaseApiUrl (for example: at runtime)
 export const setBaseApiUrl = (newBaseApiUrl: string): void => {
@@ -14,9 +23,6 @@ export const setBaseApiUrl = (newBaseApiUrl: string): void => {
 export const ApiConfig = {
   get BaseUrl() {
     return BaseUrl;
-  },
-  get BaseApiPath() {
-    return BaseApiPath;
   },
   get BaseApiUrl() {
     return BaseApiUrl;
