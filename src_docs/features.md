@@ -118,4 +118,5 @@ openssl req -x509 -out localhost.crt -keyout localhost.key \
 ## Deployment
 
 With Vercel:
+- Node-rem has vercel.json config file. You can run "npx vercel" to deploy it with your Vercel account
 - Try this repo: https://github.com/ngduc/vercel-express
