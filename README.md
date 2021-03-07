@@ -4,6 +4,8 @@ NodeJS Rest Express MongoDB (REM) - a production-ready lightweight backend setup
 
 [![Build Status](https://travis-ci.org/ngduc/node-rem.svg?branch=master)](https://travis-ci.org/ngduc/node-rem) [![Maintainability](https://api.codeclimate.com/v1/badges/11155b15b675ef311f72/maintainability)](https://codeclimate.com/github/ngduc/node-rem/maintainability)
 
+[Live Demo](https://node-rem-ngduc.vercel.app/) (login with a test user: user1@example.com, user111 - inspect API calls to learn more)
+
 🌟 It rains ~~cats and dogs~~ features:
 
 ```
@@ -25,7 +27,6 @@ NodeJS Rest Express MongoDB (REM) - a production-ready lightweight backend setup
             CRA, Typescript, React-router, Axios, PostCSS, Tailwind. Components: Login, Home, ItemView.
 ```
   - More details in [Documentation / Features](src_docs/features.md)
-  - [Live Demo](https://node-rem-demo.now.sh/) (login & inspect API calls to learn more)
 
 ### 📦 Installation
 
