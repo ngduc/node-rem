@@ -103,7 +103,6 @@ exports.list = async (req: Request, res: Response, next: NextFunction) => {
 
 /**
  * Get user's notes.
- * NOTE: Any logged in user can get a list of notes of any user.
  * @public
  * @example GET /v1/users/userId/notes
  */
