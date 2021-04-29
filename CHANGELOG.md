@@ -1,6 +1,9 @@
+## [0.11.2] - 2021-04-28
+- added new routes: POST /:userId/notes/:noteId/like
+
 ## [0.11.0] - 2021-03-07
 - UI Example: added selectedItem, ItemView, read & update Item.
-- added new routes: GET, POST /user/:userId/item/:itemId
+- added new routes: GET, POST /user/:userId/notes/:noteId
 - user.validation.ts: updated listUsers validation.
 - added "rest-client-example.rest" - used in VSCode Rest Client extension.
 - upgraded dependencies.

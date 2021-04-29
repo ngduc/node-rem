@@ -6,11 +6,12 @@ const userNoteSchema = new mongoose.Schema(
   {
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     title: { type: String, default: '' },
-    note: String
+    note: String,
+    likes: { type: Number, default: 0 }
   },
   { timestamps: true }
 );
-const ALLOWED_FIELDS = ['id', 'user', 'title', 'note', 'createdAt'];
+const ALLOWED_FIELDS = ['id', 'user', 'title', 'note', 'likes', 'createdAt'];
 
 userNoteSchema.method({
   // query is optional, e.g. to transform data for response but only include certain "fields"

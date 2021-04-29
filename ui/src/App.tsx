@@ -10,7 +10,7 @@ function App() {
   const { userEmail } = getLoginData();
   return (
     <>
-      <header className="bg-gray-300 px-5 py-3 flex justify-between">
+      <header className="bg-blue-200 px-5 py-1 flex justify-between items-center">
         <div>Node-REM - UI Example</div>
         <div>{userEmail}</div>
       </header>

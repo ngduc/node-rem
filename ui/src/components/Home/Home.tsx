@@ -34,6 +34,11 @@ export function Home() {
     await fetchData();
   };
 
+  const onClickLike = async (item: any) => {
+    await apiPost(`/users/${userId}/notes/${item.id}/like`, {});
+    await fetchData();
+  };
+
   if (error) {
     return <div className="p-5 text-red-500">Error when fetching data: {error.message}</div>;
   }
@@ -41,8 +46,8 @@ export function Home() {
     <div className="p-5">
       <h3>List User's Notes:</h3>
 
-      <div className="flex flex-wrap items-center mt-4">
-        <div className="w-1/12 border rounded p-4 text-sm mt-4 mr-4 bg-gray-200">
+      <div className="flex flex-wrap items-baseline mt-4">
+        <div className="w-1/6 mb-3 border rounded p-4 text-sm mr-4 bg-gray-200 hover:bg-blue-200">
           <a href="javascript:;" onClick={onClickAddNote}>
             + New Note
           </a>
@@ -50,11 +55,22 @@ export function Home() {
 
         {items ? (
           (items || []).map((item: any) => (
-            <div className="w-1/12 border rounded p-4 text-sm mt-4 mr-4 flex justify-between">
-              <Link to={`/item/${item.id}`}>{item.note} </Link>
-              <a href="javascript:;" onClick={() => onClickDelete(item)}>
-                ✕
-              </a>
+            <div className="w-1/6 mb-3 border rounded p-4 text-sm mr-4 hover:bg-blue-100">
+              <div className="flex justify-between">
+                <Link to={`/item/${item.id}`}>{item.note}</Link>
+                <a href="javascript:;" onClick={() => onClickDelete(item)}>
+                  ✕
+                </a>
+              </div>
+              <div className="mt-2">
+                <a className="flex" href="javascript:;" onClick={() => onClickLike(item)}>
+                  <img width="16" alt="Like icon" src="https://img.icons8.com/ios/72/facebook-like--v1.png" />
+                  <span className="ml-2">
+                    Likes:
+                    <span className="ml-2">{item.likes}</span>
+                  </span>
+                </a>
+              </div>
             </div>
           ))
         ) : (

@@ -8,6 +8,8 @@ import { User, UserNote } from '../../api/models';
 import { startTimer, apiJson } from '../../api/utils/Utils';
 const { handler: errorHandler } = require('../middlewares/error');
 
+const likesMap: any = {}; // key (userId__noteId) : 1
+
 /**
  * Load user and append to req.
  * @public
@@ -194,6 +196,30 @@ exports.deleteUserNote = async (req: Request, res: Response, next: NextFunction)
   }
   try {
     await UserNote.remove({ user: new ObjectId(userId), _id: new ObjectId(noteId) });
+    apiJson({ req, res, data: {} });
+  } catch (e) {
+    next(e);
+  }
+};
+
+/**
+ * Like user note
+ * @public
+ */
+exports.likeUserNote = async (req: Request, res: Response, next: NextFunction) => {
+  const { noteId } = req.params;
+  const { _id } = req.route.meta.user;
+  const currentUserId = _id.toString();
+  if (likesMap[`${currentUserId}__${noteId}`]) {
+    return next(); // already liked => return.
+  }
+  try {
+    const query = { _id: new ObjectId(noteId) };
+    const dbItem = await UserNote.findOne(query);
+    const newLikes = (dbItem.likes > 0 ? dbItem.likes : 0) + 1;
+
+    await UserNote.findOneAndUpdate(query, { likes: newLikes }, {});
+    likesMap[`${currentUserId}__${noteId}`] = 1; // flag as already liked.
     apiJson({ req, res, data: {} });
   } catch (e) {
     next(e);
