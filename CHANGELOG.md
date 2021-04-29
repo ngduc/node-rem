@@ -1,5 +1,6 @@
 ## [0.11.2] - 2021-04-28
 - added new routes: POST /:userId/notes/:noteId/like
+- UI Example: added simple components, Modal.
 
 ## [0.11.0] - 2021-03-07
 - UI Example: added selectedItem, ItemView, read & update Item.

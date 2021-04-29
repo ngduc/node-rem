@@ -1,11 +1,14 @@
 import React from 'react';
 import { LikeIcon } from './LikeIcon';
 import { Link } from 'react-router-dom';
+import { Modal } from '../base';
 import { apiGet, apiPost, apiDelete, getLoginData } from '../../utils/apiUtil';
 
 export function Home() {
   const [error, setError] = React.useState<any>(null);
   const [items, setItems] = React.useState(null);
+  const [showCreateModal, setShowCreateModal] = React.useState(false);
+  const [newTitle, setNewTitle] = React.useState('');
   const { loginData, userId } = getLoginData();
   console.log('loginData', loginData);
 
@@ -19,15 +22,12 @@ export function Home() {
     fetchData();
   }, []);
 
-  const onClickAddNote = async () => {
-    const title = prompt('Note Title', '');
-
-    if (title != null) {
-      await apiPost(`/users/${userId}/notes`, {
-        data: { title, note: title }
-      });
-      await fetchData();
-    }
+  const createNote = async () => {
+    await apiPost(`/users/${userId}/notes`, {
+      data: { title: newTitle, note: newTitle }
+    });
+    await fetchData();
+    setShowCreateModal(false);
   };
 
   const onClickDelete = async (item: any) => {
@@ -41,7 +41,12 @@ export function Home() {
   };
 
   if (error) {
-    return <div className="p-5 text-red-500">Error when fetching data: {error.message}</div>;
+    return (
+      <div className="p-5">
+        <div className=" text-red-500">Error when fetching data: {error.message}</div>
+        <Link to={`/`}>Back to Login</Link>
+      </div>
+    );
   }
   return (
     <div className="p-5">
@@ -49,22 +54,22 @@ export function Home() {
 
       <div className="flex flex-wrap items-baseline mt-4">
         <div className="w-1/6 mb-3 border rounded p-4 text-sm mr-4 bg-gray-200 hover:bg-blue-200">
-          <a href="javascript:;" onClick={onClickAddNote}>
+          <a href="#" onClick={() => setShowCreateModal(true)}>
             + New Note
           </a>
         </div>
 
         {items ? (
           (items || []).map((item: any) => (
-            <div className="w-1/6 mb-3 border rounded p-4 text-sm mr-4 hover:bg-blue-100">
+            <div key={item.id} className="w-1/6 mb-3 border rounded p-4 text-sm mr-4 hover:bg-blue-100">
               <div className="flex justify-between">
                 <Link to={`/item/${item.id}`}>{item.note}</Link>
-                <a href="javascript:;" onClick={() => onClickDelete(item)}>
+                <a href="#" onClick={() => onClickDelete(item)}>
                   ✕
                 </a>
               </div>
               <div className="mt-2">
-                <a className="flex" href="javascript:;" onClick={() => onClickLike(item)}>
+                <a className="flex" href="#" onClick={() => onClickLike(item)}>
                   <LikeIcon />
                   <span className="ml-2">
                     Likes:
@@ -76,6 +81,22 @@ export function Home() {
           ))
         ) : (
           <div>Loading..</div>
+        )}
+
+        {showCreateModal && (
+          <Modal
+            title="New Note"
+            content={
+              <input
+                autoFocus={true}
+                onChange={(ev) => setNewTitle(ev.target.value)}
+                className="w-full bg-gray-200 rounded p-2"
+                placeholder="Note"
+              />
+            }
+            onCancel={() => setShowCreateModal(false)}
+            onConfirm={() => createNote()}
+          />
         )}
       </div>
     </div>
