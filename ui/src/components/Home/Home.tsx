@@ -1,4 +1,5 @@
 import React from 'react';
+import { LikeIcon } from './LikeIcon';
 import { Link } from 'react-router-dom';
 import { apiGet, apiPost, apiDelete, getLoginData } from '../../utils/apiUtil';
 
@@ -64,7 +65,7 @@ export function Home() {
               </div>
               <div className="mt-2">
                 <a className="flex" href="javascript:;" onClick={() => onClickLike(item)}>
-                  <img width="16" alt="Like icon" src="https://img.icons8.com/ios/72/facebook-like--v1.png" />
+                  <LikeIcon />
                   <span className="ml-2">
                     Likes:
                     <span className="ml-2">{item.likes}</span>
