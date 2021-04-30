@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { apiPost } from '../../utils/apiUtil';
 import './LoginBox.css';
 
-export function Login() {
+export function Login({ onLogin }: { onLogin?: () => void }) {
   const [errorMsg, setErrorMsg] = React.useState('');
   const navigate = useNavigate();
 
@@ -26,6 +26,9 @@ export function Login() {
     if (apiData?.data?.token) {
       localStorage.setItem('ld', btoa(JSON.stringify(apiData))); // save to localStorage in base64
       navigate('/home');
+      if (onLogin) {
+        onLogin();
+      }
     } else {
       console.log('ERROR: ', err);
       setErrorMsg(err?.message || '');

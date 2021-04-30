@@ -23,10 +23,12 @@ export function Home() {
   }, []);
 
   const createNote = async () => {
-    await apiPost(`/users/${userId}/notes`, {
-      data: { title: newTitle, note: newTitle }
-    });
-    await fetchData();
+    if (newTitle.trim()) {
+      await apiPost(`/users/${userId}/notes`, {
+        data: { title: newTitle, note: newTitle }
+      });
+      await fetchData();
+    }
     setShowCreateModal(false);
   };
 

@@ -22,6 +22,10 @@
         "dest": "ui/build/index.html"
       },
       {
+        "src": "/home",
+        "dest": "ui/build/index.html"
+      },
+      {
         "src": "/(.+)",
         "dest": "ui/build/$1"
       }

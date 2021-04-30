@@ -23,7 +23,7 @@ export default () => {
     <div className="p-5">
       {Object.keys(item).map((itemKey: string) => {
         return (
-          <div className="flex">
+          <div key={itemKey} className="flex">
             <span className="w-1/12 text-gray-500">{itemKey}</span>
             <span>{(item as any)[itemKey]}</span>
           </div>
