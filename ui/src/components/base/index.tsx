@@ -8,6 +8,7 @@ type BaseProps = {
   className?: string;
   onClick?: () => void;
   isLoading?: boolean;
+  style?: object;
 };
 
 /* <QuestionMark /> */
@@ -54,12 +55,24 @@ export const Icons: any = {
 };
 
 /* <Button>label</Button> */
-export const Button = ({ onClick, children, className, isLoading }: BaseProps) => {
+export type ButtonProps = BaseProps & {
+  type?: 'button' | 'submit' | undefined;
+  primary?: boolean;
+  width?: number;
+};
+export const Button = ({ type, onClick, children, className, isLoading, primary, width, style }: ButtonProps) => {
+  let cn =
+    'mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm';
+  if (primary) {
+    cn = `w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm`;
+  }
   return (
     <span className="inline-flex items-center">
       <button
+        type={type ?? 'button'}
         onClick={onClick}
-        className={`border rounded border-gray-500 p-2 hover:bg-blue-200 focus:bg-blue-200 ${className}`}
+        className={`${cn} ${className}`}
+        style={{ width: width ?? 'auto', ...style }}
       >
         {children}
       </button>
@@ -237,21 +250,13 @@ export const Modal = ({
               </div>
             </div>
           </div>
-          <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-            <button
-              type="button"
-              className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
-              onClick={onConfirm}
-            >
+          <div className="mb-4 bg-gray-50 px-4 sm:px-6 sm:flex sm:flex-row-reverse">
+            <Button primary onClick={onConfirm} width={100}>
               OK
-            </button>
-            <button
-              type="button"
-              className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-              onClick={onCancel}
-            >
+            </Button>
+            <Button onClick={onCancel} width={100}>
               Cancel
-            </button>
+            </Button>
           </div>
         </div>
       </div>
