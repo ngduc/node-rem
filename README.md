@@ -25,6 +25,7 @@ NodeJS Rest Express MongoDB (REM) - a production-ready lightweight backend setup
             mstime          API response time     Stack trace in Response
       UI Example
             CRA, Typescript, React-router, Axios, PostCSS, Tailwind. Components: Login, Home, ItemView.
+            Portable-react
 ```
   - More details in [Documentation / Features](src_docs/features.md)
 
@@ -125,3 +126,5 @@ Example of generated API Docs (using `apidoc`) - https://node-rem.netlify.com
 ### 🙌 Thanks
 
 All contributions are welcome!
+
+UI Example uses [Portable-react](https://github.com/ngduc/portable-react)
