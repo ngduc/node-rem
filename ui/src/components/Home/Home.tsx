@@ -6,7 +6,7 @@ import { apiGet, apiPost, apiDelete, getLoginData } from '../../utils/apiUtil';
 
 export function Home() {
   const [error, setError] = React.useState<any>(null);
-  const [items, setItems] = React.useState(null);
+  const [items, setItems] = React.useState<any[] | null>(null);
   const [showCreateModal, setShowCreateModal] = React.useState(false);
   const [newTitle, setNewTitle] = React.useState('');
   const { loginData, userId } = getLoginData();

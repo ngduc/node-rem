@@ -1,3 +1,7 @@
+## [0.11.5] - 2022-03-17
+- update dependencies.
+- removed mstime.
+
 ## [0.11.2] - 2021-04-28
 - added new routes: POST /:userId/notes/:noteId/like
 - UI Example: added simple components, Modal.

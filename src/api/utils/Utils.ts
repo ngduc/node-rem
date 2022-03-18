@@ -1,4 +1,3 @@
-const mstime = require('mstime');
 import { NextFunction, Request, Response, Router } from 'express';
 import { ITEMS_PER_PAGE } from '../../api/utils/Const';
 
@@ -62,29 +61,6 @@ export function uuid() {
 const getUrlPathOnly = (fullUrl: string) => {
   return `${fullUrl}?`.slice(0, fullUrl.indexOf('?'));
 };
-
-export function startTimer({ key, req }: { key?: string; req?: Request }) {
-  let timerKey = key;
-  if (!key && req) {
-    timerKey = getUrlPathOnly(req.originalUrl);
-  }
-  mstime.start(timerKey, { uuid: uuid() });
-}
-
-export function endTimer({ key, req }: { key?: string; req?: Request }) {
-  let timerKey = key;
-  if (!key && req) {
-    timerKey = getUrlPathOnly(req.originalUrl);
-  }
-  const end = mstime.end(timerKey);
-  // console.log('- endTimer key: ', timerKey, end);
-  if (end) {
-    console.log(`- mstime: avg time - ${end.avg} (ms)`);
-    // console.log('--- mstime: ', mstime);
-    return end;
-  }
-  return null;
-}
 
 // from "sort" string (URL param) => build sort object (mongoose), e.g. "sort=name:desc,age"
 export function getSortQuery(sortStr: string, defaultKey = 'createdAt') {
@@ -194,12 +170,6 @@ export async function apiJson({ req, res, data, model, meta = {}, json = false }
       }
       metaData.count = data && data.length ? data.length : 0;
     }
-  }
-  // add Timer data
-  const timer = endTimer({ req });
-  if (timer) {
-    metaData.timer = timer.last;
-    metaData.timerAvg = timer.avg;
   }
 
   const output = { data, meta: metaData };
