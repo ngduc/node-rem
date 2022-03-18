@@ -14,7 +14,7 @@ Platforms:
   - Also tested on Windows 10 (Powershell) with MongoDB, latest nodejs.
 
 Require:
-  - MongoDB.
+  - MongoDB - e.g. install: `docker run -p 27017:27017 -v ~/mongo_data:/data/db mvertes/alpine-mongo`
 
 Good to have:
   - A client tool to manage data like Robo 3T.
@@ -121,5 +121,5 @@ openssl req -x509 -out localhost.crt -keyout localhost.key \
 ## Deployment
 
 With Vercel:
-- Node-rem has vercel.json config file. You can run "npx vercel" to deploy it with your Vercel account
+- Node-rem has vercel.json config file. You can build BE & FE, then run "npx vercel" to deploy it with your Vercel account
 - Try this repo: https://github.com/ngduc/vercel-express
