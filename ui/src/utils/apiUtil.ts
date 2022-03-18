@@ -48,8 +48,9 @@ const axiosApi = axios.create({ ...BaseAxiosConfig });
 
 axiosApi.interceptors.request.use((config) => {
   const { loginData } = getLoginData();
+  config = config || {};
   if (loginData?.data?.token?.accessToken) {
-    config.headers.Authorization = `Bearer ${loginData?.data?.token?.accessToken}`;
+    (config?.headers as any).Authorization = `Bearer ${loginData?.data?.token?.accessToken}`;
   }
   return config;
 });

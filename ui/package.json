@@ -28,11 +28,11 @@
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",
     "authui-ui": "^0.1.0",
-    "axios": "^0.21.1",
+    "axios": "^0.26.1",
     "cross-env": "7.x",
     "history": "^5.0.0",
     "npm-run-all": "4.x",
-    "postcss-cli": "8.x",
+    "postcss-cli": "^8.0.0",
     "postcss-preset-env": "6.x",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -70,6 +70,7 @@
     ]
   },
   "devDependencies": {
-    "husky": "^5.1.1"
+    "husky": "^5.1.1",
+    "postcss": "^8.4.12"
   }
 }
